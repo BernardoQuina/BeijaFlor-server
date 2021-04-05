@@ -42,6 +42,8 @@ const main = async () => {
     },
   })
 
+  app.use(sessionMiddleware)
+
   const apolloServer = new ApolloServer({
     schema,
     context: createContext,

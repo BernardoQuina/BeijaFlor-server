@@ -2,8 +2,16 @@ import { makeSchema } from 'nexus'
 import { nexusPrisma } from 'nexus-plugin-prisma'
 import path from 'path'
 
+import * as userTypes from './User/types'
+import * as userQueries from './User/queries'
+import * as userMutations from './User/mutations'
+
 export const schema = makeSchema({
-  types: {},
+  types: {
+    userTypes,
+    userQueries,
+    userMutations
+  },
   plugins: [
     nexusPrisma({
       experimentalCRUD: true,

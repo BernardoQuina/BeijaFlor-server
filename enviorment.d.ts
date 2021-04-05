@@ -1,4 +1,4 @@
-//import { User as PrismaUser } from '@prisma/client'
+import { User as PrismaUser } from '@prisma/client'
 
 declare global {
   namespace NodeJS {
@@ -22,9 +22,9 @@ declare global {
     }
   }
 
-  // namespace Express {
-  //   interface User extends PrismaUser {}
-  // }
+  namespace Express {
+    interface User extends PrismaUser {}
+  }
 }
 
 export {}
