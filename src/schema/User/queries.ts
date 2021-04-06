@@ -3,12 +3,14 @@ import { isAuth } from '../../util/isAuth'
 
 export const userQueries = queryField((t) => {
   t.crud.user({
-    resolve(_root, args, context, info, originalResolver) {
+    async resolve(_root, args, context, info, originalResolver) {
       if (args.where.email) {
-        throw new Error('Cannot query by email')
+        throw new Error('Cannot query by email.')
       }
 
-      const res = originalResolver(_root, args, context, info)
+      const res = await originalResolver(_root, args, context, info)
+
+      if (res === null) throw new Error('User not found.')
 
       return res
     },

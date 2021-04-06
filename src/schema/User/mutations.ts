@@ -67,13 +67,13 @@ export const login = mutationField('login', {
     const userExists = await prisma.user.findUnique({ where: { email } })
 
     if (!userExists || !userExists.passwordHash) {
-      throw new Error('Invalid credentials.')
+      throw new Error('Credenciais inválidas.')
     }
 
     const isMatch = await bcrypt.compare(password, userExists.passwordHash)
 
     if (!isMatch) {
-      throw new Error('Invalid credentials.')
+      throw new Error('Credenciais inválidas.')
     }
 
     req.session.userId = userExists.id
@@ -137,13 +137,13 @@ export const editUser = mutationField('editUser', {
 
     if (updateEmail || updatePassword) {
       if (!password) {
-        throw new Error('Invalid credentials.')
+        throw new Error('Credenciais inválidas.')
       }
 
       const isMatch = await bcrypt.compare(password, userExists.passwordHash!)
 
       if (!isMatch) {
-        throw new Error('Invalid credentials.')
+        throw new Error('Credenciais inválidas.')
       }
     }
 
@@ -161,28 +161,44 @@ export const editUser = mutationField('editUser', {
     }
 
     if (updateEmail) {
+      const emailRegex = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/
+
+      if (!emailRegex.test(updateEmail)) throw new Error('Email inválido.')
+
       const emailTaken = await context.prisma.user.findUnique({
         where: { email: updateEmail },
       })
 
       if (emailTaken && updateEmail !== userExists.email) {
-        throw new Error('An account is already using this email.')
+        throw new Error('Já existe uma conta com este email.')
       }
 
       data.email = updateEmail
     }
 
     if (updateName) {
+      const nameRegex = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/
+
+      if (!nameRegex.test(updateName)) {
+        throw new Error(
+          'Nome só pode conter caracteres alfanuméricos (ex: #?!@$%^&*- não é permitido) e tem de ser de 8 a 20.'
+        )
+      }
+
       data.name = updateName
     }
 
     if (updatePassword) {
-      if (updatePassword !== confirmNewPassword) {
-        throw new Error('Passwords do not match.')
+      const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
+
+      if (!passwordRegex.test(updatePassword)) {
+        throw new Error(
+          'Palavra-passe tem ser de 8 a 20 caracteres, pelo menos uma maiúscula, uma minúscula, um número e um caractere especial (#?!@$%^&*-).'
+        )
       }
 
-      if (updatePassword.length < 8) {
-        throw new Error('Password must be 8 characters or longer.')
+      if (updatePassword !== confirmNewPassword) {
+        throw new Error('Palavras-passe não correspondem.')
       }
 
       const newHashedPassword = await bcrypt.hash(updatePassword, 10)
@@ -191,7 +207,7 @@ export const editUser = mutationField('editUser', {
     }
 
     if (!updateName && !updateEmail && !updatePassword) {
-      throw new Error('Please provide something to update')
+      throw new Error('Nada para atualizar.')
     }
 
     const updatedUser = await context.prisma.user.update({
