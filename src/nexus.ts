@@ -156,12 +156,10 @@ export interface NexusGenObjects {
   User: { // root type
     cloudinaryPhoto?: boolean | null; // Boolean
     createdAt: NexusGenScalars['DateTime']; // DateTime!
-    email: string; // String!
     facebookId?: string | null; // String
     googleId?: string | null; // String
     id: string; // String!
     name: string; // String!
-    passwordHash?: string | null; // String
     photo?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }

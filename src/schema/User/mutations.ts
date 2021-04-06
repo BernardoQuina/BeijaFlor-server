@@ -15,20 +15,28 @@ export const register = mutationField('register', {
     { name, email, password, confirmPassword },
     { prisma, req }
   ) {
-    if (name.length < 2) {
-      throw new Error('Name must be 2 characters or longer.')
+    const nameRegex = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/
+
+    const emailRegex = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/
+
+    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
+
+    if (!nameRegex.test(name)) {
+      throw new Error(
+        'Nome só pode conter caracteres alfanuméricos (ex: #?!@$%^&*- não é permitido) e tem de ser de 8 a 20.'
+      )
     }
 
-    if (email.length < 4) {
-      throw new Error('Please provide a valid email.')
-    }
+    if (!emailRegex.test(email)) throw new Error('Email inválido.')
 
-    if (password.length < 8) {
-      throw new Error('Password must be 8 characters or longer.')
+    if (!passwordRegex.test(password)) {
+      throw new Error(
+        'Palavra-passe tem ser de 8 a 20 caracteres, pelo menos uma maiúscula, uma minúscula, um número e um caractere especial (#?!@$%^&*-).'
+      )
     }
 
     if (password !== confirmPassword) {
-      throw new Error('Passwords do not match')
+      throw new Error('Palavras-passe não correspondem.')
     }
 
     const passwordHash = await bcrypt.hash(password, 10)
@@ -36,7 +44,7 @@ export const register = mutationField('register', {
     const emailTaken = await prisma.user.findUnique({ where: { email } })
 
     if (emailTaken) {
-      throw new Error('An account is already using this email.')
+      throw new Error('Já existe uma conta com este email.')
     }
 
     const newUser = await prisma.user.create({
