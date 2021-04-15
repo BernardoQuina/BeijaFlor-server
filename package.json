@@ -13,25 +13,25 @@
     "update": "yarn upgrade-interactive --latest"
   },
   "dependencies": {
-    "@prisma/client": "^2.20.1",
-    "apollo-server-express": "^2.22.2",
+    "@prisma/client": "^2.21.1",
+    "apollo-server-express": "^2.23.0",
     "bcryptjs": "^2.4.3",
     "connect-redis": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "googleapis": "^70.0.0",
+    "googleapis": "^71.0.0",
     "graphql": "^15.5.0",
     "graphql-redis-subscriptions": "^2.3.1",
-    "ioredis": "^4.25.0",
+    "ioredis": "^4.26.0",
     "nexus": "^1.0.0",
-    "nexus-plugin-prisma": "^0.33.0",
+    "nexus-plugin-prisma": "^0.34.1",
     "nodemailer": "^6.5.0",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
-    "typescript": "^4.2.3",
+    "typescript": "^4.2.4",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -40,8 +40,8 @@
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
     "@types/express-session": "^1.17.3",
-    "@types/ioredis": "^4.22.2",
-    "@types/node": "^14.14.37",
+    "@types/ioredis": "^4.22.3",
+    "@types/node": "^14.14.39",
     "@types/nodemailer": "^6.4.1",
     "@types/passport": "^1.0.6",
     "@types/passport-facebook": "^2.1.10",
@@ -49,6 +49,6 @@
     "@types/redis": "^2.8.28",
     "@types/uuid": "^8.3.0",
     "nodemon": "^2.0.7",
-    "prisma": "^2.20.1"
+    "prisma": "^2.21.1"
   }
 }
