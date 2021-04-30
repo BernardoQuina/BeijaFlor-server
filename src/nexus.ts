@@ -448,7 +448,10 @@ export interface NexusGenArgTypes {
   }
   Mutation: {
     createCategory: { // args
+      image: string; // String!
+      mainCategory: NexusGenEnums['MainCategory']; // MainCategory!
       name: string; // String!
+      subCategory: NexusGenEnums['SubCategory']; // SubCategory!
     }
     createProduct: { // args
       categories: string[]; // [String!]!

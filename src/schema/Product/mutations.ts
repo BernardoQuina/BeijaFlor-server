@@ -1,5 +1,4 @@
 import { floatArg, list, mutationField, nonNull, stringArg } from 'nexus'
-import { prisma } from '../../context'
 import { isAuth } from '../../util/isAuth'
 
 export const createProduct = mutationField('createProduct', {
