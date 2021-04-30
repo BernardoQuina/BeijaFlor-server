@@ -23,6 +23,10 @@ export interface NexusGenInputs {
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
   }
+  CategoryWhereUniqueInput: { // input type
+    id?: string | null; // String
+    name?: string | null; // String
+  }
   DateTimeFilter: { // input type
     equals?: NexusGenScalars['DateTime'] | null; // DateTime
     gt?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -84,6 +88,10 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedStringNullableFilter'] | null; // NestedStringNullableFilter
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
+  }
+  ProductWhereUniqueInput: { // input type
+    id?: string | null; // String
+    name?: string | null; // String
   }
   StringFilter: { // input type
     contains?: string | null; // String
@@ -151,9 +159,11 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  MainCategory: "Acessorios" | "Flores" | "Ocasiao" | "Plantas"
   QueryMode: "default" | "insensitive"
   Role: "ADMIN" | "USER"
   SortOrder: "asc" | "desc"
+  SubCategory: "arranjos" | "calendario" | "caracteristicas" | "cerimonias" | "cores" | "estacao" | "local" | "momentosEspeciais" | "outros" | "tipos" | "vasos"
 }
 
 export interface NexusGenScalars {
@@ -166,7 +176,25 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Category: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    image: string; // String!
+    mainCategory: NexusGenEnums['MainCategory']; // MainCategory!
+    name: string; // String!
+    subCategory: NexusGenEnums['SubCategory']; // SubCategory!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Mutation: {};
+  Product: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string; // String!
+    id: string; // String!
+    images: string[]; // [String!]!
+    name: string; // String!
+    price: number; // Float!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Query: {};
   User: { // root type
     cloudinaryPhoto?: boolean | null; // Boolean
@@ -192,12 +220,32 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  Category: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    image: string; // String!
+    mainCategory: NexusGenEnums['MainCategory']; // MainCategory!
+    name: string; // String!
+    products: NexusGenRootTypes['Product'][]; // [Product!]!
+    subCategory: NexusGenEnums['SubCategory']; // SubCategory!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Mutation: { // field return type
     deleteUser: NexusGenRootTypes['User'] | null; // User
     editUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['User'] | null; // User
     logout: boolean | null; // Boolean
     register: NexusGenRootTypes['User'] | null; // User
+  }
+  Product: { // field return type
+    categories: NexusGenRootTypes['Category'][]; // [Category!]!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string; // String!
+    id: string; // String!
+    images: string[]; // [String!]!
+    name: string; // String!
+    price: number; // Float!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Query: { // field return type
     me: NexusGenRootTypes['User'] | null; // User
@@ -221,12 +269,32 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Category: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    image: 'String'
+    mainCategory: 'MainCategory'
+    name: 'String'
+    products: 'Product'
+    subCategory: 'SubCategory'
+    updatedAt: 'DateTime'
+  }
   Mutation: { // field return type name
     deleteUser: 'User'
     editUser: 'User'
     login: 'User'
     logout: 'Boolean'
     register: 'User'
+  }
+  Product: { // field return type name
+    categories: 'Category'
+    createdAt: 'DateTime'
+    description: 'String'
+    id: 'String'
+    images: 'String'
+    name: 'String'
+    price: 'Float'
+    updatedAt: 'DateTime'
   }
   Query: { // field return type name
     me: 'User'
@@ -250,6 +318,13 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Category: {
+    products: { // args
+      cursor?: NexusGenInputs['ProductWhereUniqueInput'] | null; // ProductWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+  }
   Mutation: {
     deleteUser: { // args
       password?: string | null; // String
@@ -271,6 +346,13 @@ export interface NexusGenArgTypes {
       email: string; // String!
       name: string; // String!
       password: string; // String!
+    }
+  }
+  Product: {
+    categories: { // args
+      cursor?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
     }
   }
   Query: {

@@ -7,6 +7,22 @@ input BoolNullableFilter {
   not: NestedBoolNullableFilter
 }
 
+type Category {
+  createdAt: DateTime!
+  id: String!
+  image: String!
+  mainCategory: MainCategory!
+  name: String!
+  products(cursor: ProductWhereUniqueInput, skip: Int, take: Int): [Product!]!
+  subCategory: SubCategory!
+  updatedAt: DateTime!
+}
+
+input CategoryWhereUniqueInput {
+  id: String
+  name: String
+}
+
 scalar DateTime
 
 input DateTimeFilter {
@@ -25,6 +41,13 @@ input EnumRoleFilter {
   in: [Role!]
   not: NestedEnumRoleFilter
   notIn: [Role!]
+}
+
+enum MainCategory {
+  Acessorios
+  Flores
+  Ocasiao
+  Plantas
 }
 
 type Mutation {
@@ -86,6 +109,22 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+type Product {
+  categories(cursor: CategoryWhereUniqueInput, skip: Int, take: Int): [Category!]!
+  createdAt: DateTime!
+  description: String!
+  id: String!
+  images: [String!]!
+  name: String!
+  price: Float!
+  updatedAt: DateTime!
+}
+
+input ProductWhereUniqueInput {
+  id: String
+  name: String
+}
+
 type Query {
   me: User
   user(where: UserWhereUniqueInput!): User
@@ -136,6 +175,20 @@ input StringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
+}
+
+enum SubCategory {
+  arranjos
+  calendario
+  caracteristicas
+  cerimonias
+  cores
+  estacao
+  local
+  momentosEspeciais
+  outros
+  tipos
+  vasos
 }
 
 type User {
