@@ -28,6 +28,7 @@ export const User = objectType({
         return 'Not authorized.'
       },
     })
+    t.model.role()
     t.model.passwordHash({
       async resolve(_root, args, ctx, info, originalResolver) {
         const res = originalResolver(_root, args, ctx, info)

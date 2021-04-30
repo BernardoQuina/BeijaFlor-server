@@ -20,6 +20,13 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
+input EnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  not: NestedEnumRoleFilter
+  notIn: [Role!]
+}
+
 type Mutation {
   deleteUser(password: String): User
   editUser(confirmNewPassword: String, password: String, updateEmail: String, updateName: String, updatePassword: String, updatePhoto: String): User
@@ -42,6 +49,13 @@ input NestedDateTimeFilter {
   lte: DateTime
   not: NestedDateTimeFilter
   notIn: [DateTime!]
+}
+
+input NestedEnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  not: NestedEnumRoleFilter
+  notIn: [Role!]
 }
 
 input NestedStringFilter {
@@ -82,6 +96,11 @@ type Query {
 enum QueryMode {
   default
   insensitive
+}
+
+enum Role {
+  ADMIN
+  USER
 }
 
 enum SortOrder {
@@ -129,6 +148,7 @@ type User {
   name: String!
   passwordHash: String
   photo: String
+  role: Role!
   updatedAt: DateTime!
 }
 
@@ -142,6 +162,7 @@ input UserOrderByInput {
   name: SortOrder
   passwordHash: SortOrder
   photo: SortOrder
+  role: SortOrder
   updatedAt: SortOrder
 }
 
@@ -158,6 +179,7 @@ input UserWhereInput {
   name: StringFilter
   passwordHash: StringNullableFilter
   photo: StringNullableFilter
+  role: EnumRoleFilter
   updatedAt: DateTimeFilter
 }
 

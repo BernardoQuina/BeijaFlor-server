@@ -33,6 +33,12 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
   }
+  EnumRoleFilter: { // input type
+    equals?: NexusGenEnums['Role'] | null; // Role
+    in?: NexusGenEnums['Role'][] | null; // [Role!]
+    not?: NexusGenInputs['NestedEnumRoleFilter'] | null; // NestedEnumRoleFilter
+    notIn?: NexusGenEnums['Role'][] | null; // [Role!]
+  }
   NestedBoolNullableFilter: { // input type
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
@@ -46,6 +52,12 @@ export interface NexusGenInputs {
     lte?: NexusGenScalars['DateTime'] | null; // DateTime
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
+  }
+  NestedEnumRoleFilter: { // input type
+    equals?: NexusGenEnums['Role'] | null; // Role
+    in?: NexusGenEnums['Role'][] | null; // [Role!]
+    not?: NexusGenInputs['NestedEnumRoleFilter'] | null; // NestedEnumRoleFilter
+    notIn?: NexusGenEnums['Role'][] | null; // [Role!]
   }
   NestedStringFilter: { // input type
     contains?: string | null; // String
@@ -111,6 +123,7 @@ export interface NexusGenInputs {
     name?: NexusGenEnums['SortOrder'] | null; // SortOrder
     passwordHash?: NexusGenEnums['SortOrder'] | null; // SortOrder
     photo?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    role?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   UserWhereInput: { // input type
@@ -126,6 +139,7 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     passwordHash?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     photo?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    role?: NexusGenInputs['EnumRoleFilter'] | null; // EnumRoleFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   UserWhereUniqueInput: { // input type
@@ -138,6 +152,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   QueryMode: "default" | "insensitive"
+  Role: "ADMIN" | "USER"
   SortOrder: "asc" | "desc"
 }
 
@@ -161,6 +176,7 @@ export interface NexusGenObjects {
     id: string; // String!
     name: string; // String!
     photo?: string | null; // String
+    role: NexusGenEnums['Role']; // Role!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -199,6 +215,7 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     passwordHash: string | null; // String
     photo: string | null; // String
+    role: NexusGenEnums['Role']; // Role!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
 }
@@ -227,6 +244,7 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     passwordHash: 'String'
     photo: 'String'
+    role: 'Role'
     updatedAt: 'DateTime'
   }
 }

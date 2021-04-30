@@ -10,15 +10,64 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+enum MainCategory {
+  Flores
+  Plantas
+  Acessorios
+  Ocasiao
+}
+
+enum SubCategory {
+  tipos
+  arranjos
+  cores
+  estacao
+  local
+  caracteristicas
+  vasos
+  outros
+  calendario
+  cerimonias
+  momentosEspeciais
+}
+
 model User {
   id              String   @id @default(uuid())
   googleId        String?  @unique
   facebookId      String?  @unique
   email           String   @unique
+  role            Role     @default(USER)
   passwordHash    String?
   name            String
   photo           String?
   cloudinaryPhoto Boolean?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+}
+
+model Product {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  description String
+  images      String[]
+  price       Float
+  categories  Category[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Category {
+  id           String       @id @default(uuid())
+  mainCategory MainCategory
+  subCategory  SubCategory
+  name         String       @unique
+  image        String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  products     Product[]
 }
