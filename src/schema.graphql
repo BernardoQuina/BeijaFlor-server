@@ -106,6 +106,8 @@ enum MainCategory {
 }
 
 type Mutation {
+  createCategory(name: String!): Category
+  createProduct(categories: [String!]!, description: String!, images: [String!]!, name: String!, price: Float!): Product
   deleteUser(password: String): User
   editUser(confirmNewPassword: String, password: String, updateEmail: String, updateName: String, updatePassword: String, updatePhoto: String): User
   login(email: String!, password: String!): User

@@ -8,9 +8,11 @@ import * as userMutations from './User/mutations'
 
 import * as productTypes from './Product/types'
 import * as productQueries from './Product/queries'
+import * as productMutations from './Product/mutations'
 
 import * as categoryTypes from './Category/types'
 import * as categoryQueries from './Category/queries'
+import * as categoryMutations from './Category/mutations'
 
 export const schema = makeSchema({
   types: {
@@ -19,8 +21,10 @@ export const schema = makeSchema({
     userMutations,
     productTypes,
     productQueries,
+    productMutations,
     categoryTypes,
     categoryQueries,
+    categoryMutations
   },
   plugins: [
     nexusPrisma({
