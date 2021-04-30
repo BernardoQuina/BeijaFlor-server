@@ -18,6 +18,36 @@ type Category {
   updatedAt: DateTime!
 }
 
+input CategoryListRelationFilter {
+  every: CategoryWhereInput
+  none: CategoryWhereInput
+  some: CategoryWhereInput
+}
+
+input CategoryOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  image: SortOrder
+  mainCategory: SortOrder
+  name: SortOrder
+  subCategory: SortOrder
+  updatedAt: SortOrder
+}
+
+input CategoryWhereInput {
+  AND: [CategoryWhereInput!]
+  NOT: [CategoryWhereInput!]
+  OR: [CategoryWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  image: StringFilter
+  mainCategory: EnumMainCategoryFilter
+  name: StringFilter
+  products: ProductListRelationFilter
+  subCategory: EnumSubCategoryFilter
+  updatedAt: DateTimeFilter
+}
+
 input CategoryWhereUniqueInput {
   id: String
   name: String
@@ -36,11 +66,36 @@ input DateTimeFilter {
   notIn: [DateTime!]
 }
 
+input EnumMainCategoryFilter {
+  equals: MainCategory
+  in: [MainCategory!]
+  not: NestedEnumMainCategoryFilter
+  notIn: [MainCategory!]
+}
+
 input EnumRoleFilter {
   equals: Role
   in: [Role!]
   not: NestedEnumRoleFilter
   notIn: [Role!]
+}
+
+input EnumSubCategoryFilter {
+  equals: SubCategory
+  in: [SubCategory!]
+  not: NestedEnumSubCategoryFilter
+  notIn: [SubCategory!]
+}
+
+input FloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
 }
 
 enum MainCategory {
@@ -74,11 +129,36 @@ input NestedDateTimeFilter {
   notIn: [DateTime!]
 }
 
+input NestedEnumMainCategoryFilter {
+  equals: MainCategory
+  in: [MainCategory!]
+  not: NestedEnumMainCategoryFilter
+  notIn: [MainCategory!]
+}
+
 input NestedEnumRoleFilter {
   equals: Role
   in: [Role!]
   not: NestedEnumRoleFilter
   notIn: [Role!]
+}
+
+input NestedEnumSubCategoryFilter {
+  equals: SubCategory
+  in: [SubCategory!]
+  not: NestedEnumSubCategoryFilter
+  notIn: [SubCategory!]
+}
+
+input NestedFloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
 }
 
 input NestedStringFilter {
@@ -120,13 +200,49 @@ type Product {
   updatedAt: DateTime!
 }
 
+input ProductListRelationFilter {
+  every: ProductWhereInput
+  none: ProductWhereInput
+  some: ProductWhereInput
+}
+
+input ProductOrderByInput {
+  createdAt: SortOrder
+  description: SortOrder
+  id: SortOrder
+  images: SortOrder
+  name: SortOrder
+  price: SortOrder
+  updatedAt: SortOrder
+}
+
+input ProductWhereInput {
+  AND: [ProductWhereInput!]
+  NOT: [ProductWhereInput!]
+  OR: [ProductWhereInput!]
+  categories: CategoryListRelationFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: StringFilter
+  images: StringNullableListFilter
+  name: StringFilter
+  price: FloatFilter
+  updatedAt: DateTimeFilter
+}
+
 input ProductWhereUniqueInput {
   id: String
   name: String
 }
 
 type Query {
+  categories(cursor: CategoryWhereUniqueInput, orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): [Category!]!
+  category(where: CategoryWhereUniqueInput!): Category
+  categoryCount: Int
   me: User
+  product(where: ProductWhereUniqueInput!): Product
+  productCount: Int
+  products(cursor: ProductWhereUniqueInput, orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
   user(where: UserWhereUniqueInput!): User
   userCount: Int
   users(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
@@ -175,6 +291,14 @@ input StringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
+}
+
+input StringNullableListFilter {
+  equals: [String!]
+  has: String
+  hasEvery: [String!]
+  hasSome: [String!]
+  isEmpty: Boolean
 }
 
 enum SubCategory {

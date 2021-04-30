@@ -23,6 +23,33 @@ export interface NexusGenInputs {
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
   }
+  CategoryListRelationFilter: { // input type
+    every?: NexusGenInputs['CategoryWhereInput'] | null; // CategoryWhereInput
+    none?: NexusGenInputs['CategoryWhereInput'] | null; // CategoryWhereInput
+    some?: NexusGenInputs['CategoryWhereInput'] | null; // CategoryWhereInput
+  }
+  CategoryOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    image?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    mainCategory?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    subCategory?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  CategoryWhereInput: { // input type
+    AND?: NexusGenInputs['CategoryWhereInput'][] | null; // [CategoryWhereInput!]
+    NOT?: NexusGenInputs['CategoryWhereInput'][] | null; // [CategoryWhereInput!]
+    OR?: NexusGenInputs['CategoryWhereInput'][] | null; // [CategoryWhereInput!]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    image?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    mainCategory?: NexusGenInputs['EnumMainCategoryFilter'] | null; // EnumMainCategoryFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    products?: NexusGenInputs['ProductListRelationFilter'] | null; // ProductListRelationFilter
+    subCategory?: NexusGenInputs['EnumSubCategoryFilter'] | null; // EnumSubCategoryFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
   CategoryWhereUniqueInput: { // input type
     id?: string | null; // String
     name?: string | null; // String
@@ -37,11 +64,33 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
   }
+  EnumMainCategoryFilter: { // input type
+    equals?: NexusGenEnums['MainCategory'] | null; // MainCategory
+    in?: NexusGenEnums['MainCategory'][] | null; // [MainCategory!]
+    not?: NexusGenInputs['NestedEnumMainCategoryFilter'] | null; // NestedEnumMainCategoryFilter
+    notIn?: NexusGenEnums['MainCategory'][] | null; // [MainCategory!]
+  }
   EnumRoleFilter: { // input type
     equals?: NexusGenEnums['Role'] | null; // Role
     in?: NexusGenEnums['Role'][] | null; // [Role!]
     not?: NexusGenInputs['NestedEnumRoleFilter'] | null; // NestedEnumRoleFilter
     notIn?: NexusGenEnums['Role'][] | null; // [Role!]
+  }
+  EnumSubCategoryFilter: { // input type
+    equals?: NexusGenEnums['SubCategory'] | null; // SubCategory
+    in?: NexusGenEnums['SubCategory'][] | null; // [SubCategory!]
+    not?: NexusGenInputs['NestedEnumSubCategoryFilter'] | null; // NestedEnumSubCategoryFilter
+    notIn?: NexusGenEnums['SubCategory'][] | null; // [SubCategory!]
+  }
+  FloatFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
+    notIn?: number[] | null; // [Float!]
   }
   NestedBoolNullableFilter: { // input type
     equals?: boolean | null; // Boolean
@@ -57,11 +106,33 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeFilter'] | null; // NestedDateTimeFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
   }
+  NestedEnumMainCategoryFilter: { // input type
+    equals?: NexusGenEnums['MainCategory'] | null; // MainCategory
+    in?: NexusGenEnums['MainCategory'][] | null; // [MainCategory!]
+    not?: NexusGenInputs['NestedEnumMainCategoryFilter'] | null; // NestedEnumMainCategoryFilter
+    notIn?: NexusGenEnums['MainCategory'][] | null; // [MainCategory!]
+  }
   NestedEnumRoleFilter: { // input type
     equals?: NexusGenEnums['Role'] | null; // Role
     in?: NexusGenEnums['Role'][] | null; // [Role!]
     not?: NexusGenInputs['NestedEnumRoleFilter'] | null; // NestedEnumRoleFilter
     notIn?: NexusGenEnums['Role'][] | null; // [Role!]
+  }
+  NestedEnumSubCategoryFilter: { // input type
+    equals?: NexusGenEnums['SubCategory'] | null; // SubCategory
+    in?: NexusGenEnums['SubCategory'][] | null; // [SubCategory!]
+    not?: NexusGenInputs['NestedEnumSubCategoryFilter'] | null; // NestedEnumSubCategoryFilter
+    notIn?: NexusGenEnums['SubCategory'][] | null; // [SubCategory!]
+  }
+  NestedFloatFilter: { // input type
+    equals?: number | null; // Float
+    gt?: number | null; // Float
+    gte?: number | null; // Float
+    in?: number[] | null; // [Float!]
+    lt?: number | null; // Float
+    lte?: number | null; // Float
+    not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
+    notIn?: number[] | null; // [Float!]
   }
   NestedStringFilter: { // input type
     contains?: string | null; // String
@@ -88,6 +159,33 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedStringNullableFilter'] | null; // NestedStringNullableFilter
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
+  }
+  ProductListRelationFilter: { // input type
+    every?: NexusGenInputs['ProductWhereInput'] | null; // ProductWhereInput
+    none?: NexusGenInputs['ProductWhereInput'] | null; // ProductWhereInput
+    some?: NexusGenInputs['ProductWhereInput'] | null; // ProductWhereInput
+  }
+  ProductOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    description?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    images?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    price?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  ProductWhereInput: { // input type
+    AND?: NexusGenInputs['ProductWhereInput'][] | null; // [ProductWhereInput!]
+    NOT?: NexusGenInputs['ProductWhereInput'][] | null; // [ProductWhereInput!]
+    OR?: NexusGenInputs['ProductWhereInput'][] | null; // [ProductWhereInput!]
+    categories?: NexusGenInputs['CategoryListRelationFilter'] | null; // CategoryListRelationFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    description?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    images?: NexusGenInputs['StringNullableListFilter'] | null; // StringNullableListFilter
+    name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    price?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
   ProductWhereUniqueInput: { // input type
     id?: string | null; // String
@@ -120,6 +218,13 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedStringNullableFilter'] | null; // NestedStringNullableFilter
     notIn?: string[] | null; // [String!]
     startsWith?: string | null; // String
+  }
+  StringNullableListFilter: { // input type
+    equals?: string[] | null; // [String!]
+    has?: string | null; // String
+    hasEvery?: string[] | null; // [String!]
+    hasSome?: string[] | null; // [String!]
+    isEmpty?: boolean | null; // Boolean
   }
   UserOrderByInput: { // input type
     cloudinaryPhoto?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -248,7 +353,13 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Query: { // field return type
+    categories: NexusGenRootTypes['Category'][]; // [Category!]!
+    category: NexusGenRootTypes['Category'] | null; // Category
+    categoryCount: number | null; // Int
     me: NexusGenRootTypes['User'] | null; // User
+    product: NexusGenRootTypes['Product'] | null; // Product
+    productCount: number | null; // Int
+    products: NexusGenRootTypes['Product'][]; // [Product!]!
     user: NexusGenRootTypes['User'] | null; // User
     userCount: number | null; // Int
     users: NexusGenRootTypes['User'][]; // [User!]!
@@ -297,7 +408,13 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
   }
   Query: { // field return type name
+    categories: 'Category'
+    category: 'Category'
+    categoryCount: 'Int'
     me: 'User'
+    product: 'Product'
+    productCount: 'Int'
+    products: 'Product'
     user: 'User'
     userCount: 'Int'
     users: 'User'
@@ -356,6 +473,26 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    categories: { // args
+      cursor?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
+      orderBy?: NexusGenInputs['CategoryOrderByInput'][] | null; // [CategoryOrderByInput!]
+      skip?: number | null; // Int
+      take?: number | null; // Int
+      where?: NexusGenInputs['CategoryWhereInput'] | null; // CategoryWhereInput
+    }
+    category: { // args
+      where: NexusGenInputs['CategoryWhereUniqueInput']; // CategoryWhereUniqueInput!
+    }
+    product: { // args
+      where: NexusGenInputs['ProductWhereUniqueInput']; // ProductWhereUniqueInput!
+    }
+    products: { // args
+      cursor?: NexusGenInputs['ProductWhereUniqueInput'] | null; // ProductWhereUniqueInput
+      orderBy?: NexusGenInputs['ProductOrderByInput'][] | null; // [ProductOrderByInput!]
+      skip?: number | null; // Int
+      take?: number | null; // Int
+      where?: NexusGenInputs['ProductWhereInput'] | null; // ProductWhereInput
+    }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
     }
