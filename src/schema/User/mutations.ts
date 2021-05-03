@@ -86,7 +86,7 @@ export const logout = mutationField('logout', {
   type: 'Boolean',
   async resolve(_root, _args, { req, res }) {
     if (req.user || req.session.userId) {
-      req.logOut()
+      // req.logOut()
       return new Promise((resolve) =>
         req.session.destroy((err) => {
           res.clearCookie('connect.sid', { path: '/' })

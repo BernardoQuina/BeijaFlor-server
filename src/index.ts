@@ -8,6 +8,7 @@ import connectRedis from 'connect-redis'
 
 import { schema } from './schema/schema'
 import { createContext, redis } from './context'
+// import { passportOauth } from './util/passport'
 
 dotenv.config()
 
@@ -43,6 +44,8 @@ const main = async () => {
   })
 
   app.use(sessionMiddleware)
+
+  // passportOauth(app)
 
   const apolloServer = new ApolloServer({
     schema,
