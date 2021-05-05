@@ -30,10 +30,6 @@ export const userQueries = queryField((t) => {
     resolve(_root, _args, context) {
       const userId = isAuth(context, false)
 
-      console.log('userId: ', userId)
-      console.log('req.user: ', context.req.user)
-      console.log('req.session.userId: ', context.req.session.userId)
-
       if (!context.req.user && !context.req.session.userId) return null
 
       return context.prisma.user.findUnique({ where: { id: userId } })
