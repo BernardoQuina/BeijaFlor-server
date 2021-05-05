@@ -19,10 +19,6 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  BoolNullableFilter: { // input type
-    equals?: boolean | null; // Boolean
-    not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
-  }
   CategoryListRelationFilter: { // input type
     every?: NexusGenInputs['CategoryWhereInput'] | null; // CategoryWhereInput
     none?: NexusGenInputs['CategoryWhereInput'] | null; // CategoryWhereInput
@@ -91,10 +87,6 @@ export interface NexusGenInputs {
     lte?: number | null; // Float
     not?: NexusGenInputs['NestedFloatFilter'] | null; // NestedFloatFilter
     notIn?: number[] | null; // [Float!]
-  }
-  NestedBoolNullableFilter: { // input type
-    equals?: boolean | null; // Boolean
-    not?: NexusGenInputs['NestedBoolNullableFilter'] | null; // NestedBoolNullableFilter
   }
   NestedDateTimeFilter: { // input type
     equals?: NexusGenScalars['DateTime'] | null; // DateTime
@@ -227,7 +219,6 @@ export interface NexusGenInputs {
     isEmpty?: boolean | null; // Boolean
   }
   UserOrderByInput: { // input type
-    cloudinaryPhoto?: NexusGenEnums['SortOrder'] | null; // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     email?: NexusGenEnums['SortOrder'] | null; // SortOrder
     facebookId?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -243,7 +234,6 @@ export interface NexusGenInputs {
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
-    cloudinaryPhoto?: NexusGenInputs['BoolNullableFilter'] | null; // BoolNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     facebookId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
@@ -302,7 +292,6 @@ export interface NexusGenObjects {
   }
   Query: {};
   User: { // root type
-    cloudinaryPhoto?: boolean | null; // Boolean
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     facebookId?: string | null; // String
     googleId?: string | null; // String
@@ -367,7 +356,6 @@ export interface NexusGenFieldTypes {
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   User: { // field return type
-    cloudinaryPhoto: boolean | null; // Boolean
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
     facebookId: string | null; // String
@@ -424,7 +412,6 @@ export interface NexusGenFieldTypeNames {
     users: 'User'
   }
   User: { // field return type name
-    cloudinaryPhoto: 'Boolean'
     createdAt: 'DateTime'
     email: 'String'
     facebookId: 'String'
@@ -469,7 +456,6 @@ export interface NexusGenArgTypes {
       updateEmail?: string | null; // String
       updateName?: string | null; // String
       updatePassword?: string | null; // String
-      updatePhoto?: string | null; // String
     }
     login: { // args
       email: string; // String!

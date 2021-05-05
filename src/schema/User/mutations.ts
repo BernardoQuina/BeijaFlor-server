@@ -108,21 +108,13 @@ export const editUser = mutationField('editUser', {
   args: {
     password: stringArg(),
     updateName: stringArg(),
-    updatePhoto: stringArg(),
     updateEmail: stringArg(),
     updatePassword: stringArg(),
     confirmNewPassword: stringArg(),
   },
   async resolve(
     _root,
-    {
-      password,
-      updateName,
-      updatePhoto,
-      updateEmail,
-      updatePassword,
-      confirmNewPassword,
-    },
+    { password, updateName, updateEmail, updatePassword, confirmNewPassword },
     context
   ) {
     const userId = isAuth(context)
@@ -149,16 +141,9 @@ export const editUser = mutationField('editUser', {
 
     let data: {
       email?: string
-      photo?: string
-      cloudinaryPhoto?: boolean
       name?: string
       password?: string
     } = {}
-
-    if (updatePhoto) {
-      data.photo = updatePhoto
-      data.cloudinaryPhoto = true
-    }
 
     if (updateEmail) {
       const emailRegex = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/

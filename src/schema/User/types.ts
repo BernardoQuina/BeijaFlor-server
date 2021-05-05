@@ -42,7 +42,6 @@ export const User = objectType({
     })
     t.model.name()
     t.model.photo()
-    t.model.cloudinaryPhoto()
     t.model.createdAt()
     t.model.updatedAt()
   },

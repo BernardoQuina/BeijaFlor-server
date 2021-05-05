@@ -2,11 +2,6 @@
 ### Do not make changes to this file directly
 
 
-input BoolNullableFilter {
-  equals: Boolean
-  not: NestedBoolNullableFilter
-}
-
 type Category {
   createdAt: DateTime!
   id: String!
@@ -109,15 +104,10 @@ type Mutation {
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
   createProduct(categories: [String!]!, description: String!, images: [String!]!, name: String!, price: Float!): Product
   deleteUser(password: String): User
-  editUser(confirmNewPassword: String, password: String, updateEmail: String, updateName: String, updatePassword: String, updatePhoto: String): User
+  editUser(confirmNewPassword: String, password: String, updateEmail: String, updateName: String, updatePassword: String): User
   login(email: String!, password: String!): User
   logout: Boolean
   register(confirmPassword: String!, email: String!, name: String!, password: String!): User
-}
-
-input NestedBoolNullableFilter {
-  equals: Boolean
-  not: NestedBoolNullableFilter
 }
 
 input NestedDateTimeFilter {
@@ -318,7 +308,6 @@ enum SubCategory {
 }
 
 type User {
-  cloudinaryPhoto: Boolean
   createdAt: DateTime!
   email: String!
   facebookId: String
@@ -332,7 +321,6 @@ type User {
 }
 
 input UserOrderByInput {
-  cloudinaryPhoto: SortOrder
   createdAt: SortOrder
   email: SortOrder
   facebookId: SortOrder
@@ -349,7 +337,6 @@ input UserWhereInput {
   AND: [UserWhereInput!]
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
-  cloudinaryPhoto: BoolNullableFilter
   createdAt: DateTimeFilter
   email: StringFilter
   facebookId: StringNullableFilter

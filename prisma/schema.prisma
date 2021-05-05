@@ -45,7 +45,6 @@ model User {
   passwordHash    String?
   name            String
   photo           String?
-  cloudinaryPhoto Boolean?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }

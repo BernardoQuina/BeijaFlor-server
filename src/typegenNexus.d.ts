@@ -22,15 +22,15 @@ interface PrismaModels {
 interface NexusPrismaInputs {
   Query: {
     users: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'cloudinaryPhoto' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'cloudinaryPhoto' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt'
     }
     products: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'categories' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'createdAt' | 'updatedAt'
     }
     categories: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'createdAt' | 'updatedAt' | 'products'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'products' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'createdAt' | 'updatedAt'
     }
   },
@@ -39,7 +39,7 @@ interface NexusPrismaInputs {
   }
   Product: {
     categories: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'createdAt' | 'updatedAt' | 'products'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'products' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'createdAt' | 'updatedAt'
     }
   }
@@ -90,7 +90,6 @@ interface NexusPrismaOutputs {
     passwordHash: 'String'
     name: 'String'
     photo: 'String'
-    cloudinaryPhoto: 'Boolean'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
   }
@@ -110,9 +109,9 @@ interface NexusPrismaOutputs {
     subCategory: 'SubCategory'
     name: 'String'
     image: 'String'
+    products: 'Product'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
-    products: 'Product'
   }
 }
 
