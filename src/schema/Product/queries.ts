@@ -11,4 +11,17 @@ export const productQueries = queryField((t) => {
       return prisma.product.count({})
     },
   })
+
+  t.field('inactiveCount', {
+    type: 'Int',
+    resolve(_root, _args, { prisma }) {
+      return prisma.product.count({ where: { active: false } })
+    },
+  })
+  t.field('outOfStockCount', {
+    type: 'Int',
+    resolve(_root, _args, { prisma }) {
+      return prisma.product.count({ where: { stock: { lt: 1 } } })
+    },
+  })
 })

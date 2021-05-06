@@ -8,6 +8,8 @@ export const Product = objectType({
     t.model.description()
     t.model.images()
     t.model.price()
+    t.model.stock()
+    t.model.active()
     t.model.categories()
     t.model.createdAt()
     t.model.updatedAt()

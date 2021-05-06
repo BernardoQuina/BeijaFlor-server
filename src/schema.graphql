@@ -2,6 +2,11 @@
 ### Do not make changes to this file directly
 
 
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
 type Category {
   createdAt: DateTime!
   id: String!
@@ -93,6 +98,17 @@ input FloatFilter {
   notIn: [Float!]
 }
 
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
 enum MainCategory {
   Acessorios
   Flores
@@ -108,6 +124,11 @@ type Mutation {
   login(email: String!, password: String!): User
   logout: Boolean
   register(confirmPassword: String!, email: String!, name: String!, password: String!): User
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
 }
 
 input NestedDateTimeFilter {
@@ -153,6 +174,17 @@ input NestedFloatFilter {
   notIn: [Float!]
 }
 
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
 input NestedStringFilter {
   contains: String
   endsWith: String
@@ -182,6 +214,7 @@ input NestedStringNullableFilter {
 }
 
 type Product {
+  active: Boolean!
   categories(cursor: CategoryWhereUniqueInput, skip: Int, take: Int): [Category!]!
   createdAt: DateTime!
   description: String!
@@ -189,6 +222,7 @@ type Product {
   images: [String!]!
   name: String!
   price: Float!
+  stock: Int!
   updatedAt: DateTime!
 }
 
@@ -199,12 +233,14 @@ input ProductListRelationFilter {
 }
 
 input ProductOrderByInput {
+  active: SortOrder
   createdAt: SortOrder
   description: SortOrder
   id: SortOrder
   images: SortOrder
   name: SortOrder
   price: SortOrder
+  stock: SortOrder
   updatedAt: SortOrder
 }
 
@@ -212,6 +248,7 @@ input ProductWhereInput {
   AND: [ProductWhereInput!]
   NOT: [ProductWhereInput!]
   OR: [ProductWhereInput!]
+  active: BoolFilter
   categories: CategoryListRelationFilter
   createdAt: DateTimeFilter
   description: StringFilter
@@ -219,6 +256,7 @@ input ProductWhereInput {
   images: StringNullableListFilter
   name: StringFilter
   price: FloatFilter
+  stock: IntFilter
   updatedAt: DateTimeFilter
 }
 
@@ -231,7 +269,9 @@ type Query {
   categories(cursor: CategoryWhereUniqueInput, orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): [Category!]!
   category(where: CategoryWhereUniqueInput!): Category
   categoryCount: Int
+  inactiveCount: Int
   me: User
+  outOfStockCount: Int
   product(where: ProductWhereUniqueInput!): Product
   productCount: Int
   products(cursor: ProductWhereUniqueInput, orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
