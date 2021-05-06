@@ -488,6 +488,7 @@ export interface NexusGenArgTypes {
       images: string[]; // [String!]!
       name: string; // String!
       price: number; // Float!
+      stock: number; // Int!
     }
     deleteUser: { // args
       password?: string | null; // String

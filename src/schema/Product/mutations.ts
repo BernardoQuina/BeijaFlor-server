@@ -1,4 +1,4 @@
-import { floatArg, list, mutationField, nonNull, stringArg } from 'nexus'
+import { floatArg, intArg, list, mutationField, nonNull, stringArg } from 'nexus'
 import { isAuth } from '../../util/isAuth'
 
 export const createProduct = mutationField('createProduct', {
@@ -8,11 +8,12 @@ export const createProduct = mutationField('createProduct', {
     description: nonNull(stringArg()),
     images: nonNull(list(nonNull(stringArg()))),
     price: nonNull(floatArg()),
+    stock: nonNull(intArg()),
     categories: nonNull(list(nonNull(stringArg()))),
   },
   async resolve(
     _root,
-    { name, description, images, price, categories },
+    { name, description, images, price, stock, categories },
     context
   ) {
     const userId = isAuth(context)
@@ -20,7 +21,7 @@ export const createProduct = mutationField('createProduct', {
     const user = await context.prisma.user.findUnique({ where: { id: userId } })
 
     if (!user || user.role !== 'ADMIN') {
-      throw new Error('Not authorized.')
+      throw new Error('Não autorizado.')
     }
 
     const productExists = await context.prisma.product.findUnique({
@@ -61,6 +62,7 @@ export const createProduct = mutationField('createProduct', {
         description,
         images,
         price,
+        stock,
         categories: {
           connect: categoriesConnectObject,
         },
