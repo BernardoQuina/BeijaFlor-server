@@ -189,12 +189,17 @@ export interface NexusGenInputs {
     active?: NexusGenEnums['SortOrder'] | null; // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     description?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    exposure?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    height?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     images?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    lifespan?: NexusGenEnums['SortOrder'] | null; // SortOrder
     name?: NexusGenEnums['SortOrder'] | null; // SortOrder
     price?: NexusGenEnums['SortOrder'] | null; // SortOrder
     stock?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    temperature?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    water?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   ProductWhereInput: { // input type
     AND?: NexusGenInputs['ProductWhereInput'][] | null; // [ProductWhereInput!]
@@ -204,12 +209,17 @@ export interface NexusGenInputs {
     categories?: NexusGenInputs['CategoryListRelationFilter'] | null; // CategoryListRelationFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    exposure?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    height?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     images?: NexusGenInputs['StringNullableListFilter'] | null; // StringNullableListFilter
+    lifespan?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     price?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
     stock?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    temperature?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    water?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
   }
   ProductWhereUniqueInput: { // input type
     id?: string | null; // String
@@ -317,12 +327,17 @@ export interface NexusGenObjects {
     active: boolean; // Boolean!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
+    exposure?: string | null; // String
+    height?: string | null; // String
     id: string; // String!
     images: string[]; // [String!]!
+    lifespan?: string | null; // String
     name: string; // String!
     price: number; // Float!
     stock: number; // Int!
+    temperature?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    water?: string | null; // String
   }
   Query: {};
   User: { // root type
@@ -372,12 +387,17 @@ export interface NexusGenFieldTypes {
     categories: NexusGenRootTypes['Category'][]; // [Category!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
+    exposure: string | null; // String
+    height: string | null; // String
     id: string; // String!
     images: string[]; // [String!]!
+    lifespan: string | null; // String
     name: string; // String!
     price: number; // Float!
     stock: number; // Int!
+    temperature: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    water: string | null; // String
   }
   Query: { // field return type
     categories: NexusGenRootTypes['Category'][]; // [Category!]!
@@ -432,12 +452,17 @@ export interface NexusGenFieldTypeNames {
     categories: 'Category'
     createdAt: 'DateTime'
     description: 'String'
+    exposure: 'String'
+    height: 'String'
     id: 'String'
     images: 'String'
+    lifespan: 'String'
     name: 'String'
     price: 'Float'
     stock: 'Int'
+    temperature: 'String'
     updatedAt: 'DateTime'
+    water: 'String'
   }
   Query: { // field return type name
     categories: 'Category'
@@ -485,10 +510,15 @@ export interface NexusGenArgTypes {
     createProduct: { // args
       categories: string[]; // [String!]!
       description: string; // String!
+      exposure?: string | null; // String
+      height?: string | null; // String
       images: string[]; // [String!]!
+      lifespan?: string | null; // String
       name: string; // String!
       price: number; // Float!
       stock: number; // Int!
+      temperature?: string | null; // String
+      water?: string | null; // String
     }
     deleteUser: { // args
       password?: string | null; // String

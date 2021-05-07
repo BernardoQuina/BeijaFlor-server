@@ -1,4 +1,11 @@
-import { floatArg, intArg, list, mutationField, nonNull, stringArg } from 'nexus'
+import {
+  floatArg,
+  intArg,
+  list,
+  mutationField,
+  nonNull,
+  stringArg,
+} from 'nexus'
 import { isAuth } from '../../util/isAuth'
 
 export const createProduct = mutationField('createProduct', {
@@ -10,10 +17,27 @@ export const createProduct = mutationField('createProduct', {
     price: nonNull(floatArg()),
     stock: nonNull(intArg()),
     categories: nonNull(list(nonNull(stringArg()))),
+    height: stringArg(),
+    water: stringArg(),
+    exposure: stringArg(),
+    temperature: stringArg(),
+    lifespan: stringArg(),
   },
   async resolve(
     _root,
-    { name, description, images, price, stock, categories },
+    {
+      name,
+      description,
+      images,
+      price,
+      stock,
+      categories,
+      height,
+      water,
+      exposure,
+      temperature,
+      lifespan,
+    },
     context
   ) {
     const userId = isAuth(context)
@@ -66,6 +90,11 @@ export const createProduct = mutationField('createProduct', {
         categories: {
           connect: categoriesConnectObject,
         },
+        height,
+        water,
+        exposure,
+        temperature,
+        lifespan,
       },
     })
 

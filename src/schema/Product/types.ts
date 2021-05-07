@@ -11,6 +11,11 @@ export const Product = objectType({
     t.model.stock()
     t.model.active()
     t.model.categories()
+    t.model.height()
+    t.model.water()
+    t.model.exposure()
+    t.model.temperature()
+    t.model.lifespan()
     t.model.createdAt()
     t.model.updatedAt()
   },

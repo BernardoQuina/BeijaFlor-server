@@ -26,8 +26,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt'
     }
     products: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
     }
     categories: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'products' | 'createdAt' | 'updatedAt'
@@ -45,8 +45,8 @@ interface NexusPrismaInputs {
   }
   Category: {
     products: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
     }
   }
 }
@@ -102,6 +102,11 @@ interface NexusPrismaOutputs {
     stock: 'Int'
     active: 'Boolean'
     categories: 'Category'
+    height: 'String'
+    water: 'String'
+    exposure: 'String'
+    temperature: 'String'
+    lifespan: 'String'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
   }

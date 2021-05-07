@@ -118,7 +118,7 @@ enum MainCategory {
 
 type Mutation {
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
-  createProduct(categories: [String!]!, description: String!, images: [String!]!, name: String!, price: Float!, stock: Int!): Product
+  createProduct(categories: [String!]!, description: String!, exposure: String, height: String, images: [String!]!, lifespan: String, name: String!, price: Float!, stock: Int!, temperature: String, water: String): Product
   deleteUser(password: String): User
   editUser(confirmNewPassword: String, password: String, updateEmail: String, updateName: String, updatePassword: String): User
   login(email: String!, password: String!): User
@@ -218,12 +218,17 @@ type Product {
   categories(cursor: CategoryWhereUniqueInput, skip: Int, take: Int): [Category!]!
   createdAt: DateTime!
   description: String!
+  exposure: String
+  height: String
   id: String!
   images: [String!]!
+  lifespan: String
   name: String!
   price: Float!
   stock: Int!
+  temperature: String
   updatedAt: DateTime!
+  water: String
 }
 
 input ProductListRelationFilter {
@@ -236,12 +241,17 @@ input ProductOrderByInput {
   active: SortOrder
   createdAt: SortOrder
   description: SortOrder
+  exposure: SortOrder
+  height: SortOrder
   id: SortOrder
   images: SortOrder
+  lifespan: SortOrder
   name: SortOrder
   price: SortOrder
   stock: SortOrder
+  temperature: SortOrder
   updatedAt: SortOrder
+  water: SortOrder
 }
 
 input ProductWhereInput {
@@ -252,12 +262,17 @@ input ProductWhereInput {
   categories: CategoryListRelationFilter
   createdAt: DateTimeFilter
   description: StringFilter
+  exposure: StringNullableFilter
+  height: StringNullableFilter
   id: StringFilter
   images: StringNullableListFilter
+  lifespan: StringNullableFilter
   name: StringFilter
   price: FloatFilter
   stock: IntFilter
+  temperature: StringNullableFilter
   updatedAt: DateTimeFilter
+  water: StringNullableFilter
 }
 
 input ProductWhereUniqueInput {

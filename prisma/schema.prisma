@@ -58,6 +58,11 @@ model Product {
   stock       Int        @default(0)
   active      Boolean    @default(true)
   categories  Category[]
+  height      String?
+  water       String?
+  exposure    String?
+  temperature String?
+  lifespan    String?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 }
