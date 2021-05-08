@@ -48,6 +48,30 @@ export const createProduct = mutationField('createProduct', {
       throw new Error('Não autorizado.')
     }
 
+    if (name.length < 1) {
+      throw new Error('Dê um nome ao produto.')
+    }
+
+    if (description.length < 1) {
+      throw new Error('Dê uma descrição ao produto.')
+    }
+
+    if (price < 0.1) {
+      throw new Error('Determine o preço do produto.')
+    }
+
+    if (stock < 0.1) {
+      throw new Error('Determine o stock do produto.')
+    }
+
+    if (categories.length < 1) {
+      throw new Error('Selecione pelo menos 1 categoria para cada produto.')
+    }
+
+    if (images.length < 3) {
+      throw new Error('Atribua pelo menos 3 fotografias a cada produto.')
+    }
+
     const productExists = await context.prisma.product.findUnique({
       where: { name },
     })
