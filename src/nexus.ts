@@ -377,6 +377,7 @@ export interface NexusGenFieldTypes {
     createCategory: NexusGenRootTypes['Category'] | null; // Category
     createProduct: NexusGenRootTypes['Product'] | null; // Product
     deleteUser: NexusGenRootTypes['User'] | null; // User
+    editCategory: NexusGenRootTypes['Category'] | null; // Category
     editUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['User'] | null; // User
     logout: boolean | null; // Boolean
@@ -442,6 +443,7 @@ export interface NexusGenFieldTypeNames {
     createCategory: 'Category'
     createProduct: 'Product'
     deleteUser: 'User'
+    editCategory: 'Category'
     editUser: 'User'
     login: 'User'
     logout: 'Boolean'
@@ -522,6 +524,13 @@ export interface NexusGenArgTypes {
     }
     deleteUser: { // args
       password?: string | null; // String
+    }
+    editCategory: { // args
+      image?: string | null; // String
+      mainCategory?: NexusGenEnums['MainCategory'] | null; // MainCategory
+      name?: string | null; // String
+      subCategory?: NexusGenEnums['SubCategory'] | null; // SubCategory
+      whereId: string; // String!
     }
     editUser: { // args
       confirmNewPassword?: string | null; // String
