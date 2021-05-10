@@ -125,3 +125,170 @@ export const createProduct = mutationField('createProduct', {
     return createProduct
   },
 })
+
+export const editProduct = mutationField('editProduct', {
+  type: 'Product',
+  args: {
+    whereId: nonNull(stringArg()),
+    name: stringArg(),
+    description: stringArg(),
+    images: list(nonNull(stringArg())),
+    price: floatArg(),
+    stock: intArg(),
+    categories: list(nonNull(stringArg())),
+    height: stringArg(),
+    water: stringArg(),
+    exposure: stringArg(),
+    temperature: stringArg(),
+    lifespan: stringArg(),
+  },
+  async resolve(
+    _root,
+    {
+      whereId,
+      name,
+      description,
+      images,
+      price,
+      stock,
+      categories,
+      height,
+      water,
+      exposure,
+      temperature,
+      lifespan,
+    },
+    context
+  ) {
+    const userId = isAuth(context)
+
+    const user = await context.prisma.user.findUnique({ where: { id: userId } })
+
+    if (!user || user.role !== 'ADMIN') {
+      throw new Error('Not authorized.')
+    }
+
+    const productExists = await context.prisma.product.findUnique({
+      where: { id: whereId },
+    })
+
+    if (!productExists) {
+      throw new Error('A categoria que pretende editar não existe.')
+    }
+
+    let data: {
+      name?: string
+      description?: string
+      images?: string[]
+      price?: number
+      stock?: number
+      categories?: { connect: { name: string }[] }
+      height?: string
+      water?: string
+      exposure?: string
+      temperature?: string
+      lifespan?: string
+    } = {}
+
+    if (name) {
+      const nameTaken = await context.prisma.product.findUnique({
+        where: { name },
+      })
+
+      if (nameTaken && productExists.name !== nameTaken.name) {
+        throw new Error('Outro produto já utiliza esse nome.')
+      }
+
+      data.name = name
+    }
+
+    if (description) {
+      data.description = description
+    }
+
+    if (images) {
+      data.images = images
+    }
+
+    if (price) {
+      data.price = price
+    }
+
+    if (stock) {
+      data.stock = stock
+    }
+
+    if (categories) {
+      let categoriesConnectObject: { connect: { name: string }[] } = {
+        connect: [],
+      }
+
+      const categoriesExist = async (categories: string[]) => {
+        for (let i = 0; i < categories.length; i++) {
+          if (categories[i] === '') {
+            throw new Error('Uma categoria tem de ter pelo menos 1 caractere.')
+          }
+
+          const categoryExists = await context.prisma.category.findUnique({
+            where: { name: categories[i] },
+          })
+
+          if (!categoryExists) {
+            throw new Error(
+              `A categoria ${categories[i]} não existe. Terá de a criar primeiro.`
+            )
+          }
+
+          categoriesConnectObject.connect.push({ name: categories[i] })
+        }
+      }
+
+      await categoriesExist(categories)
+
+      data.categories = categoriesConnectObject
+    }
+
+    if (height) {
+      data.height = height
+    }
+
+    if (water) {
+      data.water = water
+    }
+
+    if (exposure) {
+      data.exposure = exposure
+    }
+
+    if (temperature) {
+      data.temperature = temperature
+    }
+
+    if (lifespan) {
+      data.lifespan = lifespan
+    }
+
+    if (
+      !name &&
+      !description &&
+      !images &&
+      !price &&
+      !stock &&
+      !categories &&
+      !height &&
+      !water &&
+      !exposure &&
+      !temperature &&
+      !lifespan
+    ) {
+      throw new Error('Nada para editar.')
+    }
+
+    const updateProduct = await context.prisma.product.update({
+      where: { id: whereId },
+      data,
+    })
+
+    return updateProduct
+  },
+})
