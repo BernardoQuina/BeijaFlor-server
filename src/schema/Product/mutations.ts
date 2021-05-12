@@ -6,6 +6,7 @@ import {
   nonNull,
   stringArg,
 } from 'nexus'
+import { prisma } from '../../context'
 import { isAuth } from '../../util/isAuth'
 
 export const createProduct = mutationField('createProduct', {
@@ -324,5 +325,39 @@ export const changeProductStatus = mutationField('changeProductStatus', {
     }
 
     return context.prisma.product.update({ where: { id: whereId }, data })
+  },
+})
+
+export const deleteProduct = mutationField('deleteProduct', {
+  type: 'Boolean',
+  args: {
+    whereId: nonNull(stringArg()),
+  },
+  async resolve(_root, { whereId }, context) {
+    const userId = isAuth(context)
+
+    const user = await context.prisma.user.findUnique({ where: { id: userId } })
+
+    if (!user || user.role !== 'ADMIN') {
+      throw new Error('Not authorized.')
+    }
+
+    const productExists = await context.prisma.product.findUnique({
+      where: { id: whereId },
+    })
+
+    if (!productExists) {
+      throw new Error('O produto que pretende eliminar não existe.')
+    }
+
+    const deletedProduct = await prisma.product.delete({
+      where: { id: whereId },
+    })
+
+    if (deletedProduct) {
+      return true
+    } else {
+      throw new Error('Não foi possível concluir a operação.')
+    }
   },
 })
