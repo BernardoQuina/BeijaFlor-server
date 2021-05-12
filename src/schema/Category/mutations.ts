@@ -116,3 +116,37 @@ export const editCategory = mutationField('editCategory', {
     return updateCategory
   },
 })
+
+export const deleteCategory = mutationField('deleteCategory', {
+  type: 'Boolean',
+  args: {
+    whereId: nonNull(stringArg()),
+  },
+  async resolve(_root, { whereId }, context) {
+    const userId = isAuth(context)
+
+    const user = await context.prisma.user.findUnique({ where: { id: userId } })
+
+    if (!user || user.role !== 'ADMIN') {
+      throw new Error('Not authorized.')
+    }
+
+    const categoryExists = await context.prisma.category.findUnique({
+      where: { id: whereId },
+    })
+
+    if (!categoryExists) {
+      throw new Error('A categoria que pretende eliminar não existe.')
+    }
+
+    const deletedCategory = await context.prisma.category.delete({
+      where: { id: whereId },
+    })
+
+    if (deletedCategory) {
+      return true
+    } else {
+      throw new Error('Não foi possível concluir a operação.')
+    }
+  },
+})

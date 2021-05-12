@@ -377,6 +377,7 @@ export interface NexusGenFieldTypes {
     changeProductStatus: NexusGenRootTypes['Product'] | null; // Product
     createCategory: NexusGenRootTypes['Category'] | null; // Category
     createProduct: NexusGenRootTypes['Product'] | null; // Product
+    deleteCategory: boolean | null; // Boolean
     deleteProduct: boolean | null; // Boolean
     deleteUser: NexusGenRootTypes['User'] | null; // User
     editCategory: NexusGenRootTypes['Category'] | null; // Category
@@ -446,6 +447,7 @@ export interface NexusGenFieldTypeNames {
     changeProductStatus: 'Product'
     createCategory: 'Category'
     createProduct: 'Product'
+    deleteCategory: 'Boolean'
     deleteProduct: 'Boolean'
     deleteUser: 'User'
     editCategory: 'Category'
@@ -530,6 +532,9 @@ export interface NexusGenArgTypes {
       stock: number; // Int!
       temperature?: string | null; // String
       water?: string | null; // String
+    }
+    deleteCategory: { // args
+      whereId: string; // String!
     }
     deleteProduct: { // args
       whereId: string; // String!

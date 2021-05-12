@@ -6,7 +6,6 @@ import {
   nonNull,
   stringArg,
 } from 'nexus'
-import { prisma } from '../../context'
 import { isAuth } from '../../util/isAuth'
 
 export const createProduct = mutationField('createProduct', {
@@ -350,7 +349,7 @@ export const deleteProduct = mutationField('deleteProduct', {
       throw new Error('O produto que pretende eliminar não existe.')
     }
 
-    const deletedProduct = await prisma.product.delete({
+    const deletedProduct = await context.prisma.product.delete({
       where: { id: whereId },
     })
 

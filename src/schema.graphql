@@ -120,6 +120,7 @@ type Mutation {
   changeProductStatus(whereId: String!): Product
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
   createProduct(categories: [String!]!, description: String!, exposure: String, height: String, images: [String!]!, lifespan: String, name: String!, price: Float!, stock: Int!, temperature: String, water: String): Product
+  deleteCategory(whereId: String!): Boolean
   deleteProduct(whereId: String!): Boolean
   deleteUser(password: String): User
   editCategory(image: String, mainCategory: MainCategory, name: String, subCategory: SubCategory, whereId: String!): Category
