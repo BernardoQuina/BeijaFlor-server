@@ -374,6 +374,7 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Mutation: { // field return type
+    changeProductStatus: NexusGenRootTypes['Product'] | null; // Product
     createCategory: NexusGenRootTypes['Category'] | null; // Category
     createProduct: NexusGenRootTypes['Product'] | null; // Product
     deleteUser: NexusGenRootTypes['User'] | null; // User
@@ -441,6 +442,7 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
   }
   Mutation: { // field return type name
+    changeProductStatus: 'Product'
     createCategory: 'Category'
     createProduct: 'Product'
     deleteUser: 'User'
@@ -505,6 +507,9 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    changeProductStatus: { // args
+      whereId: string; // String!
+    }
     createCategory: { // args
       image: string; // String!
       mainCategory: NexusGenEnums['MainCategory']; // MainCategory!

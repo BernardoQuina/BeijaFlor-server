@@ -173,7 +173,7 @@ export const editProduct = mutationField('editProduct', {
     })
 
     if (!productExists) {
-      throw new Error('A categoria que pretende editar não existe.')
+      throw new Error('O produto que pretende editar não existe.')
     }
 
     let data: {
@@ -290,5 +290,39 @@ export const editProduct = mutationField('editProduct', {
     })
 
     return updateProduct
+  },
+})
+
+export const changeProductStatus = mutationField('changeProductStatus', {
+  type: 'Product',
+  args: {
+    whereId: nonNull(stringArg()),
+  },
+  async resolve(_root, { whereId }, context) {
+    const userId = isAuth(context)
+
+    const user = await context.prisma.user.findUnique({ where: { id: userId } })
+
+    if (!user || user.role !== 'ADMIN') {
+      throw new Error('Not authorized.')
+    }
+
+    const productExists = await context.prisma.product.findUnique({
+      where: { id: whereId },
+    })
+
+    if (!productExists) {
+      throw new Error('O produto que pretende editar não existe.')
+    }
+
+    let data
+
+    if (productExists.active) {
+      data = { active: false }
+    } else {
+      data = { active: true }
+    }
+
+    return context.prisma.product.update({ where: { id: whereId }, data })
   },
 })
