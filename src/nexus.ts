@@ -296,11 +296,11 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  MainCategory: "Acessorios" | "Flores" | "Ocasiao" | "Plantas"
+  MainCategory: "Acessorios" | "Flores" | "Ocasiao" | "Plantas" | "none"
   QueryMode: "default" | "insensitive"
   Role: "ADMIN" | "USER"
   SortOrder: "asc" | "desc"
-  SubCategory: "arranjos" | "calendario" | "caracteristicas" | "cerimonias" | "cores" | "estacao" | "local" | "momentosEspeciais" | "outros" | "tipos" | "vasos"
+  SubCategory: "arranjos" | "calendario" | "caracteristicas" | "cerimonias" | "cores" | "estacao" | "local" | "momentosEspeciais" | "none" | "outros" | "tipos" | "vasos"
 }
 
 export interface NexusGenScalars {

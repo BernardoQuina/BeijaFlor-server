@@ -114,6 +114,7 @@ enum MainCategory {
   Flores
   Ocasiao
   Plantas
+  none
 }
 
 type Mutation {
@@ -362,6 +363,7 @@ enum SubCategory {
   estacao
   local
   momentosEspeciais
+  none
   outros
   tipos
   vasos
