@@ -25,6 +25,8 @@ enum MainCategory {
 
 enum SubCategory {
   tipos
+  tiposFlores
+  tiposPlantas
   arranjos
   cores
   estacao

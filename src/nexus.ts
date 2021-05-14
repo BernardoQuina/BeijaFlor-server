@@ -300,7 +300,7 @@ export interface NexusGenEnums {
   QueryMode: "default" | "insensitive"
   Role: "ADMIN" | "USER"
   SortOrder: "asc" | "desc"
-  SubCategory: "arranjos" | "calendario" | "caracteristicas" | "cerimonias" | "cores" | "estacao" | "local" | "momentosEspeciais" | "none" | "outros" | "tipos" | "vasos"
+  SubCategory: "arranjos" | "calendario" | "caracteristicas" | "cerimonias" | "cores" | "estacao" | "local" | "momentosEspeciais" | "none" | "outros" | "tipos" | "tiposFlores" | "tiposPlantas" | "vasos"
 }
 
 export interface NexusGenScalars {

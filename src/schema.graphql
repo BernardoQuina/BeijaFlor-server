@@ -366,6 +366,8 @@ enum SubCategory {
   none
   outros
   tipos
+  tiposFlores
+  tiposPlantas
   vasos
 }
 
