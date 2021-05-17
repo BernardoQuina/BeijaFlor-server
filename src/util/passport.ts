@@ -41,6 +41,10 @@ export const passportOauth = (app: Application) => {
             },
           })
 
+          await prisma.cart.create({
+            data: { user: { connect: { id: newUser.id } } },
+          })
+
           cb(undefined, newUser)
         } else {
           cb(undefined, userExists)
@@ -71,6 +75,10 @@ export const passportOauth = (app: Application) => {
               facebookId: profile.id,
               photo: profile.photos![0].value,
             },
+          })
+
+          await prisma.cart.create({
+            data: { user: { connect: { id: newUser.id } } },
           })
 
           cb(undefined, newUser)

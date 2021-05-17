@@ -16,6 +16,7 @@ export const Product = objectType({
     t.model.exposure()
     t.model.temperature()
     t.model.lifespan()
+    t.model.cartItems()
     t.model.createdAt()
     t.model.updatedAt()
   },

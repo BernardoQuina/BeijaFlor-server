@@ -15,11 +15,13 @@ export const register = mutationField('register', {
     { name, email, password, confirmPassword },
     { prisma, req }
   ) {
-    const nameRegex = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/
+    const nameRegex =
+      /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/
 
     const emailRegex = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/
 
-    const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
+    const passwordRegex =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
 
     if (!nameRegex.test(name)) {
       throw new Error(
@@ -52,6 +54,10 @@ export const register = mutationField('register', {
     })
 
     req.session.userId = newUser.id
+
+    await prisma.cart.create({
+      data: { user: { connect: { id: newUser.id } } },
+    })
 
     return newUser
   },
@@ -162,7 +168,8 @@ export const editUser = mutationField('editUser', {
     }
 
     if (updateName) {
-      const nameRegex = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/
+      const nameRegex =
+        /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._ ]+(?<![_.])$/
 
       if (!nameRegex.test(updateName)) {
         throw new Error(
@@ -174,7 +181,8 @@ export const editUser = mutationField('editUser', {
     }
 
     if (updatePassword) {
-      const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
+      const passwordRegex =
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
 
       if (!passwordRegex.test(updatePassword)) {
         throw new Error(
@@ -230,6 +238,14 @@ export const deleteUser = mutationField('deleteUser', {
       if (!isMatch) {
         throw new Error('Invalid credentials')
       }
+    }
+
+    const cartExists = await context.prisma.cart.findFirst({
+      where: { userId },
+    })
+
+    if (cartExists) {
+      await context.prisma.cart.delete({ where: { id: cartExists.id } })
     }
 
     return context.prisma.user.delete({ where: { id: userId } })

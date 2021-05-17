@@ -34,6 +34,15 @@ input CartItemListRelationFilter {
   some: CartItemWhereInput
 }
 
+input CartItemOrderByInput {
+  cartId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  productId: SortOrder
+  quantity: SortOrder
+  updatedAt: SortOrder
+}
+
 input CartItemWhereInput {
   AND: [CartItemWhereInput!]
   NOT: [CartItemWhereInput!]
@@ -52,6 +61,14 @@ input CartItemWhereUniqueInput {
   id: String
 }
 
+input CartOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  price: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
 input CartWhereInput {
   AND: [CartWhereInput!]
   NOT: [CartWhereInput!]
@@ -63,6 +80,10 @@ input CartWhereInput {
   updatedAt: DateTimeFilter
   user: UserWhereInput
   userId: StringFilter
+}
+
+input CartWhereUniqueInput {
+  id: String
 }
 
 type Category {
@@ -279,6 +300,7 @@ input NestedStringNullableFilter {
 
 type Product {
   active: Boolean!
+  cartItems(cursor: CartItemWhereUniqueInput, skip: Int, take: Int): [CartItem!]!
   categories(cursor: CategoryWhereUniqueInput, skip: Int, take: Int): [Category!]!
   createdAt: DateTime!
   description: String!
@@ -346,6 +368,10 @@ input ProductWhereUniqueInput {
 }
 
 type Query {
+  cart(where: CartWhereUniqueInput!): Cart
+  cartItem(where: CartItemWhereUniqueInput!): CartItem
+  cartItems(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int, where: CartItemWhereInput): [CartItem!]!
+  carts(cursor: CartWhereUniqueInput, orderBy: [CartOrderByInput!], skip: Int, take: Int, where: CartWhereInput): [Cart!]!
   categories(cursor: CategoryWhereUniqueInput, orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): [Category!]!
   category(where: CategoryWhereUniqueInput!): Category
   categoryCount: Int
@@ -431,6 +457,7 @@ enum SubCategory {
 }
 
 type User {
+  cart: Cart
   createdAt: DateTime!
   email: String!
   facebookId: String
