@@ -14,6 +14,10 @@ import * as categoryTypes from './Category/types'
 import * as categoryQueries from './Category/queries'
 import * as categoryMutations from './Category/mutations'
 
+import * as cartTypes from './Cart/types'
+
+import * as cartItemTypes from './CartItems/types'
+
 export const schema = makeSchema({
   types: {
     userTypes,
@@ -24,7 +28,9 @@ export const schema = makeSchema({
     productMutations,
     categoryTypes,
     categoryQueries,
-    categoryMutations
+    categoryMutations,
+    cartTypes,
+    cartItemTypes
   },
   plugins: [
     nexusPrisma({

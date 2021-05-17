@@ -23,6 +23,39 @@ export interface NexusGenInputs {
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
   }
+  CartItemListRelationFilter: { // input type
+    every?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
+    none?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
+    some?: NexusGenInputs['CartItemWhereInput'] | null; // CartItemWhereInput
+  }
+  CartItemWhereInput: { // input type
+    AND?: NexusGenInputs['CartItemWhereInput'][] | null; // [CartItemWhereInput!]
+    NOT?: NexusGenInputs['CartItemWhereInput'][] | null; // [CartItemWhereInput!]
+    OR?: NexusGenInputs['CartItemWhereInput'][] | null; // [CartItemWhereInput!]
+    cart?: NexusGenInputs['CartWhereInput'] | null; // CartWhereInput
+    cartId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    product?: NexusGenInputs['ProductWhereInput'] | null; // ProductWhereInput
+    productId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    quantity?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+  }
+  CartItemWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
+  CartWhereInput: { // input type
+    AND?: NexusGenInputs['CartWhereInput'][] | null; // [CartWhereInput!]
+    NOT?: NexusGenInputs['CartWhereInput'][] | null; // [CartWhereInput!]
+    OR?: NexusGenInputs['CartWhereInput'][] | null; // [CartWhereInput!]
+    cartItems?: NexusGenInputs['CartItemListRelationFilter'] | null; // CartItemListRelationFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    price?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
   CategoryListRelationFilter: { // input type
     every?: NexusGenInputs['CategoryWhereInput'] | null; // CategoryWhereInput
     none?: NexusGenInputs['CategoryWhereInput'] | null; // CategoryWhereInput
@@ -206,6 +239,7 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs['ProductWhereInput'][] | null; // [ProductWhereInput!]
     OR?: NexusGenInputs['ProductWhereInput'][] | null; // [ProductWhereInput!]
     active?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    cartItems?: NexusGenInputs['CartItemListRelationFilter'] | null; // CartItemListRelationFilter
     categories?: NexusGenInputs['CategoryListRelationFilter'] | null; // CategoryListRelationFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -276,6 +310,7 @@ export interface NexusGenInputs {
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    cart?: NexusGenInputs['CartWhereInput'] | null; // CartWhereInput
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
     facebookId?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
@@ -313,6 +348,21 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Cart: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    price: number; // Float!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
+  }
+  CartItem: { // root type
+    cartId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    productId: string; // String!
+    quantity: number; // Int!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Category: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
@@ -363,6 +413,25 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  Cart: { // field return type
+    cartItems: NexusGenRootTypes['CartItem'][]; // [CartItem!]!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    price: number; // Float!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+  }
+  CartItem: { // field return type
+    cart: NexusGenRootTypes['Cart']; // Cart!
+    cartId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    product: NexusGenRootTypes['Product']; // Product!
+    productId: string; // String!
+    quantity: number; // Int!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
   Category: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
@@ -433,6 +502,25 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Cart: { // field return type name
+    cartItems: 'CartItem'
+    createdAt: 'DateTime'
+    id: 'String'
+    price: 'Float'
+    updatedAt: 'DateTime'
+    user: 'User'
+    userId: 'String'
+  }
+  CartItem: { // field return type name
+    cart: 'Cart'
+    cartId: 'String'
+    createdAt: 'DateTime'
+    id: 'String'
+    product: 'Product'
+    productId: 'String'
+    quantity: 'Int'
+    updatedAt: 'DateTime'
+  }
   Category: { // field return type name
     createdAt: 'DateTime'
     id: 'String'
@@ -503,6 +591,13 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Cart: {
+    cartItems: { // args
+      cursor?: NexusGenInputs['CartItemWhereUniqueInput'] | null; // CartItemWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+  }
   Category: {
     products: { // args
       cursor?: NexusGenInputs['ProductWhereUniqueInput'] | null; // ProductWhereUniqueInput

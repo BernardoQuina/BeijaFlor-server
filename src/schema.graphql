@@ -7,6 +7,64 @@ input BoolFilter {
   not: NestedBoolFilter
 }
 
+type Cart {
+  cartItems(cursor: CartItemWhereUniqueInput, skip: Int, take: Int): [CartItem!]!
+  createdAt: DateTime!
+  id: String!
+  price: Float!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type CartItem {
+  cart: Cart!
+  cartId: String!
+  createdAt: DateTime!
+  id: String!
+  product: Product!
+  productId: String!
+  quantity: Int!
+  updatedAt: DateTime!
+}
+
+input CartItemListRelationFilter {
+  every: CartItemWhereInput
+  none: CartItemWhereInput
+  some: CartItemWhereInput
+}
+
+input CartItemWhereInput {
+  AND: [CartItemWhereInput!]
+  NOT: [CartItemWhereInput!]
+  OR: [CartItemWhereInput!]
+  cart: CartWhereInput
+  cartId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  product: ProductWhereInput
+  productId: StringFilter
+  quantity: IntFilter
+  updatedAt: DateTimeFilter
+}
+
+input CartItemWhereUniqueInput {
+  id: String
+}
+
+input CartWhereInput {
+  AND: [CartWhereInput!]
+  NOT: [CartWhereInput!]
+  OR: [CartWhereInput!]
+  cartItems: CartItemListRelationFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  price: FloatFilter
+  updatedAt: DateTimeFilter
+  user: UserWhereInput
+  userId: StringFilter
+}
+
 type Category {
   createdAt: DateTime!
   id: String!
@@ -265,6 +323,7 @@ input ProductWhereInput {
   NOT: [ProductWhereInput!]
   OR: [ProductWhereInput!]
   active: BoolFilter
+  cartItems: CartItemListRelationFilter
   categories: CategoryListRelationFilter
   createdAt: DateTimeFilter
   description: StringFilter
@@ -401,6 +460,7 @@ input UserWhereInput {
   AND: [UserWhereInput!]
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  cart: CartWhereInput
   createdAt: DateTimeFilter
   email: StringFilter
   facebookId: StringNullableFilter
