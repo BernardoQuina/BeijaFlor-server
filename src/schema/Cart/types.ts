@@ -5,8 +5,9 @@ export const Cart = objectType({
   definition(t) {
     t.model.id()
     t.model.user()
-    t.model.cartItems()
+    t.model.cartItems({ordering: true})
     t.model.price()
+    t.model.quantity()
     t.model.userId()
     t.model.createdAt()
     t.model.updatedAt()

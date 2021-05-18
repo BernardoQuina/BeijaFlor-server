@@ -59,6 +59,7 @@ model Cart {
   user      User       @relation(fields: [userId], references: [id])
   cartItems CartItem[]
   price     Float      @default(0)
+  quantity  Int        @default(0)
   userId    String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt

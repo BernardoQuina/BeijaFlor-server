@@ -56,6 +56,7 @@ export interface NexusGenInputs {
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     price?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    quantity?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
@@ -67,6 +68,7 @@ export interface NexusGenInputs {
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     price?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    quantity?: NexusGenInputs['IntFilter'] | null; // IntFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -370,6 +372,7 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
     price: number; // Float!
+    quantity: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
@@ -436,6 +439,7 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
     price: number; // Float!
+    quantity: number; // Int!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
@@ -461,7 +465,9 @@ export interface NexusGenFieldTypes {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Mutation: { // field return type
+    changeItemQuantity: NexusGenRootTypes['CartItem'] | null; // CartItem
     changeProductStatus: NexusGenRootTypes['Product'] | null; // Product
+    createCartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
     createCategory: NexusGenRootTypes['Category'] | null; // Category
     createProduct: NexusGenRootTypes['Product'] | null; // Product
     deleteCategory: boolean | null; // Boolean
@@ -473,6 +479,7 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['User'] | null; // User
     logout: boolean | null; // Boolean
     register: NexusGenRootTypes['User'] | null; // User
+    removeItem: boolean | null; // Boolean
   }
   Product: { // field return type
     active: boolean; // Boolean!
@@ -531,6 +538,7 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     id: 'String'
     price: 'Float'
+    quantity: 'Int'
     updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
@@ -556,7 +564,9 @@ export interface NexusGenFieldTypeNames {
     updatedAt: 'DateTime'
   }
   Mutation: { // field return type name
+    changeItemQuantity: 'CartItem'
     changeProductStatus: 'Product'
+    createCartItem: 'CartItem'
     createCategory: 'Category'
     createProduct: 'Product'
     deleteCategory: 'Boolean'
@@ -568,6 +578,7 @@ export interface NexusGenFieldTypeNames {
     login: 'User'
     logout: 'Boolean'
     register: 'User'
+    removeItem: 'Boolean'
   }
   Product: { // field return type name
     active: 'Boolean'
@@ -624,6 +635,7 @@ export interface NexusGenArgTypes {
   Cart: {
     cartItems: { // args
       cursor?: NexusGenInputs['CartItemWhereUniqueInput'] | null; // CartItemWhereUniqueInput
+      orderBy?: NexusGenInputs['CartItemOrderByInput'][] | null; // [CartItemOrderByInput!]
       skip?: number | null; // Int
       take?: number | null; // Int
     }
@@ -636,8 +648,19 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    changeItemQuantity: { // args
+      cartId: string; // String!
+      cartItemId: string; // String!
+      plusOrMinusOne: number; // Int!
+      productId: string; // String!
+    }
     changeProductStatus: { // args
       whereId: string; // String!
+    }
+    createCartItem: { // args
+      cartId: string; // String!
+      productId: string; // String!
+      quantity: number; // Int!
     }
     createCategory: { // args
       image: string; // String!
@@ -704,6 +727,11 @@ export interface NexusGenArgTypes {
       email: string; // String!
       name: string; // String!
       password: string; // String!
+    }
+    removeItem: { // args
+      cartId: string; // String!
+      cartItemId: string; // String!
+      productId: string; // String!
     }
   }
   Product: {

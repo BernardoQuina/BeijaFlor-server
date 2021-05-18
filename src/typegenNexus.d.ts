@@ -28,8 +28,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt'
     }
     carts: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'cartItems' | 'price' | 'userId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'price' | 'userId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'cartItems' | 'price' | 'quantity' | 'userId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'price' | 'quantity' | 'userId' | 'createdAt' | 'updatedAt'
     }
     cartItems: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'product' | 'quantity' | 'cart' | 'productId' | 'cartId' | 'createdAt' | 'updatedAt'
@@ -138,6 +138,7 @@ interface NexusPrismaOutputs {
     user: 'User'
     cartItems: 'CartItem'
     price: 'Float'
+    quantity: 'Int'
     userId: 'String'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'

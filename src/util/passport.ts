@@ -47,6 +47,16 @@ export const passportOauth = (app: Application) => {
 
           cb(undefined, newUser)
         } else {
+          const cartExists = await prisma.cart.findFirst({
+            where: { userId: userExists.id },
+          })
+
+          if (!cartExists) {
+            await prisma.cart.create({
+              data: { user: { connect: { id: userExists.id } } },
+            })
+          }
+
           cb(undefined, userExists)
         }
       }
@@ -83,6 +93,16 @@ export const passportOauth = (app: Application) => {
 
           cb(undefined, newUser)
         } else {
+          const cartExists = await prisma.cart.findFirst({
+            where: { userId: userExists.id },
+          })
+
+          if (!cartExists) {
+            await prisma.cart.create({
+              data: { user: { connect: { id: userExists.id } } },
+            })
+          }
+
           cb(undefined, userExists)
         }
       }

@@ -84,6 +84,16 @@ export const login = mutationField('login', {
 
     req.session.userId = userExists.id
 
+    const cartExists = await prisma.cart.findFirst({
+      where: { userId: userExists.id },
+    })
+
+    if (!cartExists) {
+      await prisma.cart.create({
+        data: { user: { connect: { id: userExists.id } } },
+      })
+    }
+
     return userExists
   },
 })

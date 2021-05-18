@@ -8,10 +8,11 @@ input BoolFilter {
 }
 
 type Cart {
-  cartItems(cursor: CartItemWhereUniqueInput, skip: Int, take: Int): [CartItem!]!
+  cartItems(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int): [CartItem!]!
   createdAt: DateTime!
   id: String!
   price: Float!
+  quantity: Int!
   updatedAt: DateTime!
   user: User!
   userId: String!
@@ -65,6 +66,7 @@ input CartOrderByInput {
   createdAt: SortOrder
   id: SortOrder
   price: SortOrder
+  quantity: SortOrder
   updatedAt: SortOrder
   userId: SortOrder
 }
@@ -77,6 +79,7 @@ input CartWhereInput {
   createdAt: DateTimeFilter
   id: StringFilter
   price: FloatFilter
+  quantity: IntFilter
   updatedAt: DateTimeFilter
   user: UserWhereInput
   userId: StringFilter
@@ -197,7 +200,9 @@ enum MainCategory {
 }
 
 type Mutation {
+  changeItemQuantity(cartId: String!, cartItemId: String!, plusOrMinusOne: Int!, productId: String!): CartItem
   changeProductStatus(whereId: String!): Product
+  createCartItem(cartId: String!, productId: String!, quantity: Int!): CartItem
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
   createProduct(categories: [String!]!, description: String!, exposure: String, height: String, images: [String!]!, lifespan: String, name: String!, price: Float!, stock: Int!, temperature: String, water: String): Product
   deleteCategory(whereId: String!): Boolean
@@ -209,6 +214,7 @@ type Mutation {
   login(email: String!, password: String!): User
   logout: Boolean
   register(confirmPassword: String!, email: String!, name: String!, password: String!): User
+  removeItem(cartId: String!, cartItemId: String!, productId: String!): Boolean
 }
 
 input NestedBoolFilter {
