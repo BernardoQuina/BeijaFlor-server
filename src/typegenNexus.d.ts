@@ -16,6 +16,7 @@ interface PrismaModels {
   User: Prisma.User
   Cart: Prisma.Cart
   CartItem: Prisma.CartItem
+  WishList: Prisma.WishList
   Product: Prisma.Product
   Category: Prisma.Category
 }
@@ -24,7 +25,7 @@ interface PrismaModels {
 interface NexusPrismaInputs {
   Query: {
     users: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt' | 'cart'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt' | 'cart' | 'wishlist'
       ordering: 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt'
     }
     carts: {
@@ -35,8 +36,12 @@ interface NexusPrismaInputs {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'product' | 'quantity' | 'cart' | 'productId' | 'cartId' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'quantity' | 'productId' | 'cartId' | 'createdAt' | 'updatedAt'
     }
+    wishLists: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'products' | 'userId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'userId' | 'createdAt' | 'updatedAt'
+    }
     products: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'wishLists'
       ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
     }
     categories: {
@@ -56,6 +61,12 @@ interface NexusPrismaInputs {
   CartItem: {
 
   }
+  WishList: {
+    products: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'wishLists'
+      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
+    }
+  }
   Product: {
     categories: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'products' | 'createdAt' | 'updatedAt'
@@ -65,10 +76,14 @@ interface NexusPrismaInputs {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'product' | 'quantity' | 'cart' | 'productId' | 'cartId' | 'createdAt' | 'updatedAt'
       ordering: 'id' | 'quantity' | 'productId' | 'cartId' | 'createdAt' | 'updatedAt'
     }
+    wishLists: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'products' | 'userId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'userId' | 'createdAt' | 'updatedAt'
+    }
   }
   Category: {
     products: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'wishLists'
       ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
     }
   }
@@ -83,6 +98,8 @@ interface NexusPrismaOutputs {
     carts: 'Cart'
     cartItem: 'CartItem'
     cartItems: 'CartItem'
+    wishList: 'WishList'
+    wishLists: 'WishList'
     product: 'Product'
     products: 'Product'
     category: 'Category'
@@ -107,6 +124,12 @@ interface NexusPrismaOutputs {
     deleteOneCartItem: 'CartItem'
     deleteManyCartItem: 'AffectedRowsOutput'
     upsertOneCartItem: 'CartItem'
+    createOneWishList: 'WishList'
+    updateOneWishList: 'WishList'
+    updateManyWishList: 'AffectedRowsOutput'
+    deleteOneWishList: 'WishList'
+    deleteManyWishList: 'AffectedRowsOutput'
+    upsertOneWishList: 'WishList'
     createOneProduct: 'Product'
     updateOneProduct: 'Product'
     updateManyProduct: 'AffectedRowsOutput'
@@ -132,6 +155,7 @@ interface NexusPrismaOutputs {
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
     cart: 'Cart'
+    wishlist: 'WishList'
   }
   Cart: {
     id: 'String'
@@ -153,6 +177,14 @@ interface NexusPrismaOutputs {
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
   }
+  WishList: {
+    id: 'String'
+    user: 'User'
+    products: 'Product'
+    userId: 'String'
+    createdAt: 'DateTime'
+    updatedAt: 'DateTime'
+  }
   Product: {
     id: 'String'
     name: 'String'
@@ -170,6 +202,7 @@ interface NexusPrismaOutputs {
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
     cartItems: 'CartItem'
+    wishLists: 'WishList'
   }
   Category: {
     id: 'String'
@@ -188,6 +221,7 @@ interface NexusPrismaMethods {
   User: Typegen.NexusPrismaFields<'User'>
   Cart: Typegen.NexusPrismaFields<'Cart'>
   CartItem: Typegen.NexusPrismaFields<'CartItem'>
+  WishList: Typegen.NexusPrismaFields<'WishList'>
   Product: Typegen.NexusPrismaFields<'Product'>
   Category: Typegen.NexusPrismaFields<'Category'>
   Query: Typegen.NexusPrismaFields<'Query'>

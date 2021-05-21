@@ -41,17 +41,18 @@ enum SubCategory {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  googleId     String?  @unique
-  facebookId   String?  @unique
-  email        String   @unique
-  role         Role     @default(USER)
+  id           String    @id @default(uuid())
+  googleId     String?   @unique
+  facebookId   String?   @unique
+  email        String    @unique
+  role         Role      @default(USER)
   passwordHash String?
   name         String
   photo        String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
   cart         Cart?
+  wishlist     WishList?
 }
 
 model Cart {
@@ -76,6 +77,15 @@ model CartItem {
   updatedAt DateTime @updatedAt
 }
 
+model WishList {
+  id        String    @id @default(uuid())
+  user      User      @relation(fields: [userId], references: [id])
+  products  Product[]
+  userId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
 model Product {
   id          String     @id @default(uuid())
   name        String     @unique
@@ -93,6 +103,7 @@ model Product {
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   cartItems   CartItem[]
+  wishLists   WishList[]
 }
 
 model Category {

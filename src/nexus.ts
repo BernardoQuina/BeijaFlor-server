@@ -274,6 +274,7 @@ export interface NexusGenInputs {
     temperature?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     water?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    wishLists?: NexusGenInputs['WishListListRelationFilter'] | null; // WishListListRelationFilter
   }
   ProductWhereUniqueInput: { // input type
     id?: string | null; // String
@@ -341,11 +342,37 @@ export interface NexusGenInputs {
     photo?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     role?: NexusGenInputs['EnumRoleFilter'] | null; // EnumRoleFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    wishlist?: NexusGenInputs['WishListWhereInput'] | null; // WishListWhereInput
   }
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
     facebookId?: string | null; // String
     googleId?: string | null; // String
+    id?: string | null; // String
+  }
+  WishListListRelationFilter: { // input type
+    every?: NexusGenInputs['WishListWhereInput'] | null; // WishListWhereInput
+    none?: NexusGenInputs['WishListWhereInput'] | null; // WishListWhereInput
+    some?: NexusGenInputs['WishListWhereInput'] | null; // WishListWhereInput
+  }
+  WishListOrderByInput: { // input type
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  WishListWhereInput: { // input type
+    AND?: NexusGenInputs['WishListWhereInput'][] | null; // [WishListWhereInput!]
+    NOT?: NexusGenInputs['WishListWhereInput'][] | null; // [WishListWhereInput!]
+    OR?: NexusGenInputs['WishListWhereInput'][] | null; // [WishListWhereInput!]
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    products?: NexusGenInputs['ProductListRelationFilter'] | null; // ProductListRelationFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  WishListWhereUniqueInput: { // input type
     id?: string | null; // String
   }
 }
@@ -420,6 +447,12 @@ export interface NexusGenObjects {
     photo?: string | null; // String
     role: NexusGenEnums['Role']; // Role!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  WishList: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
   }
 }
 
@@ -498,6 +531,7 @@ export interface NexusGenFieldTypes {
     temperature: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     water: string | null; // String
+    wishLists: NexusGenRootTypes['WishList'][]; // [WishList!]!
   }
   Query: { // field return type
     cart: NexusGenRootTypes['Cart'] | null; // Cart
@@ -516,6 +550,8 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
     userCount: number | null; // Int
     users: NexusGenRootTypes['User'][]; // [User!]!
+    wishList: NexusGenRootTypes['WishList'] | null; // WishList
+    wishLists: NexusGenRootTypes['WishList'][]; // [WishList!]!
   }
   User: { // field return type
     cart: NexusGenRootTypes['Cart'] | null; // Cart
@@ -529,6 +565,14 @@ export interface NexusGenFieldTypes {
     photo: string | null; // String
     role: NexusGenEnums['Role']; // Role!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+  }
+  WishList: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    products: NexusGenRootTypes['Product'][]; // [Product!]!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
   }
 }
 
@@ -597,6 +641,7 @@ export interface NexusGenFieldTypeNames {
     temperature: 'String'
     updatedAt: 'DateTime'
     water: 'String'
+    wishLists: 'WishList'
   }
   Query: { // field return type name
     cart: 'Cart'
@@ -615,6 +660,8 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
     userCount: 'Int'
     users: 'User'
+    wishList: 'WishList'
+    wishLists: 'WishList'
   }
   User: { // field return type name
     cart: 'Cart'
@@ -628,6 +675,14 @@ export interface NexusGenFieldTypeNames {
     photo: 'String'
     role: 'Role'
     updatedAt: 'DateTime'
+  }
+  WishList: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    products: 'Product'
+    updatedAt: 'DateTime'
+    user: 'User'
+    userId: 'String'
   }
 }
 
@@ -745,6 +800,11 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       take?: number | null; // Int
     }
+    wishLists: { // args
+      cursor?: NexusGenInputs['WishListWhereUniqueInput'] | null; // WishListWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
   }
   Query: {
     cart: { // args
@@ -796,6 +856,23 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       take?: number | null; // Int
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
+    wishList: { // args
+      where: NexusGenInputs['WishListWhereUniqueInput']; // WishListWhereUniqueInput!
+    }
+    wishLists: { // args
+      cursor?: NexusGenInputs['WishListWhereUniqueInput'] | null; // WishListWhereUniqueInput
+      orderBy?: NexusGenInputs['WishListOrderByInput'][] | null; // [WishListOrderByInput!]
+      skip?: number | null; // Int
+      take?: number | null; // Int
+      where?: NexusGenInputs['WishListWhereInput'] | null; // WishListWhereInput
+    }
+  }
+  WishList: {
+    products: { // args
+      cursor?: NexusGenInputs['ProductWhereUniqueInput'] | null; // ProductWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
     }
   }
 }

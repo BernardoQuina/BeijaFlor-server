@@ -321,6 +321,7 @@ type Product {
   temperature: String
   updatedAt: DateTime!
   water: String
+  wishLists(cursor: WishListWhereUniqueInput, skip: Int, take: Int): [WishList!]!
 }
 
 input ProductListRelationFilter {
@@ -366,6 +367,7 @@ input ProductWhereInput {
   temperature: StringNullableFilter
   updatedAt: DateTimeFilter
   water: StringNullableFilter
+  wishLists: WishListListRelationFilter
 }
 
 input ProductWhereUniqueInput {
@@ -390,6 +392,8 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   userCount: Int
   users(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!
+  wishList(where: WishListWhereUniqueInput!): WishList
+  wishLists(cursor: WishListWhereUniqueInput, orderBy: [WishListOrderByInput!], skip: Int, take: Int, where: WishListWhereInput): [WishList!]!
 }
 
 enum QueryMode {
@@ -504,11 +508,50 @@ input UserWhereInput {
   photo: StringNullableFilter
   role: EnumRoleFilter
   updatedAt: DateTimeFilter
+  wishlist: WishListWhereInput
 }
 
 input UserWhereUniqueInput {
   email: String
   facebookId: String
   googleId: String
+  id: String
+}
+
+type WishList {
+  createdAt: DateTime!
+  id: String!
+  products(cursor: ProductWhereUniqueInput, skip: Int, take: Int): [Product!]!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+input WishListListRelationFilter {
+  every: WishListWhereInput
+  none: WishListWhereInput
+  some: WishListWhereInput
+}
+
+input WishListOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+input WishListWhereInput {
+  AND: [WishListWhereInput!]
+  NOT: [WishListWhereInput!]
+  OR: [WishListWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  products: ProductListRelationFilter
+  updatedAt: DateTimeFilter
+  user: UserWhereInput
+  userId: StringFilter
+}
+
+input WishListWhereUniqueInput {
   id: String
 }

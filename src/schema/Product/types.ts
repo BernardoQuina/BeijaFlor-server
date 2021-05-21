@@ -17,6 +17,7 @@ export const Product = objectType({
     t.model.temperature()
     t.model.lifespan()
     t.model.cartItems()
+    t.model.wishLists()
     t.model.createdAt()
     t.model.updatedAt()
   },
