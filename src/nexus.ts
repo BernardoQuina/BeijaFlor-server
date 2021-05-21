@@ -565,6 +565,7 @@ export interface NexusGenFieldTypes {
     photo: string | null; // String
     role: NexusGenEnums['Role']; // Role!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    wishlist: NexusGenRootTypes['WishList'] | null; // WishList
   }
   WishList: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -675,6 +676,7 @@ export interface NexusGenFieldTypeNames {
     photo: 'String'
     role: 'Role'
     updatedAt: 'DateTime'
+    wishlist: 'WishList'
   }
   WishList: { // field return type name
     createdAt: 'DateTime'

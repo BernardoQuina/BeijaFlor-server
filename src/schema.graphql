@@ -478,6 +478,7 @@ type User {
   photo: String
   role: Role!
   updatedAt: DateTime!
+  wishlist: WishList
 }
 
 input UserOrderByInput {

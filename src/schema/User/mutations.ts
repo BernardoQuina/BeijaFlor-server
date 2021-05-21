@@ -59,6 +59,10 @@ export const register = mutationField('register', {
       data: { user: { connect: { id: newUser.id } } },
     })
 
+    await prisma.wishList.create({
+      data: { user: { connect: { id: newUser.id } } },
+    })
+
     return newUser
   },
 })
@@ -90,6 +94,16 @@ export const login = mutationField('login', {
 
     if (!cartExists) {
       await prisma.cart.create({
+        data: { user: { connect: { id: userExists.id } } },
+      })
+    }
+
+    const wishListExists = await prisma.wishList.findFirst({
+      where: { userId: userExists.id },
+    })
+
+    if (!wishListExists) {
+      await prisma.wishList.create({
         data: { user: { connect: { id: userExists.id } } },
       })
     }

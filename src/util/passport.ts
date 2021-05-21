@@ -45,6 +45,10 @@ export const passportOauth = (app: Application) => {
             data: { user: { connect: { id: newUser.id } } },
           })
 
+          await prisma.wishList.create({
+            data: { user: { connect: { id: newUser.id } } },
+          })
+
           cb(undefined, newUser)
         } else {
           const cartExists = await prisma.cart.findFirst({
@@ -53,6 +57,16 @@ export const passportOauth = (app: Application) => {
 
           if (!cartExists) {
             await prisma.cart.create({
+              data: { user: { connect: { id: userExists.id } } },
+            })
+          }
+
+          const wishListExists = await prisma.wishList.findFirst({
+            where: { userId: userExists.id },
+          })
+
+          if (!wishListExists) {
+            await prisma.wishList.create({
               data: { user: { connect: { id: userExists.id } } },
             })
           }
@@ -91,6 +105,10 @@ export const passportOauth = (app: Application) => {
             data: { user: { connect: { id: newUser.id } } },
           })
 
+          await prisma.wishList.create({
+            data: { user: { connect: { id: newUser.id } } },
+          })
+
           cb(undefined, newUser)
         } else {
           const cartExists = await prisma.cart.findFirst({
@@ -99,6 +117,16 @@ export const passportOauth = (app: Application) => {
 
           if (!cartExists) {
             await prisma.cart.create({
+              data: { user: { connect: { id: userExists.id } } },
+            })
+          }
+
+          const wishListExists = await prisma.wishList.findFirst({
+            where: { userId: userExists.id },
+          })
+
+          if (!wishListExists) {
+            await prisma.wishList.create({
               data: { user: { connect: { id: userExists.id } } },
             })
           }
