@@ -23,6 +23,7 @@ import * as cartItemMutations from './CartItems/mutations'
 
 import * as wishListTypes from './WishList/types'
 import * as wishListQueries from './WishList/queries'
+import * as wishListMutations from './WishList/mutations'
 
 export const schema = makeSchema({
   types: {
@@ -41,7 +42,8 @@ export const schema = makeSchema({
     cartItemQueries,
     cartItemMutations,
     wishListTypes,
-    wishListQueries
+    wishListQueries,
+    wishListMutations
   },
   plugins: [
     nexusPrisma({
