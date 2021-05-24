@@ -513,6 +513,7 @@ export interface NexusGenFieldTypes {
     logout: boolean | null; // Boolean
     register: NexusGenRootTypes['User'] | null; // User
     removeItem: boolean | null; // Boolean
+    stripeCharge: boolean | null; // Boolean
     toggleFromWishList: NexusGenRootTypes['WishList'] | null; // WishList
   }
   Product: { // field return type
@@ -625,6 +626,7 @@ export interface NexusGenFieldTypeNames {
     logout: 'Boolean'
     register: 'User'
     removeItem: 'Boolean'
+    stripeCharge: 'Boolean'
     toggleFromWishList: 'WishList'
   }
   Product: { // field return type name
@@ -791,6 +793,10 @@ export interface NexusGenArgTypes {
       cartId: string; // String!
       cartItemId: string; // String!
       productId: string; // String!
+    }
+    stripeCharge: { // args
+      amount: number; // Int!
+      id: string; // String!
     }
     toggleFromWishList: { // args
       merge?: boolean | null; // Boolean

@@ -13,6 +13,7 @@ declare global {
       GOOGLE_REFRESH_TOKEN: string
       FACEBOOK_CLIENT_ID: string
       FACEBOOK_CLIENT_SECRET: string
+      STRIPE_SECRET_KEY: string
       NODE_TLS_REJECT_UNAUTHORIZED: string
       FORGOT_PASSWORD_PREFIX:  string
       EMAIl: string

@@ -16,6 +16,7 @@ import * as categoryMutations from './Category/mutations'
 
 import * as cartTypes from './Cart/types'
 import * as cartQueries from './Cart/queries'
+import * as cartMutations from './Cart/mutations'
 
 import * as cartItemTypes from './CartItems/types'
 import * as cartItemQueries from './CartItems/queries'
@@ -38,6 +39,7 @@ export const schema = makeSchema({
     categoryMutations,
     cartTypes,
     cartQueries,
+    cartMutations,
     cartItemTypes,
     cartItemQueries,
     cartItemMutations,

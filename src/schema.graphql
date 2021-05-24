@@ -215,6 +215,7 @@ type Mutation {
   logout: Boolean
   register(confirmPassword: String!, email: String!, name: String!, password: String!): User
   removeItem(cartId: String!, cartItemId: String!, productId: String!): Boolean
+  stripeCharge(amount: Int!, id: String!): Boolean
   toggleFromWishList(merge: Boolean, productId: String!, wishListId: String!): WishList
 }
 
