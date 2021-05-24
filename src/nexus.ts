@@ -793,6 +793,7 @@ export interface NexusGenArgTypes {
       productId: string; // String!
     }
     toggleFromWishList: { // args
+      merge?: boolean | null; // Boolean
       productId: string; // String!
       wishListId: string; // String!
     }

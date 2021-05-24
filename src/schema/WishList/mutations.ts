@@ -1,4 +1,4 @@
-import { mutationField, nonNull, stringArg } from 'nexus'
+import { booleanArg, mutationField, nonNull, stringArg } from 'nexus'
 import { isAuth } from '../../util/isAuth'
 
 export const toggleFromWishList = mutationField('toggleFromWishList', {
@@ -6,8 +6,9 @@ export const toggleFromWishList = mutationField('toggleFromWishList', {
   args: {
     wishListId: nonNull(stringArg()),
     productId: nonNull(stringArg()),
+    merge: booleanArg()
   },
-  async resolve(_root, { wishListId, productId }, context) {
+  async resolve(_root, { wishListId, productId, merge }, context) {
     const userId = isAuth(context)
 
     const user = await context.prisma.user.findUnique({ where: { id: userId } })
@@ -40,7 +41,7 @@ export const toggleFromWishList = mutationField('toggleFromWishList', {
       where: { id: wishListId, products: { some: { id: productId } } },
     })
 
-    if (alreadyOnWishList) {
+    if (alreadyOnWishList && !merge) {
       return context.prisma.wishList.update({
         where: { id: wishListId },
         data: { products: { disconnect: { id: productId } } },
