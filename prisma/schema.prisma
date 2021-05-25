@@ -53,6 +53,24 @@ model User {
   updatedAt    DateTime  @updatedAt
   cart         Cart?
   wishlist     WishList?
+  addresses    Address[]
+}
+
+model Address {
+  id             String   @id @default(uuid())
+  completeName String
+  country        String   @default("Portugal")
+  street         String
+  numberAndBlock String
+  zone           String
+  region         String
+  postal         String
+  contact        String
+  instructions   String?
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Cart {

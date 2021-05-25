@@ -2,6 +2,69 @@
 ### Do not make changes to this file directly
 
 
+type Address {
+  completeName: String!
+  contact: String!
+  country: String!
+  createdAt: DateTime!
+  id: String!
+  instructions: String
+  numberAndBlock: String!
+  postal: String!
+  region: String!
+  street: String!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+  zone: String!
+}
+
+input AddressListRelationFilter {
+  every: AddressWhereInput
+  none: AddressWhereInput
+  some: AddressWhereInput
+}
+
+input AddressOrderByInput {
+  completeName: SortOrder
+  contact: SortOrder
+  country: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  instructions: SortOrder
+  numberAndBlock: SortOrder
+  postal: SortOrder
+  region: SortOrder
+  street: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+  zone: SortOrder
+}
+
+input AddressWhereInput {
+  AND: [AddressWhereInput!]
+  NOT: [AddressWhereInput!]
+  OR: [AddressWhereInput!]
+  completeName: StringFilter
+  contact: StringFilter
+  country: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  instructions: StringNullableFilter
+  numberAndBlock: StringFilter
+  postal: StringFilter
+  region: StringFilter
+  street: StringFilter
+  updatedAt: DateTimeFilter
+  user: UserWhereInput
+  userId: StringFilter
+  zone: StringFilter
+}
+
+input AddressWhereUniqueInput {
+  id: String
+}
+
 input BoolFilter {
   equals: Boolean
   not: NestedBoolFilter
@@ -202,6 +265,7 @@ enum MainCategory {
 type Mutation {
   changeItemQuantity(cartId: String!, cartItemId: String!, plusOrMinusOne: Int!, productId: String!): CartItem
   changeProductStatus(whereId: String!): Product
+  createAddress(completeName: String!, contact: String!, country: String!, instructions: String, numberAndBlock: String!, postal: String!, region: String!, street: String!, zone: String!): Address
   createCartItem(cartId: String!, productId: String!, quantity: Int!): CartItem
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
   createPaymentIntent(amount: Int!): PaymentIntent
@@ -393,6 +457,8 @@ input ProductWhereUniqueInput {
 }
 
 type Query {
+  address(where: AddressWhereUniqueInput!): Address
+  addresses(cursor: AddressWhereUniqueInput, orderBy: [AddressOrderByInput!], skip: Int, take: Int, where: AddressWhereInput): [Address!]!
   cart(where: CartWhereUniqueInput!): Cart
   cartItem(where: CartItemWhereUniqueInput!): CartItem
   cartItems(cursor: CartItemWhereUniqueInput, orderBy: [CartItemOrderByInput!], skip: Int, take: Int, where: CartItemWhereInput): [CartItem!]!
@@ -515,6 +581,7 @@ input UserWhereInput {
   AND: [UserWhereInput!]
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
+  addresses: AddressListRelationFilter
   cart: CartWhereInput
   createdAt: DateTimeFilter
   email: StringFilter

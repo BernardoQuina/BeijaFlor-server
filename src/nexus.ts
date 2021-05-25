@@ -19,6 +19,48 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AddressListRelationFilter: { // input type
+    every?: NexusGenInputs['AddressWhereInput'] | null; // AddressWhereInput
+    none?: NexusGenInputs['AddressWhereInput'] | null; // AddressWhereInput
+    some?: NexusGenInputs['AddressWhereInput'] | null; // AddressWhereInput
+  }
+  AddressOrderByInput: { // input type
+    completeName?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    contact?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    country?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    instructions?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    numberAndBlock?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    postal?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    region?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    street?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    zone?: NexusGenEnums['SortOrder'] | null; // SortOrder
+  }
+  AddressWhereInput: { // input type
+    AND?: NexusGenInputs['AddressWhereInput'][] | null; // [AddressWhereInput!]
+    NOT?: NexusGenInputs['AddressWhereInput'][] | null; // [AddressWhereInput!]
+    OR?: NexusGenInputs['AddressWhereInput'][] | null; // [AddressWhereInput!]
+    completeName?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    contact?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    country?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    id?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    instructions?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    numberAndBlock?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    postal?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    region?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    street?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    zone?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
+  AddressWhereUniqueInput: { // input type
+    id?: string | null; // String
+  }
   BoolFilter: { // input type
     equals?: boolean | null; // Boolean
     not?: NexusGenInputs['NestedBoolFilter'] | null; // NestedBoolFilter
@@ -331,6 +373,7 @@ export interface NexusGenInputs {
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     NOT?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
     OR?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
+    addresses?: NexusGenInputs['AddressListRelationFilter'] | null; // AddressListRelationFilter
     cart?: NexusGenInputs['CartWhereInput'] | null; // CartWhereInput
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     email?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -395,6 +438,21 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Address: { // root type
+    completeName: string; // String!
+    contact: string; // String!
+    country: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    instructions?: string | null; // String
+    numberAndBlock: string; // String!
+    postal: string; // String!
+    region: string; // String!
+    street: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    userId: string; // String!
+    zone: string; // String!
+  }
   Cart: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
@@ -484,6 +542,22 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
+  Address: { // field return type
+    completeName: string; // String!
+    contact: string; // String!
+    country: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    instructions: string | null; // String
+    numberAndBlock: string; // String!
+    postal: string; // String!
+    region: string; // String!
+    street: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+    zone: string; // String!
+  }
   Cart: { // field return type
     cartItems: NexusGenRootTypes['CartItem'][]; // [CartItem!]!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -517,6 +591,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     changeItemQuantity: NexusGenRootTypes['CartItem'] | null; // CartItem
     changeProductStatus: NexusGenRootTypes['Product'] | null; // Product
+    createAddress: NexusGenRootTypes['Address'] | null; // Address
     createCartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
     createCategory: NexusGenRootTypes['Category'] | null; // Category
     createPaymentIntent: NexusGenRootTypes['PaymentIntent'] | null; // PaymentIntent
@@ -567,6 +642,8 @@ export interface NexusGenFieldTypes {
     wishLists: NexusGenRootTypes['WishList'][]; // [WishList!]!
   }
   Query: { // field return type
+    address: NexusGenRootTypes['Address'] | null; // Address
+    addresses: NexusGenRootTypes['Address'][]; // [Address!]!
     cart: NexusGenRootTypes['Cart'] | null; // Cart
     cartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
     cartItems: NexusGenRootTypes['CartItem'][]; // [CartItem!]!
@@ -615,6 +692,22 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Address: { // field return type name
+    completeName: 'String'
+    contact: 'String'
+    country: 'String'
+    createdAt: 'DateTime'
+    id: 'String'
+    instructions: 'String'
+    numberAndBlock: 'String'
+    postal: 'String'
+    region: 'String'
+    street: 'String'
+    updatedAt: 'DateTime'
+    user: 'User'
+    userId: 'String'
+    zone: 'String'
+  }
   Cart: { // field return type name
     cartItems: 'CartItem'
     createdAt: 'DateTime'
@@ -648,6 +741,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     changeItemQuantity: 'CartItem'
     changeProductStatus: 'Product'
+    createAddress: 'Address'
     createCartItem: 'CartItem'
     createCategory: 'Category'
     createPaymentIntent: 'PaymentIntent'
@@ -698,6 +792,8 @@ export interface NexusGenFieldTypeNames {
     wishLists: 'WishList'
   }
   Query: { // field return type name
+    address: 'Address'
+    addresses: 'Address'
     cart: 'Cart'
     cartItem: 'CartItem'
     cartItems: 'CartItem'
@@ -770,6 +866,17 @@ export interface NexusGenArgTypes {
     }
     changeProductStatus: { // args
       whereId: string; // String!
+    }
+    createAddress: { // args
+      completeName: string; // String!
+      contact: string; // String!
+      country: string; // String!
+      instructions?: string | null; // String
+      numberAndBlock: string; // String!
+      postal: string; // String!
+      region: string; // String!
+      street: string; // String!
+      zone: string; // String!
     }
     createCartItem: { // args
       cartId: string; // String!
@@ -874,6 +981,16 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    address: { // args
+      where: NexusGenInputs['AddressWhereUniqueInput']; // AddressWhereUniqueInput!
+    }
+    addresses: { // args
+      cursor?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
+      orderBy?: NexusGenInputs['AddressOrderByInput'][] | null; // [AddressOrderByInput!]
+      skip?: number | null; // Int
+      take?: number | null; // Int
+      where?: NexusGenInputs['AddressWhereInput'] | null; // AddressWhereInput
+    }
     cart: { // args
       where: NexusGenInputs['CartWhereUniqueInput']; // CartWhereUniqueInput!
     }

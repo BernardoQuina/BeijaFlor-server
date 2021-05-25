@@ -14,6 +14,7 @@ type CustomScalars = 'DateTime'
 // Prisma model type definitions
 interface PrismaModels {
   User: Prisma.User
+  Address: Prisma.Address
   Cart: Prisma.Cart
   CartItem: Prisma.CartItem
   WishList: Prisma.WishList
@@ -25,8 +26,12 @@ interface PrismaModels {
 interface NexusPrismaInputs {
   Query: {
     users: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt' | 'cart' | 'wishlist'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt' | 'cart' | 'wishlist' | 'addresses'
       ordering: 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt'
+    }
+    addresses: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'user' | 'userId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'userId' | 'createdAt' | 'updatedAt'
     }
     carts: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'cartItems' | 'price' | 'quantity' | 'userId' | 'createdAt' | 'updatedAt'
@@ -50,6 +55,12 @@ interface NexusPrismaInputs {
     }
   },
   User: {
+    addresses: {
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'user' | 'userId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'userId' | 'createdAt' | 'updatedAt'
+    }
+  }
+  Address: {
 
   }
   Cart: {
@@ -94,6 +105,8 @@ interface NexusPrismaOutputs {
   Query: {
     user: 'User'
     users: 'User'
+    address: 'Address'
+    addresses: 'Address'
     cart: 'Cart'
     carts: 'Cart'
     cartItem: 'CartItem'
@@ -112,6 +125,12 @@ interface NexusPrismaOutputs {
     deleteOneUser: 'User'
     deleteManyUser: 'AffectedRowsOutput'
     upsertOneUser: 'User'
+    createOneAddress: 'Address'
+    updateOneAddress: 'Address'
+    updateManyAddress: 'AffectedRowsOutput'
+    deleteOneAddress: 'Address'
+    deleteManyAddress: 'AffectedRowsOutput'
+    upsertOneAddress: 'Address'
     createOneCart: 'Cart'
     updateOneCart: 'Cart'
     updateManyCart: 'AffectedRowsOutput'
@@ -156,6 +175,23 @@ interface NexusPrismaOutputs {
     updatedAt: 'DateTime'
     cart: 'Cart'
     wishlist: 'WishList'
+    addresses: 'Address'
+  }
+  Address: {
+    id: 'String'
+    completeName: 'String'
+    country: 'String'
+    street: 'String'
+    numberAndBlock: 'String'
+    zone: 'String'
+    region: 'String'
+    postal: 'String'
+    contact: 'String'
+    instructions: 'String'
+    user: 'User'
+    userId: 'String'
+    createdAt: 'DateTime'
+    updatedAt: 'DateTime'
   }
   Cart: {
     id: 'String'
@@ -219,6 +255,7 @@ interface NexusPrismaOutputs {
 // Helper to gather all methods relative to a model
 interface NexusPrismaMethods {
   User: Typegen.NexusPrismaFields<'User'>
+  Address: Typegen.NexusPrismaFields<'Address'>
   Cart: Typegen.NexusPrismaFields<'Cart'>
   CartItem: Typegen.NexusPrismaFields<'CartItem'>
   WishList: Typegen.NexusPrismaFields<'WishList'>
