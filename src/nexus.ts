@@ -421,6 +421,19 @@ export interface NexusGenObjects {
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   Mutation: {};
+  PaymentIntent: { // root type
+    amount?: number | null; // Int
+    amount_capturable?: number | null; // Int
+    amount_received?: number | null; // Int
+    application?: string | null; // String
+    application_fee_amount?: number | null; // Int
+    canceled_at?: number | null; // Int
+    cancellation_reason?: string | null; // String
+    capture_method?: string | null; // String
+    client_secret?: string | null; // String
+    id?: string | null; // String
+    last_payment_error?: NexusGenRootTypes['lastPaymentError'] | null; // lastPaymentError
+  }
   Product: { // root type
     active: boolean; // Boolean!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -453,6 +466,10 @@ export interface NexusGenObjects {
     id: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
+  }
+  lastPaymentError: { // root type
+    code?: string | null; // String
+    message?: string | null; // String
   }
 }
 
@@ -502,6 +519,7 @@ export interface NexusGenFieldTypes {
     changeProductStatus: NexusGenRootTypes['Product'] | null; // Product
     createCartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
     createCategory: NexusGenRootTypes['Category'] | null; // Category
+    createPaymentIntent: NexusGenRootTypes['PaymentIntent'] | null; // PaymentIntent
     createProduct: NexusGenRootTypes['Product'] | null; // Product
     deleteCategory: boolean | null; // Boolean
     deleteProduct: boolean | null; // Boolean
@@ -513,8 +531,21 @@ export interface NexusGenFieldTypes {
     logout: boolean | null; // Boolean
     register: NexusGenRootTypes['User'] | null; // User
     removeItem: boolean | null; // Boolean
-    stripeCharge: boolean | null; // Boolean
+    successfulPayment: boolean | null; // Boolean
     toggleFromWishList: NexusGenRootTypes['WishList'] | null; // WishList
+  }
+  PaymentIntent: { // field return type
+    amount: number | null; // Int
+    amount_capturable: number | null; // Int
+    amount_received: number | null; // Int
+    application: string | null; // String
+    application_fee_amount: number | null; // Int
+    canceled_at: number | null; // Int
+    cancellation_reason: string | null; // String
+    capture_method: string | null; // String
+    client_secret: string | null; // String
+    id: string | null; // String
+    last_payment_error: NexusGenRootTypes['lastPaymentError'] | null; // lastPaymentError
   }
   Product: { // field return type
     active: boolean; // Boolean!
@@ -577,6 +608,10 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
   }
+  lastPaymentError: { // field return type
+    code: string | null; // String
+    message: string | null; // String
+  }
 }
 
 export interface NexusGenFieldTypeNames {
@@ -615,6 +650,7 @@ export interface NexusGenFieldTypeNames {
     changeProductStatus: 'Product'
     createCartItem: 'CartItem'
     createCategory: 'Category'
+    createPaymentIntent: 'PaymentIntent'
     createProduct: 'Product'
     deleteCategory: 'Boolean'
     deleteProduct: 'Boolean'
@@ -626,8 +662,21 @@ export interface NexusGenFieldTypeNames {
     logout: 'Boolean'
     register: 'User'
     removeItem: 'Boolean'
-    stripeCharge: 'Boolean'
+    successfulPayment: 'Boolean'
     toggleFromWishList: 'WishList'
+  }
+  PaymentIntent: { // field return type name
+    amount: 'Int'
+    amount_capturable: 'Int'
+    amount_received: 'Int'
+    application: 'String'
+    application_fee_amount: 'Int'
+    canceled_at: 'Int'
+    cancellation_reason: 'String'
+    capture_method: 'String'
+    client_secret: 'String'
+    id: 'String'
+    last_payment_error: 'lastPaymentError'
   }
   Product: { // field return type name
     active: 'Boolean'
@@ -690,6 +739,10 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
     userId: 'String'
   }
+  lastPaymentError: { // field return type name
+    code: 'String'
+    message: 'String'
+  }
 }
 
 export interface NexusGenArgTypes {
@@ -728,6 +781,9 @@ export interface NexusGenArgTypes {
       mainCategory: NexusGenEnums['MainCategory']; // MainCategory!
       name: string; // String!
       subCategory: NexusGenEnums['SubCategory']; // SubCategory!
+    }
+    createPaymentIntent: { // args
+      amount: number; // Int!
     }
     createProduct: { // args
       categories: string[]; // [String!]!
@@ -793,10 +849,6 @@ export interface NexusGenArgTypes {
       cartId: string; // String!
       cartItemId: string; // String!
       productId: string; // String!
-    }
-    stripeCharge: { // args
-      amount: number; // Int!
-      id: string; // String!
     }
     toggleFromWishList: { // args
       merge?: boolean | null; // Boolean

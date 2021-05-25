@@ -25,12 +25,19 @@ export type Context = {
   prisma: PrismaClient
   pubsub: RedisPubSub
   req: Request & {
-    session: Session & Partial<SessionData> & { userId?: string }
+    session: Session &
+      Partial<SessionData> & { userId?: string; paymentIntentId?: string }
   }
   res: Response
   connection: {
     context: {
-      req: { session: { userId?: string; passport?: { user?: string } } }
+      req: {
+        session: {
+          userId?: string
+          passport?: { user?: string }
+          paymentIntentId?: string
+        }
+      }
     }
   }
   stripe: Stripe

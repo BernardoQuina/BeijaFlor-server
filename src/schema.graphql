@@ -204,6 +204,7 @@ type Mutation {
   changeProductStatus(whereId: String!): Product
   createCartItem(cartId: String!, productId: String!, quantity: Int!): CartItem
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
+  createPaymentIntent(amount: Int!): PaymentIntent
   createProduct(categories: [String!]!, description: String!, exposure: String, height: String, images: [String!]!, lifespan: String, name: String!, price: Float!, stock: Int!, temperature: String, water: String): Product
   deleteCategory(whereId: String!): Boolean
   deleteProduct(whereId: String!): Boolean
@@ -215,7 +216,7 @@ type Mutation {
   logout: Boolean
   register(confirmPassword: String!, email: String!, name: String!, password: String!): User
   removeItem(cartId: String!, cartItemId: String!, productId: String!): Boolean
-  stripeCharge(amount: Int!, id: String!): Boolean
+  successfulPayment: Boolean
   toggleFromWishList(merge: Boolean, productId: String!, wishListId: String!): WishList
 }
 
@@ -304,6 +305,20 @@ input NestedStringNullableFilter {
   not: NestedStringNullableFilter
   notIn: [String!]
   startsWith: String
+}
+
+type PaymentIntent {
+  amount: Int
+  amount_capturable: Int
+  amount_received: Int
+  application: String
+  application_fee_amount: Int
+  canceled_at: Int
+  cancellation_reason: String
+  capture_method: String
+  client_secret: String
+  id: String
+  last_payment_error: lastPaymentError
 }
 
 type Product {
@@ -557,4 +572,9 @@ input WishListWhereInput {
 
 input WishListWhereUniqueInput {
   id: String
+}
+
+type lastPaymentError {
+  code: String
+  message: String
 }
