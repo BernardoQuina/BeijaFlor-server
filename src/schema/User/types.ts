@@ -44,6 +44,7 @@ export const User = objectType({
     t.model.photo()
     t.model.cart()
     t.model.wishlist()
+    t.model.addresses()
     t.model.createdAt()
     t.model.updatedAt()
   },

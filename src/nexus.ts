@@ -664,6 +664,7 @@ export interface NexusGenFieldTypes {
     wishLists: NexusGenRootTypes['WishList'][]; // [WishList!]!
   }
   User: { // field return type
+    addresses: NexusGenRootTypes['Address'][]; // [Address!]!
     cart: NexusGenRootTypes['Cart'] | null; // Cart
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
@@ -814,6 +815,7 @@ export interface NexusGenFieldTypeNames {
     wishLists: 'WishList'
   }
   User: { // field return type name
+    addresses: 'Address'
     cart: 'Cart'
     createdAt: 'DateTime'
     email: 'String'
@@ -1050,6 +1052,13 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       take?: number | null; // Int
       where?: NexusGenInputs['WishListWhereInput'] | null; // WishListWhereInput
+    }
+  }
+  User: {
+    addresses: { // args
+      cursor?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
     }
   }
   WishList: {

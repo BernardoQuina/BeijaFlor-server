@@ -550,6 +550,7 @@ enum SubCategory {
 }
 
 type User {
+  addresses(cursor: AddressWhereUniqueInput, skip: Int, take: Int): [Address!]!
   cart: Cart
   createdAt: DateTime!
   email: String!
