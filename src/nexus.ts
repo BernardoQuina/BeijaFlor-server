@@ -596,6 +596,7 @@ export interface NexusGenFieldTypes {
     createCategory: NexusGenRootTypes['Category'] | null; // Category
     createPaymentIntent: NexusGenRootTypes['PaymentIntent'] | null; // PaymentIntent
     createProduct: NexusGenRootTypes['Product'] | null; // Product
+    deleteAddress: boolean | null; // Boolean
     deleteCategory: boolean | null; // Boolean
     deleteProduct: boolean | null; // Boolean
     deleteUser: NexusGenRootTypes['User'] | null; // User
@@ -748,6 +749,7 @@ export interface NexusGenFieldTypeNames {
     createCategory: 'Category'
     createPaymentIntent: 'PaymentIntent'
     createProduct: 'Product'
+    deleteAddress: 'Boolean'
     deleteCategory: 'Boolean'
     deleteProduct: 'Boolean'
     deleteUser: 'User'
@@ -908,6 +910,9 @@ export interface NexusGenArgTypes {
       stock: number; // Int!
       temperature?: string | null; // String
       water?: string | null; // String
+    }
+    deleteAddress: { // args
+      whereId: string; // String!
     }
     deleteCategory: { // args
       whereId: string; // String!

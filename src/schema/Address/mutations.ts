@@ -126,7 +126,7 @@ export const editAddress = mutationField('editAddress', {
     const user = await context.prisma.user.findUnique({ where: { id: userId } })
 
     if (!user) {
-      throw new Error('Faça login para criar uma morada.')
+      throw new Error('Faça login para editar uma morada.')
     }
 
     const addressExists = await context.prisma.address.findUnique({
@@ -188,5 +188,39 @@ export const editAddress = mutationField('editAddress', {
         instructions,
       },
     })
+  },
+})
+
+export const deleteAddress = mutationField('deleteAddress', {
+  type: 'Boolean',
+  args: {
+    whereId: nonNull(stringArg()),
+  },
+  async resolve(_root, { whereId }, context) {
+    const userId = isAuth(context)
+
+    const user = await context.prisma.user.findUnique({ where: { id: userId } })
+
+    if (!user) {
+      throw new Error('Faça login para eliminar morada.')
+    }
+
+    const addressExists = await context.prisma.address.findUnique({
+      where: { id: whereId },
+    })
+
+    if (!addressExists) {
+      throw new Error('O produto que pretende eliminar não existe.')
+    }
+
+    const deletedAddress = await context.prisma.address.delete({
+      where: { id: whereId },
+    })
+
+    if (deletedAddress) {
+      return true
+    } else {
+      throw new Error('Não foi possível concluir a operação.')
+    }
   },
 })

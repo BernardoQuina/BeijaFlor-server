@@ -270,6 +270,7 @@ type Mutation {
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
   createPaymentIntent(amount: Int!): PaymentIntent
   createProduct(categories: [String!]!, description: String!, exposure: String, height: String, images: [String!]!, lifespan: String, name: String!, price: Float!, stock: Int!, temperature: String, water: String): Product
+  deleteAddress(whereId: String!): Boolean
   deleteCategory(whereId: String!): Boolean
   deleteProduct(whereId: String!): Boolean
   deleteUser(password: String): User
