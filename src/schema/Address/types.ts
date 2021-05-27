@@ -14,6 +14,7 @@ export const Address = objectType({
     t.model.contact()
     t.model.instructions()
     t.model.user()
+    t.model.orders()
     t.model.userId()
     t.model.createdAt()
     t.model.updatedAt()

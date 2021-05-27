@@ -30,6 +30,14 @@ import * as addressTypes from './Address/types'
 import * as addressQueries from './Address/queries'
 import * as addressMutations from './Address/mutations'
 
+import * as orderTypes from './Order/types'
+import * as orderQueries from './Order/queries'
+import * as orderMutations from './Order/mutations'
+
+import * as orderItemTypes from './OrderItems/types'
+import * as orderItemQueries from './OrderItems/queries'
+// import * as orderItemMutations from './OrderItems/mutations'
+
 export const schema = makeSchema({
   types: {
     userTypes,
@@ -52,7 +60,13 @@ export const schema = makeSchema({
     wishListMutations,
     addressTypes,
     addressQueries,
-    addressMutations
+    addressMutations,
+    orderTypes,
+    orderQueries,
+    orderMutations,
+    orderItemTypes,
+    orderItemQueries,
+    // orderItemMutations,
   },
   plugins: [
     nexusPrisma({

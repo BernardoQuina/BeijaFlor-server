@@ -54,11 +54,12 @@ model User {
   cart         Cart?
   wishlist     WishList?
   addresses    Address[]
+  orders       Order[]
 }
 
 model Address {
   id             String   @id @default(uuid())
-  completeName String
+  completeName   String
   country        String   @default("Portugal")
   street         String
   numberAndBlock String
@@ -68,9 +69,34 @@ model Address {
   contact        String
   instructions   String?
   user           User     @relation(fields: [userId], references: [id])
+  orders         Order[]
   userId         String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+}
+
+model Order {
+  id        String      @id @default(uuid())
+  user      User        @relation(fields: [userId], references: [id])
+  address   Address     @relation(fields: [addressId], references: [id])
+  price     Float       @default(0)
+  quantity  Int         @default(0)
+  orderItems OrderItem[]
+  userId    String
+  addressId String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  order     Order    @relation(fields: [orderId], references: [id])
+  productId String
+  orderId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Cart {
@@ -105,22 +131,23 @@ model WishList {
 }
 
 model Product {
-  id          String     @id @default(uuid())
-  name        String     @unique
+  id          String      @id @default(uuid())
+  name        String      @unique
   description String
   images      String[]
   price       Float
-  stock       Int        @default(0)
-  active      Boolean    @default(true)
+  stock       Int         @default(0)
+  active      Boolean     @default(true)
   categories  Category[]
   height      String?
   water       String?
   exposure    String?
   temperature String?
   lifespan    String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   cartItems   CartItem[]
+  orderItems  OrderItem[]
   wishLists   WishList[]
 }
 

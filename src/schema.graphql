@@ -10,6 +10,7 @@ type Address {
   id: String!
   instructions: String
   numberAndBlock: String!
+  orders(cursor: OrderWhereUniqueInput, skip: Int, take: Int): [Order!]!
   postal: String!
   region: String!
   street: String!
@@ -52,6 +53,7 @@ input AddressWhereInput {
   id: StringFilter
   instructions: StringNullableFilter
   numberAndBlock: StringFilter
+  orders: OrderListRelationFilter
   postal: StringFilter
   region: StringFilter
   street: StringFilter
@@ -268,6 +270,7 @@ type Mutation {
   createAddress(completeName: String!, contact: String!, country: String!, instructions: String, numberAndBlock: String!, postal: String!, region: String!, street: String!, zone: String!): Address
   createCartItem(cartId: String!, productId: String!, quantity: Int!): CartItem
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
+  createOrder(addressId: String!, cartId: String!, cartItemsIds: [String!]!): Order
   createPaymentIntent(amount: Int!): PaymentIntent
   createProduct(categories: [String!]!, description: String!, exposure: String, height: String, images: [String!]!, lifespan: String, name: String!, price: Float!, stock: Int!, temperature: String, water: String): Product
   deleteAddress(whereId: String!): Boolean
@@ -373,6 +376,99 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+type Order {
+  address: Address!
+  addressId: String!
+  createdAt: DateTime!
+  id: String!
+  orderItems(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int): [OrderItem!]!
+  price: Float!
+  quantity: Int!
+  updatedAt: DateTime!
+  user: User!
+  userId: String!
+}
+
+type OrderItem {
+  createdAt: DateTime!
+  id: String!
+  order: Order!
+  orderId: String!
+  product: Product!
+  productId: String!
+  quantity: Int!
+  updatedAt: DateTime!
+}
+
+input OrderItemListRelationFilter {
+  every: OrderItemWhereInput
+  none: OrderItemWhereInput
+  some: OrderItemWhereInput
+}
+
+input OrderItemOrderByInput {
+  createdAt: SortOrder
+  id: SortOrder
+  orderId: SortOrder
+  productId: SortOrder
+  quantity: SortOrder
+  updatedAt: SortOrder
+}
+
+input OrderItemWhereInput {
+  AND: [OrderItemWhereInput!]
+  NOT: [OrderItemWhereInput!]
+  OR: [OrderItemWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  order: OrderWhereInput
+  orderId: StringFilter
+  product: ProductWhereInput
+  productId: StringFilter
+  quantity: IntFilter
+  updatedAt: DateTimeFilter
+}
+
+input OrderItemWhereUniqueInput {
+  id: String
+}
+
+input OrderListRelationFilter {
+  every: OrderWhereInput
+  none: OrderWhereInput
+  some: OrderWhereInput
+}
+
+input OrderOrderByInput {
+  addressId: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  price: SortOrder
+  quantity: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+input OrderWhereInput {
+  AND: [OrderWhereInput!]
+  NOT: [OrderWhereInput!]
+  OR: [OrderWhereInput!]
+  address: AddressWhereInput
+  addressId: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  orderItems: OrderItemListRelationFilter
+  price: FloatFilter
+  quantity: IntFilter
+  updatedAt: DateTimeFilter
+  user: UserWhereInput
+  userId: StringFilter
+}
+
+input OrderWhereUniqueInput {
+  id: String
+}
+
 type PaymentIntent {
   amount: Int
   amount_capturable: Int
@@ -399,6 +495,7 @@ type Product {
   images: [String!]!
   lifespan: String
   name: String!
+  orderItems(cursor: OrderItemWhereUniqueInput, skip: Int, take: Int): [OrderItem!]!
   price: Float!
   stock: Int!
   temperature: String
@@ -445,6 +542,7 @@ input ProductWhereInput {
   images: StringNullableListFilter
   lifespan: StringNullableFilter
   name: StringFilter
+  orderItems: OrderItemListRelationFilter
   price: FloatFilter
   stock: IntFilter
   temperature: StringNullableFilter
@@ -470,6 +568,10 @@ type Query {
   categoryCount: Int
   inactiveCount: Int
   me: User
+  order(where: OrderWhereUniqueInput!): Order
+  orderItem(where: OrderItemWhereUniqueInput!): OrderItem
+  orderItems(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int, where: OrderItemWhereInput): [OrderItem!]!
+  orders(cursor: OrderWhereUniqueInput, orderBy: [OrderOrderByInput!], skip: Int, take: Int, where: OrderWhereInput): [Order!]!
   outOfStockCount: Int
   product(where: ProductWhereUniqueInput!): Product
   productCount: Int
@@ -560,6 +662,7 @@ type User {
   googleId: String
   id: String!
   name: String!
+  orders(cursor: OrderWhereUniqueInput, skip: Int, take: Int): [Order!]!
   passwordHash: String
   photo: String
   role: Role!
@@ -592,6 +695,7 @@ input UserWhereInput {
   googleId: StringNullableFilter
   id: StringFilter
   name: StringFilter
+  orders: OrderListRelationFilter
   passwordHash: StringNullableFilter
   photo: StringNullableFilter
   role: EnumRoleFilter
