@@ -80,12 +80,12 @@ export const createOrder = mutationField('createOrder', {
 
         await context.prisma.cartItem.delete({ where: { id: cartItem.id } })
 
-        quantity = +newOrderItem.quantity
-        price = +newOrderItem.quantity * product.price
+        quantity += newOrderItem.quantity
+        price += newOrderItem.quantity * product.price
       }
     }
 
-    cartToOrder(cartItemsIds)
+    await cartToOrder(cartItemsIds)
 
     await context.prisma.cart.update({
       where: { id: cartExists.id },
