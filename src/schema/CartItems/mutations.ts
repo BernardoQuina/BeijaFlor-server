@@ -66,6 +66,11 @@ export const createCartItem = mutationField('createCartItem', {
         },
       })
 
+      // remove current paymentIntent
+      if (context.req.session.paymentIntentId) {
+        context.req.session.paymentIntentId = undefined
+      }
+
       return context.prisma.cartItem.create({
         data: {
           cart: { connect: { id: cartId } },
@@ -134,6 +139,11 @@ export const changeItemQuantity = mutationField('changeItemQuantity', {
       },
     })
 
+    // remove current paymentIntent
+    if (context.req.session.paymentIntentId) {
+      context.req.session.paymentIntentId = undefined
+    }
+
     return context.prisma.cartItem.update({
       where: { id: cartItemId },
       data: { quantity: cartItemExists.quantity + plusOrMinusOne },
@@ -192,6 +202,11 @@ export const removeItem = mutationField('removeItem', {
         quantity: cartExists.quantity - cartItemExists.quantity,
       },
     })
+
+    // remove current paymentIntent
+    if (context.req.session.paymentIntentId) {
+      context.req.session.paymentIntentId = undefined
+    }
 
     await context.prisma.cartItem.delete({ where: { id: cartItemId } })
 

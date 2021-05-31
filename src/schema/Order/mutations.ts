@@ -68,7 +68,7 @@ export const createOrder = mutationField('createOrder', {
           throw new Error(
             `O produto ${product.name} apenas tem um stock de ${product.stock}`
           )
-        } // CONTINUAR!!
+        }
 
         const newOrderItem = await context.prisma.orderItem.create({
           data: {
@@ -78,22 +78,12 @@ export const createOrder = mutationField('createOrder', {
           },
         })
 
-        await context.prisma.cartItem.delete({ where: { id: cartItem.id } })
-
         quantity += newOrderItem.quantity
         price += newOrderItem.quantity * product.price
       }
     }
 
     await cartToOrder(cartItemsIds)
-
-    await context.prisma.cart.update({
-      where: { id: cartExists.id },
-      data: {
-        price: 0,
-        quantity: 0,
-      },
-    })
 
     return context.prisma.order.update({
       where: { id: newOrder.id },

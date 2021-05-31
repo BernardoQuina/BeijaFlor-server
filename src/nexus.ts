@@ -693,6 +693,7 @@ export interface NexusGenFieldTypes {
     removeItem: boolean | null; // Boolean
     successfulPayment: boolean | null; // Boolean
     toggleFromWishList: NexusGenRootTypes['WishList'] | null; // WishList
+    unsuccessfulPayment: boolean | null; // Boolean
   }
   Order: { // field return type
     address: NexusGenRootTypes['Address']; // Address!
@@ -876,6 +877,7 @@ export interface NexusGenFieldTypeNames {
     removeItem: 'Boolean'
     successfulPayment: 'Boolean'
     toggleFromWishList: 'WishList'
+    unsuccessfulPayment: 'Boolean'
   }
   Order: { // field return type name
     address: 'Address'
@@ -1135,6 +1137,9 @@ export interface NexusGenArgTypes {
       merge?: boolean | null; // Boolean
       productId: string; // String!
       wishListId: string; // String!
+    }
+    unsuccessfulPayment: { // args
+      orderId: string; // String!
     }
   }
   Order: {

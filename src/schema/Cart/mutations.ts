@@ -1,4 +1,4 @@
-import { intArg, mutationField, nonNull } from 'nexus'
+import { intArg, mutationField, nonNull, stringArg } from 'nexus'
 import { Stripe } from 'stripe'
 import { isAuth } from '../../util/isAuth'
 import { ptErrors } from '../../util/ptErrors'
@@ -52,11 +52,49 @@ export const createPaymentIntent = mutationField('createPaymentIntent', {
 
 export const successfulPayment = mutationField('successfulPayment', {
   type: 'Boolean',
-  async resolve(_root, _args_, {req}) {
-    if (req.session.paymentIntentId) {
-      req.session.paymentIntentId = undefined
+  async resolve(_root, _args_, context) {
+    if (context.req.session.paymentIntentId) {
+      context.req.session.paymentIntentId = undefined
     }
 
+    const userId = isAuth(context)
+
+    const cartToEmpty = await context.prisma.cart.findFirst({
+      where: { userId: userId },
+    })
+
+    if (!cartToEmpty) {
+      throw new Error(
+        'O pagamento foi bem sucedido mas ocorreu um problema ao esvaziar o carrinho.'
+      )
+    }
+
+    await context.prisma.cartItem.deleteMany({
+      where: { cartId: cartToEmpty.id },
+    })
+
+    await context.prisma.cart.update({
+      where: { id: cartToEmpty.id },
+      data: {
+        quantity: 0,
+        price: 0,
+      },
+    })
+
     return true
-  }
+  },
+})
+
+export const unsuccessfulPayment = mutationField('unsuccessfulPayment', {
+  type: 'Boolean',
+  args: {
+    orderId: nonNull(stringArg()),
+  },
+  async resolve(_root, { orderId }, context) {
+    await context.prisma.orderItem.deleteMany({ where: { orderId } })
+
+    await context.prisma.order.delete({ where: { id: orderId } })
+
+    return true
+  },
 })
