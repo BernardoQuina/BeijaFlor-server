@@ -285,7 +285,7 @@ type Mutation {
   logout: Boolean
   register(confirmPassword: String!, email: String!, name: String!, password: String!): User
   removeItem(cartId: String!, cartItemId: String!, productId: String!): Boolean
-  successfulPayment: Boolean
+  successfulPayment(orderId: String!): Boolean
   toggleFromWishList(merge: Boolean, productId: String!, wishListId: String!): WishList
   unsuccessfulPayment(orderId: String!): Boolean
 }
@@ -380,6 +380,7 @@ input NestedStringNullableFilter {
 type Order {
   address: Address!
   addressId: String!
+  cardDetails: String
   createdAt: DateTime!
   id: String!
   orderItems(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int): [OrderItem!]!
@@ -442,6 +443,7 @@ input OrderListRelationFilter {
 
 input OrderOrderByInput {
   addressId: SortOrder
+  cardDetails: SortOrder
   createdAt: SortOrder
   id: SortOrder
   price: SortOrder
@@ -456,6 +458,7 @@ input OrderWhereInput {
   OR: [OrderWhereInput!]
   address: AddressWhereInput
   addressId: StringFilter
+  cardDetails: StringNullableFilter
   createdAt: DateTimeFilter
   id: StringFilter
   orderItems: OrderItemListRelationFilter

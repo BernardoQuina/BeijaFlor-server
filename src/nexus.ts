@@ -312,6 +312,7 @@ export interface NexusGenInputs {
   }
   OrderOrderByInput: { // input type
     addressId?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    cardDetails?: NexusGenEnums['SortOrder'] | null; // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     price?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -325,6 +326,7 @@ export interface NexusGenInputs {
     OR?: NexusGenInputs['OrderWhereInput'][] | null; // [OrderWhereInput!]
     address?: NexusGenInputs['AddressWhereInput'] | null; // AddressWhereInput
     addressId?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    cardDetails?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     orderItems?: NexusGenInputs['OrderItemListRelationFilter'] | null; // OrderItemListRelationFilter
@@ -545,6 +547,7 @@ export interface NexusGenObjects {
   Mutation: {};
   Order: { // root type
     addressId: string; // String!
+    cardDetails?: string | null; // String
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
     price: number; // Float!
@@ -698,6 +701,7 @@ export interface NexusGenFieldTypes {
   Order: { // field return type
     address: NexusGenRootTypes['Address']; // Address!
     addressId: string; // String!
+    cardDetails: string | null; // String
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
     orderItems: NexusGenRootTypes['OrderItem'][]; // [OrderItem!]!
@@ -882,6 +886,7 @@ export interface NexusGenFieldTypeNames {
   Order: { // field return type name
     address: 'Address'
     addressId: 'String'
+    cardDetails: 'String'
     createdAt: 'DateTime'
     id: 'String'
     orderItems: 'OrderItem'
@@ -1132,6 +1137,9 @@ export interface NexusGenArgTypes {
       cartId: string; // String!
       cartItemId: string; // String!
       productId: string; // String!
+    }
+    successfulPayment: { // args
+      orderId: string; // String!
     }
     toggleFromWishList: { // args
       merge?: boolean | null; // Boolean

@@ -1,5 +1,6 @@
 import { intArg, mutationField, nonNull, stringArg } from 'nexus'
 import { Stripe } from 'stripe'
+import { capitalize } from '../../util/capitalize'
 import { isAuth } from '../../util/isAuth'
 import { ptErrors } from '../../util/ptErrors'
 
@@ -21,7 +22,6 @@ export const createPaymentIntent = mutationField('createPaymentIntent', {
       let paymentIntent: Stripe.Response<Stripe.PaymentIntent>
 
       if (context.req.session.paymentIntentId) {
-        console.log('intent present: ', context.req.session.paymentIntentId)
         paymentIntent = await context.stripe.paymentIntents.retrieve(
           context.req.session.paymentIntentId
         )
@@ -52,8 +52,32 @@ export const createPaymentIntent = mutationField('createPaymentIntent', {
 
 export const successfulPayment = mutationField('successfulPayment', {
   type: 'Boolean',
-  async resolve(_root, _args_, context) {
+  args: {
+    orderId: nonNull(stringArg()),
+  },
+  async resolve(_root, { orderId }, context) {
     if (context.req.session.paymentIntentId) {
+      const paymentIntent = await context.stripe.paymentIntents.retrieve(
+        context.req.session.paymentIntentId
+      )
+
+      if (paymentIntent.payment_method) {
+        const paymentMethod = await context.stripe.paymentMethods.retrieve(
+          paymentIntent.payment_method as string
+        )
+
+        if (paymentMethod.card) {
+          await context.prisma.order.update({
+            where: { id: orderId },
+            data: {
+              cardDetails: `${capitalize(paymentMethod.card.brand)} •••• ${
+                paymentMethod.card.last4
+              }`,
+            },
+          })
+        }
+      }
+
       context.req.session.paymentIntentId = undefined
     }
 
