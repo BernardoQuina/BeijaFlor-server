@@ -1280,6 +1280,7 @@ export interface NexusGenArgTypes {
     }
     orders: { // args
       cursor?: NexusGenInputs['OrderWhereUniqueInput'] | null; // OrderWhereUniqueInput
+      orderBy?: NexusGenInputs['OrderOrderByInput'][] | null; // [OrderOrderByInput!]
       skip?: number | null; // Int
       take?: number | null; // Int
     }

@@ -666,7 +666,7 @@ type User {
   googleId: String
   id: String!
   name: String!
-  orders(cursor: OrderWhereUniqueInput, skip: Int, take: Int): [Order!]!
+  orders(cursor: OrderWhereUniqueInput, orderBy: [OrderOrderByInput!], skip: Int, take: Int): [Order!]!
   passwordHash: String
   photo: String
   role: Role!
