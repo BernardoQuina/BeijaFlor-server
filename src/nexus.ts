@@ -317,6 +317,7 @@ export interface NexusGenInputs {
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     price?: NexusGenEnums['SortOrder'] | null; // SortOrder
     quantity?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    state?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     userId?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
@@ -332,6 +333,7 @@ export interface NexusGenInputs {
     orderItems?: NexusGenInputs['OrderItemListRelationFilter'] | null; // OrderItemListRelationFilter
     price?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
     quantity?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    state?: NexusGenInputs['StringFilter'] | null; // StringFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     userId?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -552,6 +554,7 @@ export interface NexusGenObjects {
     id: string; // String!
     price: number; // Float!
     quantity: number; // Int!
+    state: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     userId: string; // String!
   }
@@ -707,6 +710,7 @@ export interface NexusGenFieldTypes {
     orderItems: NexusGenRootTypes['OrderItem'][]; // [OrderItem!]!
     price: number; // Float!
     quantity: number; // Int!
+    state: string; // String!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
     user: NexusGenRootTypes['User']; // User!
     userId: string; // String!
@@ -764,13 +768,17 @@ export interface NexusGenFieldTypes {
     categories: NexusGenRootTypes['Category'][]; // [Category!]!
     category: NexusGenRootTypes['Category'] | null; // Category
     categoryCount: number | null; // Int
+    deliveredCount: number | null; // Int
+    inTransitCount: number | null; // Int
     inactiveCount: number | null; // Int
     me: NexusGenRootTypes['User'] | null; // User
     order: NexusGenRootTypes['Order'] | null; // Order
+    orderCount: number | null; // Int
     orderItem: NexusGenRootTypes['OrderItem'] | null; // OrderItem
     orderItems: NexusGenRootTypes['OrderItem'][]; // [OrderItem!]!
     orders: NexusGenRootTypes['Order'][]; // [Order!]!
     outOfStockCount: number | null; // Int
+    processingCount: number | null; // Int
     product: NexusGenRootTypes['Product'] | null; // Product
     productCount: number | null; // Int
     products: NexusGenRootTypes['Product'][]; // [Product!]!
@@ -892,6 +900,7 @@ export interface NexusGenFieldTypeNames {
     orderItems: 'OrderItem'
     price: 'Float'
     quantity: 'Int'
+    state: 'String'
     updatedAt: 'DateTime'
     user: 'User'
     userId: 'String'
@@ -949,13 +958,17 @@ export interface NexusGenFieldTypeNames {
     categories: 'Category'
     category: 'Category'
     categoryCount: 'Int'
+    deliveredCount: 'Int'
+    inTransitCount: 'Int'
     inactiveCount: 'Int'
     me: 'User'
     order: 'Order'
+    orderCount: 'Int'
     orderItem: 'OrderItem'
     orderItems: 'OrderItem'
     orders: 'Order'
     outOfStockCount: 'Int'
+    processingCount: 'Int'
     product: 'Product'
     productCount: 'Int'
     products: 'Product'

@@ -82,6 +82,7 @@ model Order {
   price       Float       @default(0)
   quantity    Int         @default(0)
   cardDetails String?
+  state       String      @default("Em processamento")
   orderItems  OrderItem[]
   userId      String
   addressId   String

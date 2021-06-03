@@ -10,6 +10,7 @@ export const Order = objectType({
     t.model.price()
     t.model.quantity()
     t.model.cardDetails()
+    t.model.state()
     t.model.userId()
     t.model.addressId()
     t.model.createdAt()

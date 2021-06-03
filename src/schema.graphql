@@ -386,6 +386,7 @@ type Order {
   orderItems(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int): [OrderItem!]!
   price: Float!
   quantity: Int!
+  state: String!
   updatedAt: DateTime!
   user: User!
   userId: String!
@@ -448,6 +449,7 @@ input OrderOrderByInput {
   id: SortOrder
   price: SortOrder
   quantity: SortOrder
+  state: SortOrder
   updatedAt: SortOrder
   userId: SortOrder
 }
@@ -464,6 +466,7 @@ input OrderWhereInput {
   orderItems: OrderItemListRelationFilter
   price: FloatFilter
   quantity: IntFilter
+  state: StringFilter
   updatedAt: DateTimeFilter
   user: UserWhereInput
   userId: StringFilter
@@ -570,13 +573,17 @@ type Query {
   categories(cursor: CategoryWhereUniqueInput, orderBy: [CategoryOrderByInput!], skip: Int, take: Int, where: CategoryWhereInput): [Category!]!
   category(where: CategoryWhereUniqueInput!): Category
   categoryCount: Int
+  deliveredCount: Int
+  inTransitCount: Int
   inactiveCount: Int
   me: User
   order(where: OrderWhereUniqueInput!): Order
+  orderCount: Int
   orderItem(where: OrderItemWhereUniqueInput!): OrderItem
   orderItems(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int, where: OrderItemWhereInput): [OrderItem!]!
   orders(cursor: OrderWhereUniqueInput, orderBy: [OrderOrderByInput!], skip: Int, take: Int, where: OrderWhereInput): [Order!]!
   outOfStockCount: Int
+  processingCount: Int
   product(where: ProductWhereUniqueInput!): Product
   productCount: Int
   products(cursor: ProductWhereUniqueInput, orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
