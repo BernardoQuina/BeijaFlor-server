@@ -94,3 +94,33 @@ export const createOrder = mutationField('createOrder', {
     })
   },
 })
+
+export const orderState = mutationField('orderState', {
+  type: 'Order',
+  args: {
+    whereId: nonNull(stringArg()),
+    state: nonNull(stringArg()),
+  },
+  async resolve(_root, { whereId, state }, context) {
+    const userId = isAuth(context)
+
+    const user = await context.prisma.user.findUnique({ where: { id: userId } })
+
+    if (!user || user.role !== 'ADMIN') {
+      throw new Error('Not authorized.')
+    }
+
+    const orderExists = await context.prisma.order.findUnique({
+      where: { id: whereId },
+    })
+
+    if (!orderExists) {
+      throw new Error('A encomenda que pretende editar não existe.')
+    }
+
+    return context.prisma.order.update({
+      where: { id: whereId },
+      data: { state },
+    })
+  },
+})

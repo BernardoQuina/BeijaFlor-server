@@ -695,6 +695,7 @@ export interface NexusGenFieldTypes {
     editUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['User'] | null; // User
     logout: boolean | null; // Boolean
+    orderState: NexusGenRootTypes['Order'] | null; // Order
     register: NexusGenRootTypes['User'] | null; // User
     removeItem: boolean | null; // Boolean
     successfulPayment: boolean | null; // Boolean
@@ -885,6 +886,7 @@ export interface NexusGenFieldTypeNames {
     editUser: 'User'
     login: 'User'
     logout: 'Boolean'
+    orderState: 'Order'
     register: 'User'
     removeItem: 'Boolean'
     successfulPayment: 'Boolean'
@@ -1139,6 +1141,10 @@ export interface NexusGenArgTypes {
     login: { // args
       email: string; // String!
       password: string; // String!
+    }
+    orderState: { // args
+      state: string; // String!
+      whereId: string; // String!
     }
     register: { // args
       confirmPassword: string; // String!

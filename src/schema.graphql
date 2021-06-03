@@ -283,6 +283,7 @@ type Mutation {
   editUser(confirmNewPassword: String, password: String, updateEmail: String, updateName: String, updatePassword: String): User
   login(email: String!, password: String!): User
   logout: Boolean
+  orderState(state: String!, whereId: String!): Order
   register(confirmPassword: String!, email: String!, name: String!, password: String!): User
   removeItem(cartId: String!, cartItemId: String!, productId: String!): Boolean
   successfulPayment(orderId: String!): Boolean
