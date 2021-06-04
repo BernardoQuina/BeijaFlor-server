@@ -51,6 +51,15 @@ export const passportOauth = (app: Application) => {
 
           cb(undefined, newUser)
         } else {
+          if (userExists.photo !== profile.photos![0].value) {
+            await prisma.user.update({
+              where: { email: profile.emails![0].value },
+              data: {
+                photo: profile.photos![0].value,
+              },
+            })
+          }
+
           const cartExists = await prisma.cart.findFirst({
             where: { userId: userExists.id },
           })
@@ -111,6 +120,15 @@ export const passportOauth = (app: Application) => {
 
           cb(undefined, newUser)
         } else {
+          if (userExists.photo !== profile.photos![0].value) {
+            await prisma.user.update({
+              where: { email: profile.emails![0].value },
+              data: {
+                photo: profile.photos![0].value,
+              },
+            })
+          }
+
           const cartExists = await prisma.cart.findFirst({
             where: { userId: userExists.id },
           })

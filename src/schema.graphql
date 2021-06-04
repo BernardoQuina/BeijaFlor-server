@@ -276,7 +276,7 @@ type Mutation {
   deleteAddress(whereId: String!): Boolean
   deleteCategory(whereId: String!): Boolean
   deleteProduct(whereId: String!): Boolean
-  deleteUser(password: String): User
+  deleteUser(password: String): Boolean
   editAddress(completeName: String!, contact: String!, country: String!, instructions: String, numberAndBlock: String!, postal: String!, region: String!, street: String!, whereId: String!, zone: String!): Address
   editCategory(image: String, mainCategory: MainCategory, name: String, subCategory: SubCategory, whereId: String!): Category
   editProduct(categories: [String!], description: String, exposure: String, height: String, images: [String!], lifespan: String, name: String, price: Float, stock: Int, temperature: String, water: String, whereId: String!): Product

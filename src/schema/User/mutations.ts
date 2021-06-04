@@ -172,7 +172,7 @@ export const editUser = mutationField('editUser', {
     let data: {
       email?: string
       name?: string
-      password?: string
+      passwordHash?: string
     } = {}
 
     if (updateEmail) {
@@ -220,7 +220,7 @@ export const editUser = mutationField('editUser', {
 
       const newHashedPassword = await bcrypt.hash(updatePassword, 10)
 
-      data.password = newHashedPassword
+      data.passwordHash = newHashedPassword
     }
 
     if (!updateName && !updateEmail && !updatePassword) {
@@ -237,7 +237,7 @@ export const editUser = mutationField('editUser', {
 })
 
 export const deleteUser = mutationField('deleteUser', {
-  type: 'User',
+  type: 'Boolean',
   args: {
     password: stringArg(),
   },
@@ -254,13 +254,13 @@ export const deleteUser = mutationField('deleteUser', {
 
     if (!userExists.googleId && !userExists.facebookId) {
       if (!password) {
-        throw new Error('Invalid credentials.')
+        throw new Error('Credenciais invalidas.')
       }
 
       const isMatch = await bcrypt.compare(password, userExists.passwordHash!)
 
       if (!isMatch) {
-        throw new Error('Invalid credentials')
+        throw new Error('Credenciais invalidas.')
       }
     }
 
@@ -269,9 +269,37 @@ export const deleteUser = mutationField('deleteUser', {
     })
 
     if (cartExists) {
+      await context.prisma.cartItem.deleteMany({
+        where: { cartId: cartExists.id },
+      })
       await context.prisma.cart.delete({ where: { id: cartExists.id } })
     }
 
-    return context.prisma.user.delete({ where: { id: userId } })
+    const wishListExists = await context.prisma.wishList.findFirst({
+      where: { userId },
+    })
+
+    if (wishListExists) {
+      await context.prisma.wishList.delete({ where: { id: wishListExists.id } })
+    }
+
+    await context.prisma.user.delete({ where: { id: userId } })
+
+    if (context.req.user || context.req.session.userId) {
+      // req.logOut()
+      return new Promise((resolve) =>
+        context.req.session.destroy((err) => {
+          context.res.clearCookie('connect.sid', { path: '/' })
+          if (err) {
+            console.log(err)
+            resolve(false)
+            return
+          }
+          resolve(true)
+        })
+      )
+    }
+
+    return true
   },
 })

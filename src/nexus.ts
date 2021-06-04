@@ -688,7 +688,7 @@ export interface NexusGenFieldTypes {
     deleteAddress: boolean | null; // Boolean
     deleteCategory: boolean | null; // Boolean
     deleteProduct: boolean | null; // Boolean
-    deleteUser: NexusGenRootTypes['User'] | null; // User
+    deleteUser: boolean | null; // Boolean
     editAddress: NexusGenRootTypes['Address'] | null; // Address
     editCategory: NexusGenRootTypes['Category'] | null; // Category
     editProduct: NexusGenRootTypes['Product'] | null; // Product
@@ -879,7 +879,7 @@ export interface NexusGenFieldTypeNames {
     deleteAddress: 'Boolean'
     deleteCategory: 'Boolean'
     deleteProduct: 'Boolean'
-    deleteUser: 'User'
+    deleteUser: 'Boolean'
     editAddress: 'Address'
     editCategory: 'Category'
     editProduct: 'Product'
