@@ -1,3 +1,4 @@
+import { CartItem } from '.prisma/client'
 import { intArg, mutationField, nonNull, stringArg } from 'nexus'
 import { Stripe } from 'stripe'
 import { capitalize } from '../../util/capitalize'
@@ -92,6 +93,30 @@ export const successfulPayment = mutationField('successfulPayment', {
         'O pagamento foi bem sucedido mas ocorreu um problema ao esvaziar o carrinho.'
       )
     }
+
+    const cartItems = await context.prisma.cartItem.findMany({
+      where: { cartId: cartToEmpty.id },
+    })
+
+    const countSales = async (cartItems: CartItem[]) => {
+      for (let i = 0; i < cartItems.length; i++) {
+        const product = await context.prisma.product.findUnique({
+          where: { id: cartItems[i].productId },
+        })
+
+        if (!product) return
+
+        await context.prisma.product.update({
+          where: { id: product.id },
+          data: {
+            sales: product.sales + cartItems[i].quantity,
+            stock: product.stock - cartItems[i].quantity,
+          },
+        })
+      }
+    }
+
+    await countSales(cartItems)
 
     await context.prisma.cartItem.deleteMany({
       where: { cartId: cartToEmpty.id },

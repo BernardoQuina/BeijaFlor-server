@@ -9,6 +9,7 @@ export const Product = objectType({
     t.model.images()
     t.model.price()
     t.model.stock()
+    t.model.sales()
     t.model.active()
     t.model.categories()
     t.model.height()

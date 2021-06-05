@@ -139,6 +139,7 @@ model Product {
   images      String[]
   price       Float
   stock       Int         @default(0)
+  sales       Int         @default(0)
   active      Boolean     @default(true)
   categories  Category[]
   height      String?

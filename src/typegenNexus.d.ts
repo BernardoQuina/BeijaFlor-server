@@ -56,8 +56,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'userId' | 'createdAt' | 'updatedAt'
     }
     products: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'orderItems' | 'wishLists'
-      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'sales' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'orderItems' | 'wishLists'
+      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'sales' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
     }
     categories: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'mainCategory' | 'subCategory' | 'name' | 'image' | 'products' | 'createdAt' | 'updatedAt'
@@ -100,8 +100,8 @@ interface NexusPrismaInputs {
   }
   WishList: {
     products: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'orderItems' | 'wishLists'
-      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'sales' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'orderItems' | 'wishLists'
+      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'sales' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
     }
   }
   Product: {
@@ -124,8 +124,8 @@ interface NexusPrismaInputs {
   }
   Category: {
     products: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'orderItems' | 'wishLists'
-      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'sales' | 'active' | 'categories' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt' | 'cartItems' | 'orderItems' | 'wishLists'
+      ordering: 'id' | 'name' | 'description' | 'images' | 'price' | 'stock' | 'sales' | 'active' | 'height' | 'water' | 'exposure' | 'temperature' | 'lifespan' | 'createdAt' | 'updatedAt'
     }
   }
 }
@@ -300,6 +300,7 @@ interface NexusPrismaOutputs {
     images: 'String'
     price: 'Float'
     stock: 'Int'
+    sales: 'Int'
     active: 'Boolean'
     categories: 'Category'
     height: 'String'

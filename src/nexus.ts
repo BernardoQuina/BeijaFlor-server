@@ -357,6 +357,7 @@ export interface NexusGenInputs {
     lifespan?: NexusGenEnums['SortOrder'] | null; // SortOrder
     name?: NexusGenEnums['SortOrder'] | null; // SortOrder
     price?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    sales?: NexusGenEnums['SortOrder'] | null; // SortOrder
     stock?: NexusGenEnums['SortOrder'] | null; // SortOrder
     temperature?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -379,6 +380,7 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     orderItems?: NexusGenInputs['OrderItemListRelationFilter'] | null; // OrderItemListRelationFilter
     price?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    sales?: NexusGenInputs['IntFilter'] | null; // IntFilter
     stock?: NexusGenInputs['IntFilter'] | null; // IntFilter
     temperature?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
@@ -590,6 +592,7 @@ export interface NexusGenObjects {
     lifespan?: string | null; // String
     name: string; // String!
     price: number; // Float!
+    sales: number; // Int!
     stock: number; // Int!
     temperature?: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -753,6 +756,7 @@ export interface NexusGenFieldTypes {
     name: string; // String!
     orderItems: NexusGenRootTypes['OrderItem'][]; // [OrderItem!]!
     price: number; // Float!
+    sales: number; // Int!
     stock: number; // Int!
     temperature: string | null; // String
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
@@ -944,6 +948,7 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     orderItems: 'OrderItem'
     price: 'Float'
+    sales: 'Int'
     stock: 'Int'
     temperature: 'String'
     updatedAt: 'DateTime'

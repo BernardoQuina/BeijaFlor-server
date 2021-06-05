@@ -505,6 +505,7 @@ type Product {
   name: String!
   orderItems(cursor: OrderItemWhereUniqueInput, skip: Int, take: Int): [OrderItem!]!
   price: Float!
+  sales: Int!
   stock: Int!
   temperature: String
   updatedAt: DateTime!
@@ -529,6 +530,7 @@ input ProductOrderByInput {
   lifespan: SortOrder
   name: SortOrder
   price: SortOrder
+  sales: SortOrder
   stock: SortOrder
   temperature: SortOrder
   updatedAt: SortOrder
@@ -552,6 +554,7 @@ input ProductWhereInput {
   name: StringFilter
   orderItems: OrderItemListRelationFilter
   price: FloatFilter
+  sales: IntFilter
   stock: IntFilter
   temperature: StringNullableFilter
   updatedAt: DateTimeFilter
