@@ -1,6 +1,7 @@
 import { mutationField, nonNull, stringArg } from 'nexus'
 import bcrypt from 'bcryptjs'
 import { isAuth } from '../../util/isAuth'
+import { Order } from '.prisma/client'
 
 export const register = mutationField('register', {
   type: 'User',
@@ -282,6 +283,24 @@ export const deleteUser = mutationField('deleteUser', {
     if (wishListExists) {
       await context.prisma.wishList.delete({ where: { id: wishListExists.id } })
     }
+
+    const manyOrdersExist = await context.prisma.order.findMany({
+      where: { userId },
+    })
+
+    const deleteManyOrderItems = async (orders: Order[]) => {
+      for (let i = 0; i < orders.length; i++) {
+        await context.prisma.orderItem.deleteMany({
+          where: { orderId: orders[i].id },
+        })
+      }
+    }
+
+    await deleteManyOrderItems(manyOrdersExist)
+
+    await context.prisma.order.deleteMany({ where: { userId } })
+
+    await context.prisma.address.deleteMany({ where: { userId } })
 
     await context.prisma.user.delete({ where: { id: userId } })
 
