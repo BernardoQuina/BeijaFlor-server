@@ -130,6 +130,7 @@ export interface NexusGenInputs {
     image?: NexusGenEnums['SortOrder'] | null; // SortOrder
     mainCategory?: NexusGenEnums['SortOrder'] | null; // SortOrder
     name?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    sales?: NexusGenEnums['SortOrder'] | null; // SortOrder
     subCategory?: NexusGenEnums['SortOrder'] | null; // SortOrder
     updatedAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
@@ -143,6 +144,7 @@ export interface NexusGenInputs {
     mainCategory?: NexusGenInputs['EnumMainCategoryFilter'] | null; // EnumMainCategoryFilter
     name?: NexusGenInputs['StringFilter'] | null; // StringFilter
     products?: NexusGenInputs['ProductListRelationFilter'] | null; // ProductListRelationFilter
+    sales?: NexusGenInputs['IntFilter'] | null; // IntFilter
     subCategory?: NexusGenInputs['EnumSubCategoryFilter'] | null; // EnumSubCategoryFilter
     updatedAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
   }
@@ -545,6 +547,7 @@ export interface NexusGenObjects {
     image: string; // String!
     mainCategory: NexusGenEnums['MainCategory']; // MainCategory!
     name: string; // String!
+    sales: number; // Int!
     subCategory: NexusGenEnums['SubCategory']; // SubCategory!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -676,6 +679,7 @@ export interface NexusGenFieldTypes {
     mainCategory: NexusGenEnums['MainCategory']; // MainCategory!
     name: string; // String!
     products: NexusGenRootTypes['Product'][]; // [Product!]!
+    sales: number; // Int!
     subCategory: NexusGenEnums['SubCategory']; // SubCategory!
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
@@ -868,6 +872,7 @@ export interface NexusGenFieldTypeNames {
     mainCategory: 'MainCategory'
     name: 'String'
     products: 'Product'
+    sales: 'Int'
     subCategory: 'SubCategory'
     updatedAt: 'DateTime'
   }

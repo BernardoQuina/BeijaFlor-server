@@ -1,4 +1,4 @@
-import { CartItem } from '.prisma/client'
+import { CartItem, Category } from '.prisma/client'
 import { intArg, mutationField, nonNull, stringArg } from 'nexus'
 import { Stripe } from 'stripe'
 import { capitalize } from '../../util/capitalize'
@@ -98,6 +98,8 @@ export const successfulPayment = mutationField('successfulPayment', {
       where: { cartId: cartToEmpty.id },
     })
 
+    let categories: Category[]
+
     const countSales = async (cartItems: CartItem[]) => {
       for (let i = 0; i < cartItems.length; i++) {
         const product = await context.prisma.product.findUnique({
@@ -113,6 +115,21 @@ export const successfulPayment = mutationField('successfulPayment', {
             stock: product.stock - cartItems[i].quantity,
           },
         })
+
+        categories = await context.prisma.category.findMany({
+          where: { products: { some: { id: cartItems[i].productId } } },
+        })
+
+        for (let e = 0; e < categories.length; e++) {
+          const updated = await context.prisma.category.update({
+            where: { id: categories[e].id },
+            data: {
+              sales: categories[e].sales + cartItems[i].quantity,
+            },
+          })
+
+          console.log(`new sales count for ${updated.name}: `, updated)
+        }
       }
     }
 

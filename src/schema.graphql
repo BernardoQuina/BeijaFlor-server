@@ -161,6 +161,7 @@ type Category {
   mainCategory: MainCategory!
   name: String!
   products(cursor: ProductWhereUniqueInput, skip: Int, take: Int): [Product!]!
+  sales: Int!
   subCategory: SubCategory!
   updatedAt: DateTime!
 }
@@ -177,6 +178,7 @@ input CategoryOrderByInput {
   image: SortOrder
   mainCategory: SortOrder
   name: SortOrder
+  sales: SortOrder
   subCategory: SortOrder
   updatedAt: SortOrder
 }
@@ -191,6 +193,7 @@ input CategoryWhereInput {
   mainCategory: EnumMainCategoryFilter
   name: StringFilter
   products: ProductListRelationFilter
+  sales: IntFilter
   subCategory: EnumSubCategoryFilter
   updatedAt: DateTimeFilter
 }
