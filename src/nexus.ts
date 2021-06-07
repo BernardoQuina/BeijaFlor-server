@@ -126,6 +126,7 @@ export interface NexusGenInputs {
   }
   CategoryOrderByInput: { // input type
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    header?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     image?: NexusGenEnums['SortOrder'] | null; // SortOrder
     mainCategory?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -139,6 +140,7 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs['CategoryWhereInput'][] | null; // [CategoryWhereInput!]
     OR?: NexusGenInputs['CategoryWhereInput'][] | null; // [CategoryWhereInput!]
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    header?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     image?: NexusGenInputs['StringFilter'] | null; // StringFilter
     mainCategory?: NexusGenInputs['EnumMainCategoryFilter'] | null; // EnumMainCategoryFilter
@@ -543,6 +545,7 @@ export interface NexusGenObjects {
   }
   Category: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    header: boolean; // Boolean!
     id: string; // String!
     image: string; // String!
     mainCategory: NexusGenEnums['MainCategory']; // MainCategory!
@@ -674,6 +677,7 @@ export interface NexusGenFieldTypes {
   }
   Category: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    header: boolean; // Boolean!
     id: string; // String!
     image: string; // String!
     mainCategory: NexusGenEnums['MainCategory']; // MainCategory!
@@ -705,6 +709,7 @@ export interface NexusGenFieldTypes {
     orderState: NexusGenRootTypes['Order'] | null; // Order
     register: NexusGenRootTypes['User'] | null; // User
     removeItem: boolean | null; // Boolean
+    setAsHeader: NexusGenRootTypes['Category'] | null; // Category
     successfulPayment: boolean | null; // Boolean
     toggleFromWishList: NexusGenRootTypes['WishList'] | null; // WishList
     unsuccessfulPayment: boolean | null; // Boolean
@@ -791,6 +796,7 @@ export interface NexusGenFieldTypes {
     product: NexusGenRootTypes['Product'] | null; // Product
     productCount: number | null; // Int
     products: NexusGenRootTypes['Product'][]; // [Product!]!
+    specialOccasion: Array<NexusGenRootTypes['Product'] | null> | null; // [Product]
     user: NexusGenRootTypes['User'] | null; // User
     userCount: number | null; // Int
     users: NexusGenRootTypes['User'][]; // [User!]!
@@ -867,6 +873,7 @@ export interface NexusGenFieldTypeNames {
   }
   Category: { // field return type name
     createdAt: 'DateTime'
+    header: 'Boolean'
     id: 'String'
     image: 'String'
     mainCategory: 'MainCategory'
@@ -898,6 +905,7 @@ export interface NexusGenFieldTypeNames {
     orderState: 'Order'
     register: 'User'
     removeItem: 'Boolean'
+    setAsHeader: 'Category'
     successfulPayment: 'Boolean'
     toggleFromWishList: 'WishList'
     unsuccessfulPayment: 'Boolean'
@@ -984,6 +992,7 @@ export interface NexusGenFieldTypeNames {
     product: 'Product'
     productCount: 'Int'
     products: 'Product'
+    specialOccasion: 'Product'
     user: 'User'
     userCount: 'Int'
     users: 'User'
@@ -1166,6 +1175,9 @@ export interface NexusGenArgTypes {
       cartId: string; // String!
       cartItemId: string; // String!
       productId: string; // String!
+    }
+    setAsHeader: { // args
+      whereId: string; // String!
     }
     successfulPayment: { // args
       orderId: string; // String!

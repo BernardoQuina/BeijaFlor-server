@@ -156,6 +156,7 @@ input CartWhereUniqueInput {
 
 type Category {
   createdAt: DateTime!
+  header: Boolean!
   id: String!
   image: String!
   mainCategory: MainCategory!
@@ -174,6 +175,7 @@ input CategoryListRelationFilter {
 
 input CategoryOrderByInput {
   createdAt: SortOrder
+  header: SortOrder
   id: SortOrder
   image: SortOrder
   mainCategory: SortOrder
@@ -188,6 +190,7 @@ input CategoryWhereInput {
   NOT: [CategoryWhereInput!]
   OR: [CategoryWhereInput!]
   createdAt: DateTimeFilter
+  header: BoolFilter
   id: StringFilter
   image: StringFilter
   mainCategory: EnumMainCategoryFilter
@@ -289,6 +292,7 @@ type Mutation {
   orderState(state: String!, whereId: String!): Order
   register(confirmPassword: String!, email: String!, name: String!, password: String!): User
   removeItem(cartId: String!, cartItemId: String!, productId: String!): Boolean
+  setAsHeader(whereId: String!): Category
   successfulPayment(orderId: String!): Boolean
   toggleFromWishList(merge: Boolean, productId: String!, wishListId: String!): WishList
   unsuccessfulPayment(orderId: String!): Boolean
@@ -594,6 +598,7 @@ type Query {
   product(where: ProductWhereUniqueInput!): Product
   productCount: Int
   products(cursor: ProductWhereUniqueInput, orderBy: [ProductOrderByInput!], skip: Int, take: Int, where: ProductWhereInput): [Product!]!
+  specialOccasion: [Product]
   user(where: UserWhereUniqueInput!): User
   userCount: Int
   users(cursor: UserWhereUniqueInput, orderBy: [UserOrderByInput!], skip: Int, take: Int, where: UserWhereInput): [User!]!

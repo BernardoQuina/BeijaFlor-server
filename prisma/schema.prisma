@@ -161,6 +161,7 @@ model Category {
   name         String       @unique
   image        String
   sales        Int          @default(0)
+  header       Boolean      @default(false)
   products     Product[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt

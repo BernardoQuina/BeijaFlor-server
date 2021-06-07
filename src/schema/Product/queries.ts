@@ -1,9 +1,27 @@
-import { queryField } from 'nexus'
+import { list, queryField } from 'nexus'
 
 export const productQueries = queryField((t) => {
   t.crud.product({})
 
   t.crud.products({ pagination: true, filtering: true, ordering: true })
+
+  t.field('specialOccasion', {
+    type: list('Product'),
+    async resolve(_root, _args, { prisma }) {
+      const currentHeader = await prisma.category.findFirst({
+        where: { header: true },
+      })
+
+      if (!currentHeader) {
+        throw new Error('Ocorreu um erro.')
+      }
+
+      return prisma.product.findMany({
+        where: { categories: { some: { id: currentHeader.id } } },
+        take: 10,
+      })
+    },
+  })
 
   t.field('productCount', {
     type: 'Int',

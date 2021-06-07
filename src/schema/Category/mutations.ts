@@ -150,3 +150,49 @@ export const deleteCategory = mutationField('deleteCategory', {
     }
   },
 })
+
+export const setAsHeader = mutationField('setAsHeader', {
+  type: 'Category',
+  args: {
+    whereId: nonNull(stringArg()),
+  },
+  async resolve(_root, { whereId }, context) {
+    const userId = isAuth(context)
+
+    const user = await context.prisma.user.findUnique({ where: { id: userId } })
+
+    if (!user || user.role !== 'ADMIN') {
+      throw new Error('Not authorized.')
+    }
+
+    const categoryExists = await context.prisma.category.findUnique({
+      where: { id: whereId },
+    })
+
+    if (!categoryExists) {
+      throw new Error(
+        'A categoria que pretende colocar em destaque não existe.'
+      )
+    }
+
+    const currentHeader = await context.prisma.category.findFirst({
+      where: { header: true },
+    })
+
+    if (currentHeader) {
+      await context.prisma.category.update({
+        where: { id: currentHeader.id },
+        data: {
+          header: false,
+        },
+      })
+    }
+
+    return context.prisma.category.update({
+      where: { id: categoryExists.id },
+      data: {
+        header: true,
+      },
+    })
+  },
+})

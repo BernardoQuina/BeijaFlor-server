@@ -9,6 +9,7 @@ export const Category = objectType({
     t.model.name()
     t.model.image()
     t.model.sales()
+    t.model.header()
     t.model.products()
     t.model.createdAt()
     t.model.updatedAt()
