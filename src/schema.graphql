@@ -287,6 +287,7 @@ type Mutation {
   editCategory(image: String, mainCategory: MainCategory, name: String, subCategory: SubCategory, whereId: String!): Category
   editProduct(categories: [String!], description: String, exposure: String, height: String, images: [String!], lifespan: String, name: String, price: Float, stock: Int, temperature: String, water: String, whereId: String!): Product
   editUser(confirmNewPassword: String, password: String, updateEmail: String, updateName: String, updatePassword: String): User
+  forgotPassword(email: String!): Boolean
   login(email: String!, password: String!): User
   logout: Boolean
   orderState(state: String!, whereId: String!): Order

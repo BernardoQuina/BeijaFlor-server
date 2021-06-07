@@ -704,6 +704,7 @@ export interface NexusGenFieldTypes {
     editCategory: NexusGenRootTypes['Category'] | null; // Category
     editProduct: NexusGenRootTypes['Product'] | null; // Product
     editUser: NexusGenRootTypes['User'] | null; // User
+    forgotPassword: boolean | null; // Boolean
     login: NexusGenRootTypes['User'] | null; // User
     logout: boolean | null; // Boolean
     orderState: NexusGenRootTypes['Order'] | null; // Order
@@ -900,6 +901,7 @@ export interface NexusGenFieldTypeNames {
     editCategory: 'Category'
     editProduct: 'Product'
     editUser: 'User'
+    forgotPassword: 'Boolean'
     login: 'User'
     logout: 'Boolean'
     orderState: 'Order'
@@ -1156,6 +1158,9 @@ export interface NexusGenArgTypes {
       updateEmail?: string | null; // String
       updateName?: string | null; // String
       updatePassword?: string | null; // String
+    }
+    forgotPassword: { // args
+      email: string; // String!
     }
     login: { // args
       email: string; // String!

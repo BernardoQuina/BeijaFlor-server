@@ -16,7 +16,7 @@ declare global {
       STRIPE_SECRET_KEY: string
       NODE_TLS_REJECT_UNAUTHORIZED: string
       FORGOT_PASSWORD_PREFIX:  string
-      EMAIl: string
+      EMAIL: string
       EMAIL_PASS: string
     }
   }

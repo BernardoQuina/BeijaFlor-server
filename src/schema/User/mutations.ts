@@ -1,7 +1,9 @@
 import { mutationField, nonNull, stringArg } from 'nexus'
 import bcrypt from 'bcryptjs'
+import { v4 } from 'uuid'
 import { isAuth } from '../../util/isAuth'
 import { Order } from '.prisma/client'
+import { sendEmail } from '../../util/sendEmail'
 
 export const register = mutationField('register', {
   type: 'User',
@@ -318,6 +320,41 @@ export const deleteUser = mutationField('deleteUser', {
         })
       )
     }
+
+    return true
+  },
+})
+
+export const forgotPassword = mutationField('forgotPassword', {
+  type: 'Boolean',
+  args: {
+    email: nonNull(stringArg()),
+  },
+  async resolve(_root, { email }, { prisma, redis }) {
+    if (email.length < 4) {
+      throw new Error('Please provide a valid email.')
+    }
+
+    const userExists = await prisma.user.findUnique({ where: { email } })
+
+    if (!userExists) {
+      return true // We don't want to disclose to anyone whether a user exists or not
+    }
+
+    const token = v4()
+
+    await redis.set(
+      process.env.FORGOT_PASSWORD_PREFIX + token,
+      userExists.id,
+      'ex',
+      1000 * 60 * 60 * 24 * 3 // 3 days
+    )
+
+    await sendEmail(
+      email,
+      'Reset Password',
+      `<a href=${process.env.ORIGIN}/change-password/${token}>reset password</a>`
+    )
 
     return true
   },
