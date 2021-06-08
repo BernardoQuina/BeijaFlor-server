@@ -5,7 +5,7 @@ export const sendEmail = async (to: string, subject: string, html: string) => {
     let transporter = nodemailer.createTransport({
       host: 'mail.privateemail.com',
       port: 587,
-      secure: process.env.NODE_ENV === 'production',
+      secure: false,
       auth: {
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASS,
