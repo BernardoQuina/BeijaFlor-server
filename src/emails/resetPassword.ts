@@ -9,9 +9,9 @@ export const resetPassword = (token: string, name: string) => `<!DOCTYPE html>
   <title>Document</title>
 </head>
 <body style="font-family: 'Open Sans', sans-serif; color: #6B705C; margin: 0; ">
-  <div style="width: 90%; height: 100%; margin: auto;">
+  <div style="width: 90%; max-width: 1024px; height: 100%; margin: auto;">
     <div style="display: flex; width: 100%; margin-top: 2rem;">
-      <h1 style="font-size: 2rem; font-weight: 400; color: #CB997E;">Florista Beijaflor</h1>
+      <h1 style="font-size: 2rem; font-weight: 200; color: #CB997E;">Florista Beijaflor</h1>
 
       <img style="margin-left: auto;" height="100" width="100" src="https://floristabeijaflor.com/logo-with-letters.png" alt="logo">
     </div>
@@ -22,13 +22,13 @@ export const resetPassword = (token: string, name: string) => `<!DOCTYPE html>
         <p style="margin: auto; color: #6B705C; letter-spacing: 0.1rem;">Definir nova palavra-passe</p>
       </div>
     </a>
-    <p style="font-weight: 400; margin-left: 1rem; margin-top: 6rem; color: #6B705C;">Se não foi o/a ${name} que fez o pedido, simplesmente ignore este email. Obrigado!</p>
+    <p style="font-weight: 400; margin-left: 1rem; margin-top: 6rem;margin-bottom: 10rem; color: #6B705C;">Se não foi o/a ${name} que fez o pedido, simplesmente ignore este email. Obrigado!</p>
   </div>
-  <footer style="height: 20rem; background-color: #F5FAE8; margin-top: 10rem; padding: 1rem;">
+  <div style="background-color: #F5FAE8; margin-top: 10rem; padding: 1rem; max-width: 1024px; margin:auto">
   <div style="border-bottom: 1px solid #6B705C;">
     <img style="margin-left: 1rem;" height="100" width="100" src="https://floristabeijaflor.com/logo-with-letters.png" alt="logo">
   </div>
-  <div style="display: flex; width: 95%; padding: 3rem 2rem 0 2rem;">
+  <div style="display: flex; width: 97%; padding: 3rem 1rem 0 1rem;">
     <div style="display: flex; width: 50%;">
       <div style="width: 50%;">
         <div style="margin-bottom: 0.5rem;">
@@ -60,12 +60,12 @@ export const resetPassword = (token: string, name: string) => `<!DOCTYPE html>
       </div>
     </div>
     <div style="width: 50%;">
-      <p style="margin: 0;">Florista Beijaflor,</p>
-      <p style="padding-right: 1rem;">Avenida Gil Eanes Mercado de Rio de Mouro, loja 4, 2635-003 Rio de Mouro</p>
-      <p style="padding-right: 1rem; margin-top: 4rem; margin-bottom: 0; font-size: 0.8rem; text-align: right;">Copyright © 2021 Florista Beijaflor
+      <p style="margin: 0; color: #6B705C;">Florista Beijaflor,</p>
+      <p style="padding-right: 1rem; color: #6B705C;">Avenida Gil Eanes Mercado de Rio de Mouro, loja 4, 2635-003 Rio de Mouro</p>
+      <p style="padding-right: 1rem; margin-top: 4rem; margin-bottom: 0; font-size: 0.8rem; text-align: right; color: #6B705C;">Copyright © 2021 Florista Beijaflor
         Todos os direitos reservados</p>
     </div>
   </div>
-  </footer>
+  </div>
 </body>
 </html>`

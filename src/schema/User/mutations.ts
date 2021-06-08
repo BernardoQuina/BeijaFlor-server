@@ -332,9 +332,9 @@ export const forgotPassword = mutationField('forgotPassword', {
     email: nonNull(stringArg()),
   },
   async resolve(_root, { email }, { prisma, redis }) {
-    if (email.length < 4) {
-      throw new Error('Please provide a valid email.')
-    }
+    const emailRegex = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/
+    
+    if (!emailRegex.test(email)) throw new Error('Email inválido.')
 
     const userExists = await prisma.user.findUnique({ where: { email } })
 
