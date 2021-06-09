@@ -158,7 +158,7 @@ export const editUser = mutationField('editUser', {
     })
 
     if (!userExists) {
-      throw new Error('User not found')
+      throw new Error('Utilizador não encontrado.')
     }
 
     if (updateEmail || updatePassword) {
@@ -333,7 +333,7 @@ export const forgotPassword = mutationField('forgotPassword', {
   },
   async resolve(_root, { email }, { prisma, redis }) {
     const emailRegex = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/
-    
+
     if (!emailRegex.test(email)) throw new Error('Email inválido.')
 
     const userExists = await prisma.user.findUnique({ where: { email } })
@@ -356,5 +356,59 @@ export const forgotPassword = mutationField('forgotPassword', {
     await sendEmail(email, 'Redefinir palavra-passe', html)
 
     return true
+  },
+})
+
+export const changePassword = mutationField('changePassword', {
+  type: 'User',
+  args: {
+    token: nonNull(stringArg()),
+    newPassword: nonNull(stringArg()),
+    confirmPassword: nonNull(stringArg()),
+  },
+  async resolve(_root, { token, newPassword, confirmPassword }, context) {
+    const passwordRegex =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
+
+    if (!passwordRegex.test(newPassword)) {
+      throw new Error(
+        'Palavra-passe tem ser de 8 a 20 caracteres, pelo menos uma maiúscula, uma minúscula, um número e um caractere especial (#?!@$%^&*-).'
+      )
+    }
+
+    if (newPassword !== confirmPassword) {
+      throw new Error('Palavras-passe não correspondem.')
+    }
+
+    const newHashedPassword = await bcrypt.hash(newPassword, 10)
+
+    const userId = await context.redis.get(
+      process.env.FORGOT_PASSWORD_PREFIX + token
+    )
+
+    if (!userId) {
+      throw new Error('Este token expirou. Por favor faça um novo pedido.')
+    }
+
+    const userExists = await context.prisma.user.findUnique({
+      where: { id: userId },
+    })
+
+    if (!userExists) {
+      throw new Error('Utilizador não encontrado.')
+    }
+
+    const updatedUser = await context.prisma.user.update({
+      where: { id: userId },
+      data: {
+        passwordHash: newHashedPassword,
+      },
+    })
+
+    context.req.session.userId = userExists.id
+
+    context.redis.del(process.env.FORGOT_PASSWORD_PREFIX + token)
+
+    return updatedUser
   },
 })

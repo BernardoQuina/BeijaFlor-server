@@ -272,6 +272,7 @@ enum MainCategory {
 
 type Mutation {
   changeItemQuantity(cartId: String!, cartItemId: String!, plusOrMinusOne: Int!, productId: String!): CartItem
+  changePassword(confirmPassword: String!, newPassword: String!, token: String!): User
   changeProductStatus(whereId: String!): Product
   createAddress(completeName: String!, contact: String!, country: String!, instructions: String, numberAndBlock: String!, postal: String!, region: String!, street: String!, zone: String!): Address
   createCartItem(cartId: String!, productId: String!, quantity: Int!): CartItem

@@ -689,6 +689,7 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     changeItemQuantity: NexusGenRootTypes['CartItem'] | null; // CartItem
+    changePassword: NexusGenRootTypes['User'] | null; // User
     changeProductStatus: NexusGenRootTypes['Product'] | null; // Product
     createAddress: NexusGenRootTypes['Address'] | null; // Address
     createCartItem: NexusGenRootTypes['CartItem'] | null; // CartItem
@@ -886,6 +887,7 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     changeItemQuantity: 'CartItem'
+    changePassword: 'User'
     changeProductStatus: 'Product'
     createAddress: 'Address'
     createCartItem: 'CartItem'
@@ -1060,6 +1062,11 @@ export interface NexusGenArgTypes {
       cartItemId: string; // String!
       plusOrMinusOne: number; // Int!
       productId: string; // String!
+    }
+    changePassword: { // args
+      confirmPassword: string; // String!
+      newPassword: string; // String!
+      token: string; // String!
     }
     changeProductStatus: { // args
       whereId: string; // String!
