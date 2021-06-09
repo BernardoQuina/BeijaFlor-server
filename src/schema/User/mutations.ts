@@ -338,7 +338,7 @@ export const forgotPassword = mutationField('forgotPassword', {
 
     const userExists = await prisma.user.findUnique({ where: { email } })
 
-    if (!userExists) {
+    if (!userExists || userExists.googleId || userExists.facebookId) {
       return true // We don't want to disclose to anyone whether a user exists or not
     }
 
