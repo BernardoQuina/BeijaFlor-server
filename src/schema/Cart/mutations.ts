@@ -7,6 +7,7 @@ import { capitalize } from '../../util/capitalize'
 import { isAuth } from '../../util/isAuth'
 import { ptErrors } from '../../util/ptErrors'
 import { sendEmail } from '../../util/sendEmail'
+import { seguimentoEncomenda } from '../../emails/seguimentoEncomenda'
 
 export const createPaymentIntent = mutationField('createPaymentIntent', {
   type: 'PaymentIntent',
@@ -77,6 +78,16 @@ export const successfulPayment = mutationField('successfulPayment', {
     if (!orderExists) {
       throw new Error(
         'O pagamento foi bem sucedido mas ocorreu um problema ao criar a encomenda.'
+      )
+    }
+
+    const orderAddress = await context.prisma.address.findUnique({
+      where: { id: orderExists.addressId },
+    })
+
+    if (!orderAddress) {
+      throw new Error(
+        'O pagamento foi bem sucedido mas ocorreu um problema ao processar a morada da encomenda.'
       )
     }
 
@@ -180,7 +191,22 @@ export const successfulPayment = mutationField('successfulPayment', {
       },
     })
 
-    const html = reciboEncomenda(
+    const address = `${orderAddress.street}, ${orderAddress.numberAndBlock}, ${orderAddress.postal} ${orderAddress.zone}`
+
+    const html = seguimentoEncomenda(
+      user.name,
+      orderExists.id,
+      orderAddress.completeName,
+      address
+    )
+
+    await sendEmail(
+      user.email,
+      `Confirmação da encomenda: ${orderExists.state}`,
+      html
+    )
+
+    const html2 = reciboEncomenda(
       user.name,
       orderExists.id,
       moment(orderExists.createdAt).locale('pt').format('l'),
@@ -193,8 +219,8 @@ export const successfulPayment = mutationField('successfulPayment', {
 
     await sendEmail(
       user.email,
-      `O recibo da sua encomenda, Total: € ${orderExists.price}`,
-      html
+      `O recibo da sua encomenda, Total: € ${orderExists.price.toFixed(2)}`,
+      html2
     )
 
     return true
