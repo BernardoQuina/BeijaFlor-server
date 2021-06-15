@@ -117,6 +117,15 @@ export const successfulPayment = mutationField('successfulPayment', {
       }
 
       context.req.session.paymentIntentId = undefined
+    } else {
+      cardDetails = 'PayPal'
+
+      await context.prisma.order.update({
+        where: { id: orderId },
+        data: {
+          cardDetails,
+        },
+      })
     }
 
     const cartToEmpty = await context.prisma.cart.findFirst({

@@ -64,7 +64,7 @@ export const seguimentoEncomenda = (
     >
       Para ser entregue a <strong>${addressName}</strong>, em:
     </h3>
-    <h4 style="font-weight: 400; margin: 1rem 0px 4rem 2rem;">
+    <h4 style="font-weight: 400; margin: 1rem 0px 4rem 2rem; color: #6b705c;">
       ${address}
     </h4>
     <h3
