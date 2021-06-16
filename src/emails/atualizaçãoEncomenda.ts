@@ -19,8 +19,8 @@ export const atualizaçãoEncomenda = (
     <title>Document</title>
   </head>
   <body style="font-family: 'Open Sans', sans-serif; color: #6b705c; margin: 0">
-    <div style="width: 90%; max-width: 1024px; height: 100%; margin: auto">
-      <div style="display: flex; width: 100%; margin-top: 2rem">
+    <div style="width: 100%; max-width: 1024px; height: 100%; margin: auto">
+      <div style="display: flex; width: 90%; margin: auto; margin-top: 2rem">
         <h1 style="font-size: 2rem; font-weight: 200; color: #cb997e">
           Florista Beijaflor
         </h1>
@@ -33,13 +33,13 @@ export const atualizaçãoEncomenda = (
           alt="logo"
         />
       </div>
-      <h2 style="font-weight: 400; color: #6b705c">
+      <h2 style="font-weight: 400; color: #6b705c; margin-left: 1rem;">
         Olá ${name}, o estado da sua encomenda foi atualizado!
       </h2>
       <h3
         style="
           font-weight: 400;
-          margin-left: 1rem;
+          margin-left: 1.5rem;
           margin-top: 0;
           color: #6b705c;
         "
@@ -93,7 +93,7 @@ export const atualizaçãoEncomenda = (
           alt="logo"
         />
       </div>
-      <div style="display: flex; width: 97%; padding: 3rem 1rem 0 1rem">
+      <div style="display: flex; width: 97%; padding: 3rem 0.5rem 0 0.5rem">
         <div style="display: flex; width: 50%">
           <div style="width: 50%">
             <div style="margin-bottom: 0.5rem">

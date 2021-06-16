@@ -28,7 +28,7 @@ export const resetPassword = (token: string, name: string) => `<!DOCTYPE html>
   <div style="border-bottom: 1px solid #6B705C;">
     <img style="margin-left: 1rem;" height="100" width="100" src="https://floristabeijaflor.com/logo-with-letters.png" alt="logo">
   </div>
-  <div style="display: flex; width: 97%; padding: 3rem 1rem 0 1rem;">
+  <div style="display: flex; width: 97%; padding: 3rem 0.5rem 0 0.5rem;">
     <div style="display: flex; width: 50%;">
       <div style="width: 50%;">
         <div style="margin-bottom: 0.5rem;">
