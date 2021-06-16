@@ -17,8 +17,14 @@ export const productQueries = queryField((t) => {
       }
 
       return prisma.product.findMany({
-        where: { categories: { some: { id: currentHeader.id } } },
         take: 10,
+        where: {
+          AND: [
+            { categories: { some: { id: currentHeader.id } } },
+            { stock: { gt: 0 } },
+            { active: { equals: true } },
+          ],
+        },
       })
     },
   })

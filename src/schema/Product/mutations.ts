@@ -214,7 +214,7 @@ export const editProduct = mutationField('editProduct', {
       data.price = price
     }
 
-    if (stock) {
+    if (stock || stock === 0) {
       data.stock = stock
     }
 
