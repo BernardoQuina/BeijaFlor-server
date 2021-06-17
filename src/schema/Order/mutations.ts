@@ -60,9 +60,13 @@ export const createOrder = mutationField('createOrder', {
           where: { id: cartItem.productId },
         })
 
-        if (!product) {
+        if (!product || !product.active) {
           await context.prisma.order.delete({ where: { id: newOrder.id } })
-          throw new Error('Um dos produtos do carrinho já não está disponível.')
+          throw new Error(
+            `${
+              product ? product.name : 'Um produto do carrinho'
+            } já não está disponível.`
+          )
         }
 
         if (product.stock < cartItem.quantity) {

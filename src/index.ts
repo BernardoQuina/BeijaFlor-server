@@ -21,7 +21,7 @@ const main = async () => {
 
   app.use(
     cors({
-      origin: process.env.ORIGIN,
+      origin: [process.env.ORIGIN, 'https://studio.apollographql.com'],
       credentials: true,
     })
   )
