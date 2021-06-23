@@ -148,7 +148,7 @@ export const atualizaçãoEncomenda = (
             <div>
               <a
                 style="color: #6b705c"
-                href="https://floristabeijaflor.com/perguntas"
+                href="https://floristabeijaflor.com/ajuda"
                 >Perguntas frequentes</a
               >
             </div>
