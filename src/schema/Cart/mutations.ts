@@ -188,6 +188,18 @@ export const successfulPayment = mutationField('successfulPayment', {
 
     await countSales(cartItems)
 
+    if (orderExists.price >= 35) {
+      priceDetails.push(`<div style="display: flex; margin: auto; max-width: 400px;">
+      <h4 style="font-weight: 400;">Taxa de entrega</h4>
+      <h4 style="font-weight: 400; margin-left: auto;">GRÁTIS</h4>
+    </div>`)
+    } else {
+      priceDetails.push(`<div style="display: flex; margin: auto; max-width: 400px;">
+      <h4 style="font-weight: 400;">Taxa de entrega</h4>
+      <h4 style="font-weight: 400; margin-left: auto;">€ 5.00</h4>
+    </div>`)
+    }
+
     await context.prisma.cartItem.deleteMany({
       where: { cartId: cartToEmpty.id },
     })

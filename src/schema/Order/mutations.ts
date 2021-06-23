@@ -91,6 +91,10 @@ export const createOrder = mutationField('createOrder', {
 
     await cartToOrder(cartItemsIds)
 
+    if (price < 35) {
+      price += 5
+    }
+
     return context.prisma.order.update({
       where: { id: newOrder.id },
       data: {
