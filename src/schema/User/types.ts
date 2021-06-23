@@ -45,7 +45,7 @@ export const User = objectType({
     t.model.cart()
     t.model.orders({ordering: true})
     t.model.wishlist()
-    t.model.addresses()
+    t.model.addresses({filtering: true})
     t.model.createdAt()
     t.model.updatedAt()
   },

@@ -32,8 +32,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'googleId' | 'facebookId' | 'email' | 'role' | 'passwordHash' | 'name' | 'photo' | 'createdAt' | 'updatedAt'
     }
     addresses: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'user' | 'orders' | 'userId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'userId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'active' | 'user' | 'orders' | 'userId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'active' | 'userId' | 'createdAt' | 'updatedAt'
     }
     orders: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'address' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'orderItems' | 'userId' | 'addressId' | 'createdAt' | 'updatedAt'
@@ -66,8 +66,8 @@ interface NexusPrismaInputs {
   },
   User: {
     addresses: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'user' | 'orders' | 'userId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'userId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'active' | 'user' | 'orders' | 'userId' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'active' | 'userId' | 'createdAt' | 'updatedAt'
     }
     orders: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'address' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'orderItems' | 'userId' | 'addressId' | 'createdAt' | 'updatedAt'
@@ -235,6 +235,7 @@ interface NexusPrismaOutputs {
     postal: 'String'
     contact: 'String'
     instructions: 'String'
+    active: 'Boolean'
     user: 'User'
     orders: 'Order'
     userId: 'String'

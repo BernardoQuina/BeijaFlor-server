@@ -25,6 +25,7 @@ export interface NexusGenInputs {
     some?: NexusGenInputs['AddressWhereInput'] | null; // AddressWhereInput
   }
   AddressOrderByInput: { // input type
+    active?: NexusGenEnums['SortOrder'] | null; // SortOrder
     completeName?: NexusGenEnums['SortOrder'] | null; // SortOrder
     contact?: NexusGenEnums['SortOrder'] | null; // SortOrder
     country?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -43,6 +44,7 @@ export interface NexusGenInputs {
     AND?: NexusGenInputs['AddressWhereInput'][] | null; // [AddressWhereInput!]
     NOT?: NexusGenInputs['AddressWhereInput'][] | null; // [AddressWhereInput!]
     OR?: NexusGenInputs['AddressWhereInput'][] | null; // [AddressWhereInput!]
+    active?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     completeName?: NexusGenInputs['StringFilter'] | null; // StringFilter
     contact?: NexusGenInputs['StringFilter'] | null; // StringFilter
     country?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -513,6 +515,7 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Address: { // root type
+    active: boolean; // Boolean!
     completeName: string; // String!
     contact: string; // String!
     country: string; // String!
@@ -639,6 +642,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnu
 
 export interface NexusGenFieldTypes {
   Address: { // field return type
+    active: boolean; // Boolean!
     completeName: string; // String!
     contact: string; // String!
     country: string; // String!
@@ -837,6 +841,7 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Address: { // field return type name
+    active: 'Boolean'
     completeName: 'String'
     contact: 'String'
     country: 'String'
@@ -1330,6 +1335,7 @@ export interface NexusGenArgTypes {
       cursor?: NexusGenInputs['AddressWhereUniqueInput'] | null; // AddressWhereUniqueInput
       skip?: number | null; // Int
       take?: number | null; // Int
+      where?: NexusGenInputs['AddressWhereInput'] | null; // AddressWhereInput
     }
     orders: { // args
       cursor?: NexusGenInputs['OrderWhereUniqueInput'] | null; // OrderWhereUniqueInput

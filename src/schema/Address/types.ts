@@ -13,6 +13,7 @@ export const Address = objectType({
     t.model.postal()
     t.model.contact()
     t.model.instructions()
+    t.model.active()
     t.model.user()
     t.model.orders()
     t.model.userId()

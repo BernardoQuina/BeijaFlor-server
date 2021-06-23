@@ -213,8 +213,9 @@ export const deleteAddress = mutationField('deleteAddress', {
       throw new Error('O produto que pretende eliminar não existe.')
     }
 
-    const deletedAddress = await context.prisma.address.delete({
+    const deletedAddress = await context.prisma.address.update({
       where: { id: whereId },
+      data: { active: false },
     })
 
     if (deletedAddress) {

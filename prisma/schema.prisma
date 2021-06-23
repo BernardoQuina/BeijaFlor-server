@@ -68,6 +68,7 @@ model Address {
   postal         String
   contact        String
   instructions   String?
+  active         Boolean  @default(true)
   user           User     @relation(fields: [userId], references: [id])
   orders         Order[]
   userId         String

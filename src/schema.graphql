@@ -3,6 +3,7 @@
 
 
 type Address {
+  active: Boolean!
   completeName: String!
   contact: String!
   country: String!
@@ -27,6 +28,7 @@ input AddressListRelationFilter {
 }
 
 input AddressOrderByInput {
+  active: SortOrder
   completeName: SortOrder
   contact: SortOrder
   country: SortOrder
@@ -46,6 +48,7 @@ input AddressWhereInput {
   AND: [AddressWhereInput!]
   NOT: [AddressWhereInput!]
   OR: [AddressWhereInput!]
+  active: BoolFilter
   completeName: StringFilter
   contact: StringFilter
   country: StringFilter
@@ -679,7 +682,7 @@ enum SubCategory {
 }
 
 type User {
-  addresses(cursor: AddressWhereUniqueInput, skip: Int, take: Int): [Address!]!
+  addresses(cursor: AddressWhereUniqueInput, skip: Int, take: Int, where: AddressWhereInput): [Address!]!
   cart: Cart
   createdAt: DateTime!
   email: String!
