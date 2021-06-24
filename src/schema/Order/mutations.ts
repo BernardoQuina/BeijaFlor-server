@@ -1,4 +1,5 @@
 import { mutationField, stringArg, nonNull, list } from 'nexus'
+import moment from 'moment'
 import { atualizaçãoEncomenda } from '../../emails/atualizaçãoEncomenda'
 import { isAuth } from '../../util/isAuth'
 import { sendEmail } from '../../util/sendEmail'
@@ -9,8 +10,13 @@ export const createOrder = mutationField('createOrder', {
     cartId: nonNull(stringArg()),
     cartItemsIds: nonNull(list(nonNull(stringArg()))),
     addressId: nonNull(stringArg()),
+    deliveryDate: nonNull(stringArg()),
   },
-  async resolve(_root, { cartId, cartItemsIds, addressId }, context) {
+  async resolve(
+    _root,
+    { cartId, cartItemsIds, addressId, deliveryDate },
+    context
+  ) {
     const userId = isAuth(context)
 
     const user = await context.prisma.user.findUnique({ where: { id: userId } })
@@ -39,6 +45,7 @@ export const createOrder = mutationField('createOrder', {
       data: {
         user: { connect: { id: userId } },
         address: { connect: { id: addressId } },
+        deliveryDate: new Date(deliveryDate),
       },
     })
 
@@ -188,6 +195,7 @@ export const orderState = mutationField('orderState', {
       user.name,
       updatedOrder.state.toLowerCase(),
       stateDiagram,
+      moment(orderExists.deliveryDate).locale('pt').format('LL'),
       orderAddress.completeName,
       address
     )

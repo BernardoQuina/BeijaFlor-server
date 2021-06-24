@@ -77,18 +77,19 @@ model Address {
 }
 
 model Order {
-  id          String      @id @default(uuid())
-  user        User        @relation(fields: [userId], references: [id])
-  address     Address     @relation(fields: [addressId], references: [id])
-  price       Float       @default(0)
-  quantity    Int         @default(0)
-  cardDetails String?
-  state       String      @default("Em processamento")
-  orderItems  OrderItem[]
-  userId      String
-  addressId   String
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id           String      @id @default(uuid())
+  user         User        @relation(fields: [userId], references: [id])
+  address      Address     @relation(fields: [addressId], references: [id])
+  price        Float       @default(0)
+  quantity     Int         @default(0)
+  cardDetails  String?
+  state        String      @default("Em processamento")
+  orderItems   OrderItem[]
+  userId       String
+  addressId    String
+  deliveryDate DateTime    @default(now())
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 model OrderItem {

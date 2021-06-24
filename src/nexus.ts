@@ -320,6 +320,7 @@ export interface NexusGenInputs {
     addressId?: NexusGenEnums['SortOrder'] | null; // SortOrder
     cardDetails?: NexusGenEnums['SortOrder'] | null; // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    deliveryDate?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     price?: NexusGenEnums['SortOrder'] | null; // SortOrder
     quantity?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -335,6 +336,7 @@ export interface NexusGenInputs {
     addressId?: NexusGenInputs['StringFilter'] | null; // StringFilter
     cardDetails?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
+    deliveryDate?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     id?: NexusGenInputs['StringFilter'] | null; // StringFilter
     orderItems?: NexusGenInputs['OrderItemListRelationFilter'] | null; // OrderItemListRelationFilter
     price?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
@@ -562,6 +564,7 @@ export interface NexusGenObjects {
     addressId: string; // String!
     cardDetails?: string | null; // String
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    deliveryDate: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
     price: number; // Float!
     quantity: number; // Int!
@@ -725,6 +728,7 @@ export interface NexusGenFieldTypes {
     addressId: string; // String!
     cardDetails: string | null; // String
     createdAt: NexusGenScalars['DateTime']; // DateTime!
+    deliveryDate: NexusGenScalars['DateTime']; // DateTime!
     id: string; // String!
     orderItems: NexusGenRootTypes['OrderItem'][]; // [OrderItem!]!
     price: number; // Float!
@@ -924,6 +928,7 @@ export interface NexusGenFieldTypeNames {
     addressId: 'String'
     cardDetails: 'String'
     createdAt: 'DateTime'
+    deliveryDate: 'DateTime'
     id: 'String'
     orderItems: 'OrderItem'
     price: 'Float'
@@ -1102,6 +1107,7 @@ export interface NexusGenArgTypes {
       addressId: string; // String!
       cartId: string; // String!
       cartItemsIds: string[]; // [String!]!
+      deliveryDate: string; // String!
     }
     createPaymentIntent: { // args
       amount: number; // Int!

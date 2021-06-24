@@ -36,8 +36,8 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'active' | 'userId' | 'createdAt' | 'updatedAt'
     }
     orders: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'address' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'orderItems' | 'userId' | 'addressId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'userId' | 'addressId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'address' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'orderItems' | 'userId' | 'addressId' | 'deliveryDate' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'userId' | 'addressId' | 'deliveryDate' | 'createdAt' | 'updatedAt'
     }
     orderItems: {
       filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'product' | 'quantity' | 'order' | 'productId' | 'orderId' | 'createdAt' | 'updatedAt'
@@ -70,14 +70,14 @@ interface NexusPrismaInputs {
       ordering: 'id' | 'completeName' | 'country' | 'street' | 'numberAndBlock' | 'zone' | 'region' | 'postal' | 'contact' | 'instructions' | 'active' | 'userId' | 'createdAt' | 'updatedAt'
     }
     orders: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'address' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'orderItems' | 'userId' | 'addressId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'userId' | 'addressId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'address' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'orderItems' | 'userId' | 'addressId' | 'deliveryDate' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'userId' | 'addressId' | 'deliveryDate' | 'createdAt' | 'updatedAt'
     }
   }
   Address: {
     orders: {
-      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'address' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'orderItems' | 'userId' | 'addressId' | 'createdAt' | 'updatedAt'
-      ordering: 'id' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'userId' | 'addressId' | 'createdAt' | 'updatedAt'
+      filtering: 'AND' | 'OR' | 'NOT' | 'id' | 'user' | 'address' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'orderItems' | 'userId' | 'addressId' | 'deliveryDate' | 'createdAt' | 'updatedAt'
+      ordering: 'id' | 'price' | 'quantity' | 'cardDetails' | 'state' | 'userId' | 'addressId' | 'deliveryDate' | 'createdAt' | 'updatedAt'
     }
   }
   Order: {
@@ -253,6 +253,7 @@ interface NexusPrismaOutputs {
     orderItems: 'OrderItem'
     userId: 'String'
     addressId: 'String'
+    deliveryDate: 'DateTime'
     createdAt: 'DateTime'
     updatedAt: 'DateTime'
   }

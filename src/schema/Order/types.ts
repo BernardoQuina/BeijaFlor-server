@@ -13,6 +13,7 @@ export const Order = objectType({
     t.model.state()
     t.model.userId()
     t.model.addressId()
+    t.model.deliveryDate()
     t.model.createdAt()
     t.model.updatedAt()
   },

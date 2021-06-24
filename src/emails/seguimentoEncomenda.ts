@@ -1,6 +1,7 @@
 export const seguimentoEncomenda = (
   name: string,
   orderId: string,
+  deliveryDate: string,
   addressName: string,
   address: string
 ) => `<!DOCTYPE html>
@@ -62,7 +63,7 @@ export const seguimentoEncomenda = (
         color: #6b705c;
       "
     >
-      Para ser entregue a <strong>${addressName}</strong>, em:
+      Para ser entregue dia ${deliveryDate}, a <strong>${addressName}</strong>, em:
     </h3>
     <h4 style="font-weight: 400; margin: 1rem 0px 4rem 2rem; color: #6b705c;">
       ${address}

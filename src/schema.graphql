@@ -280,7 +280,7 @@ type Mutation {
   createAddress(completeName: String!, contact: String!, country: String!, instructions: String, numberAndBlock: String!, postal: String!, region: String!, street: String!, zone: String!): Address
   createCartItem(cartId: String!, productId: String!, quantity: Int!): CartItem
   createCategory(image: String!, mainCategory: MainCategory!, name: String!, subCategory: SubCategory!): Category
-  createOrder(addressId: String!, cartId: String!, cartItemsIds: [String!]!): Order
+  createOrder(addressId: String!, cartId: String!, cartItemsIds: [String!]!, deliveryDate: String!): Order
   createPaymentIntent(amount: Int!): PaymentIntent
   createProduct(categories: [String!]!, description: String!, exposure: String, height: String, images: [String!]!, lifespan: String, name: String!, price: Float!, stock: Int!, temperature: String, water: String): Product
   deleteAddress(whereId: String!): Boolean
@@ -395,6 +395,7 @@ type Order {
   addressId: String!
   cardDetails: String
   createdAt: DateTime!
+  deliveryDate: DateTime!
   id: String!
   orderItems(cursor: OrderItemWhereUniqueInput, orderBy: [OrderItemOrderByInput!], skip: Int, take: Int): [OrderItem!]!
   price: Float!
@@ -459,6 +460,7 @@ input OrderOrderByInput {
   addressId: SortOrder
   cardDetails: SortOrder
   createdAt: SortOrder
+  deliveryDate: SortOrder
   id: SortOrder
   price: SortOrder
   quantity: SortOrder
@@ -475,6 +477,7 @@ input OrderWhereInput {
   addressId: StringFilter
   cardDetails: StringNullableFilter
   createdAt: DateTimeFilter
+  deliveryDate: DateTimeFilter
   id: StringFilter
   orderItems: OrderItemListRelationFilter
   price: FloatFilter

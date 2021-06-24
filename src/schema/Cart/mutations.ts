@@ -217,6 +217,7 @@ export const successfulPayment = mutationField('successfulPayment', {
     const html = seguimentoEncomenda(
       user.name,
       orderExists.id,
+      moment(orderExists.deliveryDate).locale('pt').format('LL'),
       orderAddress.completeName,
       address
     )
